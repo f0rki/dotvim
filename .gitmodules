@@ -43,6 +43,3 @@
 [submodule "bundle/autoclose"]
 	path = bundle/autoclose
 	url = git://github.com/Townk/vim-autoclose
-[submodule "bundle/latex"]
-	path = bundle/latex
-	url = https://github.com/vim-scripts/LaTeX-Suite-aka-Vim-LaTeX.git
