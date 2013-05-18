@@ -44,6 +44,9 @@ set tm=500
 
 set title
 set wildignore=*.swp,*.bak,*.pyc,*.class
+set wildignore+=*_build/*
+set wildignore+=*build/*
+set wildignore+=*/coverage/*
 
 " let tab trigger auto completion
 set wildchar=<Tab> wildmenu wildmode=full
@@ -136,10 +139,10 @@ map <leader>ca :1,1000 c!<cr>
 
 
 " Easy window navigation
-" map <C-h> <C-w>h
-" map <C-j> <C-w>j
-" map <C-k> <C-w>k
-" map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 
 " Opens a new tab with the current buffer's path
@@ -207,23 +210,45 @@ endfunc
 " plugins
 """""""""""""""""""""""""""""""""""""""""
 
-" use pathogen to load vim plugins
+"" use pathogen to load vim plugins
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
 
-" plugin options/mappings
+
+"" plugin options/mappings
 nmap <F8> :TagbarToggle<CR>
 
-" NERDTree configuration
+
+"" NERDTree configuration
 let g:NERDTreeWinPos = "right"
 "let g:NERDTreeWinSize = 31
 nmap <leader>n :NERDTreeToggle<RETURN>
 
 
+"" configuration of flake8 plugin
+let g:flake8_cmd="/usr/bin/flake8"
 
 
+"" python-mode configuration
+" disable python folding
+let g:pymode_folding = 0
+" Disable pylint checking every save
+let g:pymode_lint_write = 0
+" Load run code plugin
+let g:pymode_run = 0
+" the checkers
+let g:pymode_lint_checker = "flake8"
 
 
+"" for powerline
+set rtp+=/home/mikey/.vim/bundle/powerline/powerline/bindings/vim
+let g:Powerline_symbols = 'fancy'
+set laststatus=2
+set encoding=utf-8
 
+
+"" settings for ctrlp
+let g:ctrlp_max_height = 30
+map <leader>t :CtrlPMixed<cr>
 
