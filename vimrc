@@ -63,6 +63,7 @@ syntax enable
 
 " colorscheme
 colorscheme desert
+" TODO: find a better colorscheme!!!
 set background=dark
 
 " Set extra options when running in GUI mode
