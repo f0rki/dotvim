@@ -212,6 +212,9 @@ endfunc
 " plugins
 """""""""""""""""""""""""""""""""""""""""
 
+" Install vundle
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
 "" use vundle 
 set nocompatible               " be iMproved
 filetype off                   " required!
