@@ -212,10 +212,31 @@ endfunc
 " plugins
 """""""""""""""""""""""""""""""""""""""""
 
-"" use pathogen to load vim plugins
-runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
+"" use vundle 
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" Bundles
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'ervandew/supertab'
+Bundle 'majutsushi/tagbar'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'voithos/vim-python-matchit'
+Bundle 'klen/python-mode'
+" Bundle 'tpope/vim-surround'
+
+Bundle 'Lokaltog/powerline'
+
+" non-github stuff
+Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 
 
 "" plugin options/mappings
@@ -229,7 +250,7 @@ nmap <leader>n :NERDTreeToggle<RETURN>
 
 
 "" configuration of flake8 plugin
-let g:flake8_cmd="/usr/bin/flake8"
+"let g:flake8_cmd="/usr/bin/flake8"
 
 
 "" python-mode configuration
