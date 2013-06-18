@@ -62,7 +62,8 @@ set pastetoggle=<F11>
 syntax enable 
 
 " colorscheme
-colorscheme desert
+" colorscheme desert
+colorscheme default
 set background=dark
 
 " Set extra options when running in GUI mode
