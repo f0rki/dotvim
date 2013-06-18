@@ -61,6 +61,7 @@ set pastetoggle=<F11>
 " Enable syntax highlighting
 syntax enable 
 
+" TODO: find a better colorscheme!!!
 " colorscheme
 " colorscheme desert
 colorscheme default
