@@ -11,9 +11,6 @@ set nocompatible
 set number
 " Sets how many lines of history VIM has to remember
 set history=700
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 " With a map leader it's possible to do extra key combinations
@@ -235,8 +232,16 @@ Bundle 'klen/python-mode'
 
 Bundle 'Lokaltog/powerline'
 
+" colorschemes
+Bundle 'Lokaltog/vim-distinguished'
+
+
 " non-github stuff
 Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+
+" (re-)Enable filetype plugins
+filetype plugin on
+filetype indent on
 
 
 "" plugin options/mappings
@@ -274,4 +279,10 @@ set encoding=utf-8
 "" settings for ctrlp
 let g:ctrlp_max_height = 30
 map <leader>t :CtrlPMixed<cr>
+
+
+" for syntastic
+let g:syntastic_python_checkers = ['flake8', 'python']
+" let g:syntastic_c_checkers = ['scan-build']
+
 
