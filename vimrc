@@ -58,15 +58,14 @@ set pastetoggle=<F11>
 " Enable syntax highlighting
 syntax enable 
 
-" TODO: find a better colorscheme!!!
-" colorscheme
-" colorscheme desert
-colorscheme default
-set background=dark
-
 " Set extra options when running in GUI mode
 if has("gui_running")
-    "TODO: 
+    "colorscheme github
+    colorscheme wombat256mod
+    set guioptions-=Te
+    highlight ColorColumn guibg=lightgrey
+else
+    colorscheme darkdot
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -75,8 +74,8 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" set column at 81 per default
-set colorcolumn=81
+" set column
+set colorcolumn=80
 highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 
@@ -273,7 +272,7 @@ let g:pymode_lint_checker = "flake8"
 
 
 "" for powerline
-set rtp+=/home/mikey/.vim/bundle/powerline/powerline/bindings/vim
+set rtp+=$HOME/.vim/bundle/powerline/powerline/bindings/vim
 let g:Powerline_symbols = 'fancy'
 set laststatus=2
 set encoding=utf-8
