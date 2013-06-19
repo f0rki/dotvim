@@ -62,7 +62,8 @@ syntax enable
 if has("gui_running")
     "colorscheme github
     colorscheme wombat256mod
-    set guioptions-=Te
+    set guioptions-=T
+    set guioptions-=e
     highlight ColorColumn guibg=lightgrey
 else
     colorscheme darkdot
