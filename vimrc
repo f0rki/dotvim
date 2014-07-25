@@ -2,6 +2,68 @@
 " my .vimrc 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""
+" plugins
+"""""""""""""""""""""""""""""""""""""""""
+
+" Install vundle
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+"" use vundle 
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle
+" required! 
+Plugin 'gmarik/Vundle.vim'
+
+" Plugins
+" file navigation based on name
+Plugin 'kien/ctrlp.vim'
+" syntax checkers
+Plugin 'scrooloose/syntastic'
+" auto completion
+if v:version > 703 || (v:version == 703 && has('patch584'))
+    Plugin 'Valloric/YouCompleteMe'
+else
+    Plugin 'ervandew/supertab'
+endif
+" show functions/methods/classes etc.
+Plugin 'majutsushi/tagbar'
+" commenting code
+"Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
+"auto delimiter insertion
+Plugin 'Raimondi/delimitMate'
+"
+" Plugin 'tpope/vim-surround'
+
+" language support
+"Plugin 'voithos/vim-python-matchit'
+"python mode combines several useful python plugins
+Plugin 'klen/python-mode'
+Plugin 'dag/vim-fish'
+
+"Plugin 'Lokaltog/powerline'
+" airline is a pure vimscript powerline alternative
+Plugin 'bling/vim-airline'
+
+" colorschemes
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'michalbachowski/vim-wombat256mod'
+
+" non-github stuff
+Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+
+call vundle#end()            " required
+" (re-)Enable filetype plugins
+filetype plugin indent on    " required
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -205,65 +267,6 @@ func! DeleteTrailingWS()
 endfunc
 
 
-"""""""""""""""""""""""""""""""""""""""""
-" plugins
-"""""""""""""""""""""""""""""""""""""""""
-
-" Install vundle
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-"" use vundle 
-set nocompatible               " be iMproved
-filetype off                   " required!
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle
-" required! 
-Plugin 'gmarik/Vundle.vim'
-
-" Plugins
-" file navigation based on name
-Plugin 'kien/ctrlp.vim'
-" syntax checkers
-Plugin 'scrooloose/syntastic'
-" auto completion
-if v:version > 703 || (v:version == 703 && has('patch584'))
-    Plugin 'Valloric/YouCompleteMe'
-else
-    Plugin 'ervandew/supertab'
-endif
-" show functions/methods/classes etc.
-Plugin 'majutsushi/tagbar'
-" commenting code
-"Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-commentary'
-"auto delimiter insertion
-Plugin 'Raimondi/delimitMate'
-"
-" Plugin 'tpope/vim-surround'
-
-" language support
-"Plugin 'voithos/vim-python-matchit'
-"python mode combines several useful python plugins
-Plugin 'klen/python-mode'
-Plugin 'dag/vim-fish'
-
-"Plugin 'Lokaltog/powerline'
-" airline is a pure vimscript powerline alternative
-Plugin 'bling/vim-airline'
-
-" colorschemes
-Plugin 'Lokaltog/vim-distinguished'
-
-
-" non-github stuff
-Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
-
-call vundle#end()            " required
-" (re-)Enable filetype plugins
-filetype plugin indent on    " required
 
 
 """""""""""""""""""""""""""""""""""""
