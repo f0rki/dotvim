@@ -210,42 +210,65 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""
 
 " Install vundle
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 "" use vundle 
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-" Bundles
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'ervandew/supertab'
-Bundle 'majutsushi/tagbar'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'voithos/vim-python-matchit'
-Bundle 'klen/python-mode'
-" Bundle 'tpope/vim-surround'
+" Plugins
+" file navigation based on name
+Plugin 'kien/ctrlp.vim'
+" syntax checkers
+Plugin 'scrooloose/syntastic'
+" auto completion
+if v:version > 703 || (v:version == 703 && has('patch584'))
+    Plugin 'Valloric/YouCompleteMe'
+else
+    Plugin 'ervandew/supertab'
+endif
+" show functions/methods/classes etc.
+Plugin 'majutsushi/tagbar'
+" commenting code
+"Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
+"auto delimiter insertion
+Plugin 'Raimondi/delimitMate'
+"
+" Plugin 'tpope/vim-surround'
 
-Bundle 'Lokaltog/powerline'
+" language support
+"Plugin 'voithos/vim-python-matchit'
+"python mode combines several useful python plugins
+Plugin 'klen/python-mode'
+Plugin 'dag/vim-fish'
+
+"Plugin 'Lokaltog/powerline'
+" airline is a pure vimscript powerline alternative
+Plugin 'bling/vim-airline'
 
 " colorschemes
-Bundle 'Lokaltog/vim-distinguished'
+Plugin 'Lokaltog/vim-distinguished'
 
 
 " non-github stuff
-Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 
+call vundle#end()            " required
 " (re-)Enable filetype plugins
-filetype plugin on
-filetype indent on
+filetype plugin indent on    " required
 
+
+"""""""""""""""""""""""""""""""""""""
+""""""""" Plugin settings """""""""""
+"""""""""""""""""""""""""""""""""""""
 
 "" plugin options/mappings
 nmap <F8> :TagbarToggle<CR>
@@ -273,10 +296,10 @@ let g:pymode_lint_checker = "flake8"
 
 
 "" for powerline
-set rtp+=$HOME/.vim/bundle/powerline/powerline/bindings/vim
-let g:Powerline_symbols = 'fancy'
-set laststatus=2
-set encoding=utf-8
+"set rtp+=$HOME/.vim/bundle/powerline/powerline/bindings/vim
+"let g:Powerline_symbols = 'fancy'
+"set laststatus=2
+"set encoding=utf-8
 
 
 "" settings for ctrlp
