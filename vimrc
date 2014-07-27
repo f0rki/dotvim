@@ -67,6 +67,13 @@ call vundle#end()
 filetype plugin indent on
 
 
+""""" external/system plugins """""""
+
+if file_readable(expand("$GOROOT/misc/vim/"))
+    set rtp+=$GOROOT/misc/vim
+elseif file_readable(expand("/usr/share/go/misc/vim/"))
+    set rpt+=/usr/share/go/misc/vim/
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
