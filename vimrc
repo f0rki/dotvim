@@ -1,5 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" my .vimrc 
+" my .vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""
@@ -9,15 +9,15 @@
 " Install vundle
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-"" use vundle 
-set nocompatible               " be iMproved
-filetype off                   " required!
+"" use vundle
+set nocompatible " be iMproved
+filetype off     " required!
 
-set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins
@@ -41,14 +41,16 @@ Plugin 'tpope/vim-commentary'
 "auto delimiter insertion
 Plugin 'Raimondi/delimitMate'
 "
-" Plugin 'tpope/vim-surround'
+"Plugin 'tpope/vim-surround'
 
 " language support
 "Plugin 'voithos/vim-python-matchit'
 "python mode combines several useful python plugins
 Plugin 'klen/python-mode'
 Plugin 'dag/vim-fish'
+"Plugin 'derekwyatt/vim-scala'
 
+" status bar
 "Plugin 'Lokaltog/powerline'
 " airline is a pure vimscript powerline alternative
 Plugin 'bling/vim-airline'
@@ -60,9 +62,9 @@ Plugin 'michalbachowski/vim-wombat256mod'
 " non-github stuff
 Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 
-call vundle#end()            " required
-" (re-)Enable filetype plugins
-filetype plugin indent on    " required
+" required
+call vundle#end()
+filetype plugin indent on
 
 
 
@@ -85,18 +87,18 @@ let mapleader = ";"
 let g:mapleader = ";"
 " Ignore case when searching
 set ignorecase
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 " Highlight search results
 set hlsearch
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 " For regular expressions turn magic on
 set magic
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 " No annoying sound on errors
@@ -114,15 +116,13 @@ set wildignore+=*/coverage/*
 " let tab trigger auto completion
 set wildchar=<Tab> wildmenu wildmode=full
 
-set pastetoggle=<F11>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -202,7 +202,7 @@ map <leader>ca :1,1000 c!<cr>
 "map <leader>tn :tabnew<cr>
 "map <leader>to :tabonly<cr>
 "map <leader>tc :tabclose<cr>
-"map <leader>tm :tabmove 
+"map <leader>tm :tabmove
 
 
 " Easy window navigation
@@ -219,7 +219,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -278,16 +278,6 @@ endfunc
 
 "" plugin options/mappings
 nmap <F8> :TagbarToggle<CR>
-
-
-"" NERDTree configuration
-let g:NERDTreeWinPos = "right"
-"let g:NERDTreeWinSize = 31
-nmap <leader>n :NERDTreeToggle<RETURN>
-
-
-"" configuration of flake8 plugin
-"let g:flake8_cmd="/usr/bin/flake8"
 
 
 "" python-mode configuration
