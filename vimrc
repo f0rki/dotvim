@@ -2,9 +2,74 @@
 " my .vimrc 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""
+" plugins
+"""""""""""""""""""""""""""""""""""""""""
+
+" Install vundle
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+"" use vundle 
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle
+" required! 
+Plugin 'gmarik/Vundle.vim'
+
+" Plugins
+" file navigation based on name
+Plugin 'kien/ctrlp.vim'
+" syntax checkers
+Plugin 'scrooloose/syntastic'
+" display git diff, as sign for added, changed, removed lines
+Plugin 'airblade/vim-gitgutter'
+" auto completion
+if v:version > 703 || (v:version == 703 && has('patch584'))
+    Plugin 'Valloric/YouCompleteMe'
+else
+    Plugin 'ervandew/supertab'
+endif
+" show functions/methods/classes etc.
+Plugin 'majutsushi/tagbar'
+" commenting code
+"Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
+"auto delimiter insertion
+Plugin 'Raimondi/delimitMate'
+"
+" Plugin 'tpope/vim-surround'
+
+" language support
+"Plugin 'voithos/vim-python-matchit'
+"python mode combines several useful python plugins
+Plugin 'klen/python-mode'
+Plugin 'dag/vim-fish'
+
+"Plugin 'Lokaltog/powerline'
+" airline is a pure vimscript powerline alternative
+Plugin 'bling/vim-airline'
+
+" colorschemes
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'michalbachowski/vim-wombat256mod'
+
+" non-github stuff
+Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+
+call vundle#end()            " required
+" (re-)Enable filetype plugins
+filetype plugin indent on    " required
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" we need this when using fish, or otherwise some plugins are fubar
 set shell=/bin/bash
 " disable vi compat
 set nocompatible
@@ -66,6 +131,7 @@ if has("gui_running")
     set guioptions-=T
     set guioptions-=e
     highlight ColorColumn guibg=lightgrey
+	" pasting from X
     nmap <leader>P "+gP
 else
     colorscheme darkdot
@@ -206,77 +272,32 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 
-
-"""""""""""""""""""""""""""""""""""""""""
-" plugins
-"""""""""""""""""""""""""""""""""""""""""
-
-" Install vundle
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-
-"" use vundle 
-set nocompatible               " be iMproved
-filetype off                   " required!
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
-
-" Bundles
-" open files/switch to open buffers
-Bundle 'kien/ctrlp.vim'
-" several synatx checking tools
-Bundle 'scrooloose/syntastic'
-" show overview of classes, methods, etc.
-Bundle 'majutsushi/tagbar'
-" comment a bunch of lines with a shortcut
-Bundle 'scrooloose/nerdcommenter'
-" display git diff, as sign for added, changed, removed lines
-Bundle 'airblade/vim-gitgutter'
-" autocompletion
-" Bundle 'davidhalter/jedi-vim'
-Bundle 'Valloric/YouCompleteMe'
-" combines several python related tools
-"Bundle 'klen/python-mode'
-" surround stuff with " [ { ...
-Bundle 'tpope/vim-surround'
-" repeat a whole map with .
-Bundle 'tpope/vim-repeat'
-
-" support for other programming languages
-"Bundle 'derekwyatt/vim-scala'
-Bundle 'vim-scripts/fish.vim'
-
-" pure vim-script status bar
-Bundle 'bling/vim-airline'
-" python status bar
-"Bundle 'Lokaltog/powerline'
-
-" colorschemes
-Bundle 'Lokaltog/vim-distinguished'
-
-" non-github stuff
-Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
-
-" (re-)Enable filetype plugins
-filetype plugin on
-filetype indent on
-
+"""""""""""""""""""""""""""""""""""""
+""""""""" Plugin settings """""""""""
+"""""""""""""""""""""""""""""""""""""
 
 "" plugin options/mappings
 nmap <F8> :TagbarToggle<CR>
 
+
+"" NERDTree configuration
+let g:NERDTreeWinPos = "right"
+"let g:NERDTreeWinSize = 31
+nmap <leader>n :NERDTreeToggle<RETURN>
+
+
+"" configuration of flake8 plugin
+"let g:flake8_cmd="/usr/bin/flake8"
+
+
 "" python-mode configuration
 " disable python folding
 "let g:pymode_folding = 0
-"" Disable pylint checking every save
+" Disable pylint checking every save
 "let g:pymode_lint_write = 0
-"" Load run code plugin
+" Load run code plugin
 "let g:pymode_run = 0
-"" the checkers
+" the checkers
 "let g:pymode_lint_checker = "flake8"
 
 
@@ -291,3 +312,5 @@ map <leader>t :CtrlPMixed<cr>
 " for syntastic
 let g:syntastic_python_checkers = ['flake8', 'python']
 " let g:syntastic_c_checkers = ['scan-build']
+
+
