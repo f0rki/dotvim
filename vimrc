@@ -5,6 +5,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set shell=/bin/bash
 " disable vi compat
 set nocompatible
 " we want line numbers
@@ -65,6 +66,7 @@ if has("gui_running")
     set guioptions-=T
     set guioptions-=e
     highlight ColorColumn guibg=lightgrey
+    nmap <leader>P "+gP
 else
     colorscheme darkdot
 endif
@@ -224,20 +226,37 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Bundles
+" open files/switch to open buffers
 Bundle 'kien/ctrlp.vim'
+" several synatx checking tools
 Bundle 'scrooloose/syntastic'
-Bundle 'ervandew/supertab'
+" show overview of classes, methods, etc.
 Bundle 'majutsushi/tagbar'
+" comment a bunch of lines with a shortcut
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'voithos/vim-python-matchit'
-Bundle 'klen/python-mode'
-" Bundle 'tpope/vim-surround'
+" display git diff, as sign for added, changed, removed lines
+Bundle 'airblade/vim-gitgutter'
+" autocompletion
+" Bundle 'davidhalter/jedi-vim'
+Bundle 'Valloric/YouCompleteMe'
+" combines several python related tools
+"Bundle 'klen/python-mode'
+" surround stuff with " [ { ...
+Bundle 'tpope/vim-surround'
+" repeat a whole map with .
+Bundle 'tpope/vim-repeat'
 
-Bundle 'Lokaltog/powerline'
+" support for other programming languages
+"Bundle 'derekwyatt/vim-scala'
+Bundle 'vim-scripts/fish.vim'
+
+" pure vim-script status bar
+Bundle 'bling/vim-airline'
+" python status bar
+"Bundle 'Lokaltog/powerline'
 
 " colorschemes
 Bundle 'Lokaltog/vim-distinguished'
-
 
 " non-github stuff
 Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
@@ -250,34 +269,19 @@ filetype indent on
 "" plugin options/mappings
 nmap <F8> :TagbarToggle<CR>
 
-
-"" NERDTree configuration
-let g:NERDTreeWinPos = "right"
-"let g:NERDTreeWinSize = 31
-nmap <leader>n :NERDTreeToggle<RETURN>
-
-
-"" configuration of flake8 plugin
-"let g:flake8_cmd="/usr/bin/flake8"
-
-
 "" python-mode configuration
 " disable python folding
-let g:pymode_folding = 0
-" Disable pylint checking every save
-let g:pymode_lint_write = 0
-" Load run code plugin
-let g:pymode_run = 0
-" the checkers
-let g:pymode_lint_checker = "flake8"
+"let g:pymode_folding = 0
+"" Disable pylint checking every save
+"let g:pymode_lint_write = 0
+"" Load run code plugin
+"let g:pymode_run = 0
+"" the checkers
+"let g:pymode_lint_checker = "flake8"
 
 
-"" for powerline
-set rtp+=$HOME/.vim/bundle/powerline/powerline/bindings/vim
-let g:Powerline_symbols = 'fancy'
+"" for airline
 set laststatus=2
-set encoding=utf-8
-
 
 "" settings for ctrlp
 let g:ctrlp_max_height = 30
@@ -287,5 +291,3 @@ map <leader>t :CtrlPMixed<cr>
 " for syntastic
 let g:syntastic_python_checkers = ['flake8', 'python']
 " let g:syntastic_c_checkers = ['scan-build']
-
-
