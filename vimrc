@@ -49,6 +49,8 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'klen/python-mode'
 Plugin 'dag/vim-fish'
 "Plugin 'derekwyatt/vim-scala'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'vim-scripts/yaml.vim'
 
 " status bar
 "Plugin 'Lokaltog/powerline'
