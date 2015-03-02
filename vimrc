@@ -20,13 +20,25 @@ call vundle#begin()
 " required!
 Plugin 'gmarik/Vundle.vim'
 
-" Plugins
+""""""" Plugins
+
+""""""" Navigation & Look
 " file navigation based on name
 Plugin 'kien/ctrlp.vim'
-" syntax checkers
-Plugin 'scrooloose/syntastic'
+" checkout out: https://github.com/Lokaltog/vim-easymotion
+" Plugin 'Lokaltog/vim-easymotion'
+" status bar
+Plugin 'bling/vim-airline'
 " display git diff, as sign for added, changed, removed lines
 Plugin 'airblade/vim-gitgutter'
+
+"""""" colorschemes 
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'michalbachowski/vim-wombat256mod'
+
+""""""" Programming related
+" syntax checkers
+Plugin 'scrooloose/syntastic'
 " auto completion
 if v:version > 703 || (v:version == 703 && has('patch584'))
     Plugin 'Valloric/YouCompleteMe'
@@ -58,20 +70,12 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/yaml.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-
-" status bar
-"Plugin 'Lokaltog/powerline'
-" airline is a pure vimscript powerline alternative
-Plugin 'bling/vim-airline'
-
-" colorschemes
-Plugin 'Lokaltog/vim-distinguished'
-Plugin 'michalbachowski/vim-wombat256mod'
+Plugin 'wting/rust.vim'
 
 " non-github stuff
 Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 
-" required
+""""" required, end of plugin loading
 call vundle#end()
 filetype plugin indent on
 
@@ -81,7 +85,7 @@ filetype plugin indent on
 if file_readable(expand("$GOROOT/misc/vim/"))
     set rtp+=$GOROOT/misc/vim
 elseif file_readable(expand("/usr/share/go/misc/vim/"))
-    set rpt+=/usr/share/go/misc/vim/
+    set rtp+=/usr/share/go/misc/vim/
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -292,11 +296,11 @@ endfunc
 """"""""" Plugin settings """""""""""
 """""""""""""""""""""""""""""""""""""
 
-"" for tagbar
+"""" for tagbar
 nmap <F8> :TagbarToggle<CR>
 
 
-"" python-mode configuration
+"""" python-mode configuration
 " disable python folding
 "let g:pymode_folding = 0
 " Disable pylint checking every save
@@ -317,17 +321,16 @@ let g:ctrlp_working_path_mode = 'a'
 
 
 """" for syntastic
+" configure py/C checkers, although they are handled by YCM on recent vims
 let g:syntastic_python_checkers = ['flake8', 'python']
-" let g:syntastic_c_checkers = ['scan-build']
+let g:syntastic_c_checkers = ['gcc']
 
-
-" for vim-markdown
+"""" for vim-markdown
 let g:vim_markdown_math=1
 let g:vim_markdown_folding_disabled=1
 
 
-""""" for neocomplete 
-
+"""" for neocomplete 
 " " Disable AutoComplPop.
 " let g:acp_enableAtStartup = 0
 " " Use neocomplete.
