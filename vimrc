@@ -31,6 +31,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 " display git diff, as sign for added, changed, removed lines
 Plugin 'airblade/vim-gitgutter'
+" better highlighting for too long lines, instead of colorcolumn
+Plugin 'gagoar/SmartColumnColors'
 
 """""" colorschemes 
 Plugin 'Lokaltog/vim-distinguished'
@@ -150,7 +152,7 @@ if has("gui_running")
     colorscheme wombat256mod
     set guioptions-=T
     set guioptions-=e
-    highlight ColorColumn guibg=lightgrey
+    " highlight ColorColumn guibg=lightgrey
 	" pasting from X
     nmap <leader>P "+gP
 else
@@ -164,8 +166,8 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " set column
-set colorcolumn=80
-highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+" set colorcolumn=80
+" highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 
 
@@ -313,6 +315,9 @@ nmap <F8> :TagbarToggle<CR>
 
 """" for airline
 set laststatus=2
+
+"""" for smartcolorcolumn
+" let g:smart_display_opts = { 'column' : 80 }
 
 """" settings for ctrlp
 let g:ctrlp_max_height = 30
