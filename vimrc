@@ -30,6 +30,8 @@ Plugin 'airblade/vim-gitgutter'
 " auto completion
 if v:version > 703 || (v:version == 703 && has('patch584'))
     Plugin 'Valloric/YouCompleteMe'
+    " Plugin 'Shougo/neocomplete.vim'
+    " Plugin 'davidhalter/jedi-vim'
 else
     Plugin 'ervandew/supertab'
 endif
@@ -43,14 +45,19 @@ Plugin 'Raimondi/delimitMate'
 "
 "Plugin 'tpope/vim-surround'
 
+" checker for writing style
+Plugin 'reedes/vim-wordy'
+
 " language support
 "Plugin 'voithos/vim-python-matchit'
 "python mode combines several useful python plugins
-Plugin 'klen/python-mode'
+" Plugin 'klen/python-mode'
 Plugin 'dag/vim-fish'
 "Plugin 'derekwyatt/vim-scala'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/yaml.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 " status bar
 "Plugin 'Lokaltog/powerline'
@@ -285,7 +292,7 @@ endfunc
 """"""""" Plugin settings """""""""""
 """""""""""""""""""""""""""""""""""""
 
-"" plugin options/mappings
+"" for tagbar
 nmap <F8> :TagbarToggle<CR>
 
 
@@ -300,16 +307,38 @@ nmap <F8> :TagbarToggle<CR>
 "let g:pymode_lint_checker = "flake8"
 
 
-"" for airline
+"""" for airline
 set laststatus=2
 
-"" settings for ctrlp
+"""" settings for ctrlp
 let g:ctrlp_max_height = 30
-map <leader>t :CtrlPMixed<cr>
+map <leader>t :CtrlP<cr>
+let g:ctrlp_working_path_mode = 'a'
 
 
-" for syntastic
+"""" for syntastic
 let g:syntastic_python_checkers = ['flake8', 'python']
 " let g:syntastic_c_checkers = ['scan-build']
 
 
+" for vim-markdown
+let g:vim_markdown_math=1
+let g:vim_markdown_folding_disabled=1
+
+
+""""" for neocomplete 
+
+" " Disable AutoComplPop.
+" let g:acp_enableAtStartup = 0
+" " Use neocomplete.
+" let g:neocomplete#enable_at_startup = 1
+" " Use smartcase.
+" let g:neocomplete#enable_smart_case = 1
+
+" inoremap <expr><C-g>     neocomplete#undo_completion()
+" inoremap <expr><C-l>     neocomplete#complete_common_string()
+" " <TAB>: completion.
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" " <C-h>, <BS>: close popup and delete backword char.
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
