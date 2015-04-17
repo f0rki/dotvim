@@ -74,6 +74,9 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'wting/rust.vim'
 
+
+Plugin 'joom/latex-unicoder.vim'
+
 " non-github stuff
 Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 
