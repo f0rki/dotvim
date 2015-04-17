@@ -129,6 +129,9 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" set textwidth to 80 characters
+set textwidth=80
+
 set title
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*_build/*
