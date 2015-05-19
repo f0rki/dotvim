@@ -34,7 +34,7 @@ Plugin 'airblade/vim-gitgutter'
 " better highlighting for too long lines, instead of colorcolumn
 Plugin 'gagoar/SmartColumnColors'
 
-"""""" colorschemes 
+"""""" colorschemes
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'michalbachowski/vim-wombat256mod'
 
@@ -132,9 +132,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" set textwidth to 80 characters
-set textwidth=80
-
 set title
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*_build/*
@@ -143,6 +140,10 @@ set wildignore+=*/coverage/*
 
 " let tab trigger auto completion
 set wildchar=<Tab> wildmenu wildmode=full
+
+
+" set textwidth to 80 characters
+set textwidth=79
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -293,6 +294,10 @@ endfunction
 cmap w!! w !sudo tee % >/dev/null
 
 
+" delete trailing whitespaces on write
+autocmd BufWrite * :call DeleteTrailingWS()
+
+
 " Delete trailing white space on save
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -341,7 +346,7 @@ let g:vim_markdown_math=1
 let g:vim_markdown_folding_disabled=1
 
 
-"""" for neocomplete 
+"""" for neocomplete
 " " Disable AutoComplPop.
 " let g:acp_enableAtStartup = 0
 " " Use neocomplete.
