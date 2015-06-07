@@ -1,4 +1,7 @@
 set textwidth=99
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 
 autocmd BufWrite *.c :call DeleteTrailingWS()
 autocmd BufWrite *.cpp :call DeleteTrailingWS()
