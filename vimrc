@@ -52,9 +52,9 @@ endif
 " show functions/methods/classes etc.
 Plugin 'majutsushi/tagbar'
 " commenting code
-"Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-commentary'
-"auto delimiter insertion
+Plugin 'scrooloose/nerdcommenter'
+" Plugin 'tpope/vim-commentary'
+" auto delimiter insertion
 Plugin 'Raimondi/delimitMate'
 "
 "Plugin 'tpope/vim-surround'
@@ -142,10 +142,6 @@ set wildignore+=*/coverage/*
 set wildchar=<Tab> wildmenu wildmode=full
 
 
-" set textwidth to 80 characters
-set textwidth=79
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -200,9 +196,8 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" Linebreak on 500 characters
 set lbr
-set tw=500
+set textwidth=79
 
 set ai "Auto indent
 set si "Smart indent
@@ -222,10 +217,10 @@ nmap Q gqap
 set hidden
 
 " Close the current buffer
-map <leader>c :Bclose<cr>
+map <leader>d :Bclose<cr>
 
 " Close all the buffers
-map <leader>ca :1,1000 c!<cr>
+map <leader>da :1,1000 c!<cr>
 
 " Useful mappings for managing tabs
 "map <leader>tn :tabnew<cr>
@@ -243,7 +238,7 @@ map <C-l> <C-w>l
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+" map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -294,16 +289,15 @@ endfunction
 cmap w!! w !sudo tee % >/dev/null
 
 
-" delete trailing whitespaces on write
-autocmd BufWrite * :call DeleteTrailingWS()
-
-
 " Delete trailing white space on save
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
+
+" delete trailing whitespaces on write
+autocmd BufWrite * :call DeleteTrailingWS()
 
 """""""""""""""""""""""""""""""""""""
 """"""""" Plugin settings """""""""""
