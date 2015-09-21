@@ -33,6 +33,9 @@ Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 " better highlighting for too long lines, instead of colorcolumn
 Plugin 'gagoar/SmartColumnColors'
+" highligh targets for f, F, t, T
+Plugin 'unblevable/quick-scope'
+" TODO: check out movement advice at https://github.com/unblevable/quick-scope
 
 """""" colorschemes
 Plugin 'Lokaltog/vim-distinguished'
@@ -108,6 +111,7 @@ set history=700
 set autoread
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
+" TODO: consider alternative leader
 let mapleader = ";"
 let g:mapleader = ";"
 " Ignore case when searching
@@ -213,6 +217,14 @@ nmap Q gqap
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Move across wrapped lines like regular lines
+" Go to the first non-blank character of a line
+noremap 0 g^
+" Just in case you need to go to the very beginning of a line
+noremap ^ g0
+noremap $ g$
+
 
 set hidden
 
