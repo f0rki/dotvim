@@ -77,6 +77,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'wting/rust.vim'
 
+Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 Plugin 'joom/latex-unicoder.vim'
 
