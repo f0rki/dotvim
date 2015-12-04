@@ -71,11 +71,11 @@ Plugin 'reedes/vim-wordy'
 " Plugin 'klen/python-mode'
 Plugin 'dag/vim-fish'
 "Plugin 'derekwyatt/vim-scala'
-Plugin 'kchmck/vim-coffee-script'
+"Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/yaml.vim'
-Plugin 'godlygeek/tabular'
+"Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'wting/rust.vim'
+Plugin 'rust-lang/rust.vim'
 
 Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
@@ -226,6 +226,9 @@ noremap 0 g^
 noremap ^ g0
 noremap $ g$
 
+" jumplist navigation without pressing shift...
+map <C-i> <C-I>
+map <C-o> <C-O>
 
 set hidden
 
@@ -368,3 +371,8 @@ let g:vim_markdown_folding_disabled=1
 " " <C-h>, <BS>: close popup and delete backword char.
 " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 " inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+
+"""" for rust.vim
+" auto-format rust code on save
+let g:rustfmt_autosave = 1
