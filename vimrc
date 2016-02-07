@@ -37,9 +37,22 @@ Plugin 'gagoar/SmartColumnColors'
 Plugin 'unblevable/quick-scope'
 " TODO: check out movement advice at https://github.com/unblevable/quick-scope
 
+
 """""" colorschemes
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'michalbachowski/vim-wombat256mod'
+
+
+""""""" general editing helps
+" tabular alignment of text
+Plugin 'godlygeek/tabular'
+
+" checker for writing style
+"Plugin 'reedes/vim-wordy'
+
+" convert latex math stuff to unicode chars
+Plugin 'joom/latex-unicoder.vim'
+
 
 """"""" Programming related
 " syntax checkers
@@ -50,6 +63,7 @@ if v:version > 703 || (v:version == 703 && has('patch584'))
     " Plugin 'Shougo/neocomplete.vim'
     " Plugin 'davidhalter/jedi-vim'
 else
+    " otherwise fallback to supertab
     Plugin 'ervandew/supertab'
 endif
 " show functions/methods/classes etc.
@@ -62,23 +76,16 @@ Plugin 'Raimondi/delimitMate'
 "
 "Plugin 'tpope/vim-surround'
 
-" checker for writing style
-Plugin 'reedes/vim-wordy'
-
 " language support
 "Plugin 'voithos/vim-python-matchit'
-"python mode combines several useful python plugins
+"python mode combines several useful python plugins, but we have youcompleteme
 " Plugin 'klen/python-mode'
 Plugin 'dag/vim-fish'
 "Plugin 'derekwyatt/vim-scala'
-Plugin 'kchmck/vim-coffee-script'
+"Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/yaml.vim'
-Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'wting/rust.vim'
-
-
-Plugin 'joom/latex-unicoder.vim'
+"Plugin 'JuliaLang/julia-vim'
 
 " non-github stuff
 Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
