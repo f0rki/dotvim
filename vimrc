@@ -65,7 +65,7 @@ Plugin 'Raimondi/delimitMate'
 " checker for writing style
 Plugin 'reedes/vim-wordy'
 
-" language support
+""""" language support """""""
 "Plugin 'voithos/vim-python-matchit'
 "python mode combines several useful python plugins
 " Plugin 'klen/python-mode'
@@ -73,12 +73,16 @@ Plugin 'dag/vim-fish'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/yaml.vim'
-"Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'rust-lang/rust.vim'
-
+"Plugin 'godlygeek/tabular'
 Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
+" make vim a usable rust ide
+Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer'
+
+
+" convert latex math to unicode chars
 Plugin 'joom/latex-unicoder.vim'
 
 " non-github stuff
@@ -338,7 +342,7 @@ nmap <F8> :TagbarToggle<CR>
 set laststatus=2
 
 """" for smartcolorcolumn
-" let g:smart_display_opts = { 'column' : 80 }
+let g:smart_display_opts = { 'column' : 81 }
 
 """" settings for ctrlp
 let g:ctrlp_max_height = 30
@@ -376,3 +380,7 @@ let g:vim_markdown_folding_disabled=1
 """" for rust.vim
 " auto-format rust code on save
 let g:rustfmt_autosave = 1
+
+"set hidden
+"let g:racer_cmd = "~/src/racer/target/release/racer"
+"let $RUST_SRC_PATH="~/src/rus"
