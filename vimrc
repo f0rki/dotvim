@@ -91,10 +91,6 @@ Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
 
-
-" convert latex math to unicode chars
-Plugin 'joom/latex-unicoder.vim'
-
 " non-github stuff
 Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 
