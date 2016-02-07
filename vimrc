@@ -37,7 +37,6 @@ Plugin 'gagoar/SmartColumnColors'
 Plugin 'unblevable/quick-scope'
 " TODO: check out movement advice at https://github.com/unblevable/quick-scope
 
-
 """""" colorschemes
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'michalbachowski/vim-wombat256mod'
@@ -76,16 +75,25 @@ Plugin 'Raimondi/delimitMate'
 "
 "Plugin 'tpope/vim-surround'
 
-" language support
+""""" language support
 "Plugin 'voithos/vim-python-matchit'
-"python mode combines several useful python plugins, but we have youcompleteme
+"python mode combines several useful python plugins
 " Plugin 'klen/python-mode'
 Plugin 'dag/vim-fish'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/yaml.vim'
 Plugin 'plasticboy/vim-markdown'
-"Plugin 'JuliaLang/julia-vim'
+"Plugin 'godlygeek/tabular'
+Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+
+" make vim a usable rust ide
+Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer'
+
+
+" convert latex math to unicode chars
+Plugin 'joom/latex-unicoder.vim'
 
 " non-github stuff
 Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
@@ -232,6 +240,9 @@ noremap 0 g^
 noremap ^ g0
 noremap $ g$
 
+" jumplist navigation without pressing shift...
+map <C-i> <C-I>
+map <C-o> <C-O>
 
 set hidden
 
@@ -374,3 +385,12 @@ let g:vim_markdown_folding_disabled=1
 " " <C-h>, <BS>: close popup and delete backword char.
 " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 " inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+
+"""" for rust.vim
+" auto-format rust code on save
+let g:rustfmt_autosave = 1
+
+"set hidden
+"let g:racer_cmd = "~/src/racer/target/release/racer"
+"let $RUST_SRC_PATH="~/src/rus"
