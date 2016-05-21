@@ -76,12 +76,13 @@ Plugin 'Raimondi/delimitMate'
 "Plugin 'tpope/vim-surround'
 
 """"" language support
+Plugin 'vim-latex/vim-latex'
 "Plugin 'voithos/vim-python-matchit'
 "python mode combines several useful python plugins
 " Plugin 'klen/python-mode'
 Plugin 'dag/vim-fish'
 "Plugin 'derekwyatt/vim-scala'
-"Plugin 'kchmck/vim-coffee-script'
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/yaml.vim'
 Plugin 'plasticboy/vim-markdown'
 "Plugin 'godlygeek/tabular'
@@ -89,10 +90,8 @@ Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 " make vim a usable rust ide
 Plugin 'rust-lang/rust.vim'
-Plugin 'racer-rust/vim-racer'
+"Plugin 'racer-rust/vim-racer'
 
-" non-github stuff
-Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 
 """"" required, end of plugin loading
 call vundle#end()
