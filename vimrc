@@ -87,8 +87,11 @@ Plugin 'vim-scripts/yaml.vim'
 Plugin 'plasticboy/vim-markdown'
 "Plugin 'godlygeek/tabular'
 Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+
 " make vim a usable rust ide
 Plugin 'rust-lang/rust.vim'
+"Plugin 'racer-rust/vim-racer'
+
 
 """"" required, end of plugin loading
 call vundle#end()

@@ -1,4 +1,4 @@
-set textwidth=100
+set textwidth=79
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
@@ -10,4 +10,4 @@ autocmd BufWrite *.cxx :call DeleteTrailingWS()
 autocmd BufWrite *.h :call DeleteTrailingWS()
 autocmd BufWrite *.hpp :call DeleteTrailingWS()
 
-let g:smart_display_opts = { 'column' : 100 }
+"let g:smart_display_opts = { 'column' : 100 }
