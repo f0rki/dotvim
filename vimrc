@@ -170,10 +170,19 @@ if has("gui_running")
     set guioptions-=T
     set guioptions-=e
     " highlight ColorColumn guibg=lightgrey
-	" pasting from X
-    nmap <leader>P "+gP
 else
     colorscheme darkdot
+endif
+
+if has("nvim") || has("gui_running")
+	" copypasta from X clipboard
+    nmap <leader>P "+gP
+    nmap <leader>Y "+y
+    vmap <leader>Y "+y
+endif
+
+if has("nvim")
+    colorscheme wombat256mod
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
