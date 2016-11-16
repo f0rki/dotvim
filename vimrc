@@ -332,6 +332,12 @@ endfunc
 " delete trailing whitespaces on write
 autocmd BufWrite * :call DeleteTrailingWS()
 
+
+func! EnableMoveHighlight()
+  autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+endfunc
+
+
 """""""""""""""""""""""""""""""""""""
 """"""""" Plugin settings """""""""""
 """""""""""""""""""""""""""""""""""""
