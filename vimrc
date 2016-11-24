@@ -31,6 +31,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 " display git diff, as sign for added, changed, removed lines
 Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 " better highlighting for too long lines, instead of colorcolumn
 Plugin 'gagoar/SmartColumnColors'
 " highligh targets for f, F, t, T
@@ -80,6 +81,7 @@ Plugin 'vim-latex/vim-latex'
 "Plugin 'voithos/vim-python-matchit'
 "python mode combines several useful python plugins
 " Plugin 'klen/python-mode'
+Plugin 'tell-k/vim-autopep8'
 Plugin 'dag/vim-fish'
 "Plugin 'derekwyatt/vim-scala'
 Plugin 'kchmck/vim-coffee-script'
