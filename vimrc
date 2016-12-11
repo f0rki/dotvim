@@ -1,6 +1,25 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""
 " my .vimrc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Here is a quick overview of useful shortcuts
+
+"""" buffer management
+" ;c close the buffer
+" ;t to open ctrl-p buffer managment
+"
+
+"""" movement
+" f<char> to jump to <char> on line (F for backward)
+" $ to line beginning
+" 0 to line end
+" jumplist navigation with C-i and C-o
+
+"""" git
+" jump between hunks with: [c and ]c
+" stage, undo hunks with <leader>hs and <leader>hu
+" preview hunk diff <leader>hp
+" view git diff with :Gdiff
+" git blaem with :Gblame
 
 """""""""""""""""""""""""""""""""""""""""
 " plugins
@@ -37,6 +56,7 @@ Plugin 'gagoar/SmartColumnColors'
 " highligh targets for f, F, t, T
 Plugin 'unblevable/quick-scope'
 " TODO: check out movement advice at https://github.com/unblevable/quick-scope
+"Plugin 'tpope/vim-repeat'
 
 """""" colorschemes
 Plugin 'Lokaltog/vim-distinguished'
@@ -66,6 +86,8 @@ else
     " otherwise fallback to supertab
     Plugin 'ervandew/supertab'
 endif
+" file navigation
+Plugin 'scrooloose/nerdtree'
 " show functions/methods/classes etc.
 Plugin 'majutsushi/tagbar'
 " commenting code
@@ -79,9 +101,11 @@ Plugin 'Raimondi/delimitMate'
 """"" language support
 Plugin 'vim-latex/vim-latex'
 "Plugin 'voithos/vim-python-matchit'
-"python mode combines several useful python plugins
-" Plugin 'klen/python-mode'
+" python mode combines several useful python plugins
+" TODO: check whether to use python mode
+"Plugin 'klen/python-mode'
 Plugin 'tell-k/vim-autopep8'
+Plugin 'nvie/vim-flake8'
 Plugin 'dag/vim-fish'
 "Plugin 'derekwyatt/vim-scala'
 Plugin 'kchmck/vim-coffee-script'
@@ -193,11 +217,6 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" set column
-" set colorcolumn=80
-" highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -258,23 +277,11 @@ map <leader>d :Bclose<cr>
 " Close all the buffers
 map <leader>da :1,1000 c!<cr>
 
-" Useful mappings for managing tabs
-"map <leader>tn :tabnew<cr>
-"map <leader>to :tabonly<cr>
-"map <leader>tc :tabclose<cr>
-"map <leader>tm :tabmove
-
-
 " Easy window navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-" map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -335,7 +342,7 @@ endfunc
 " delete trailing whitespaces on write
 "autocmd BufWrite * :call DeleteTrailingWS()
 "Explicitly enable for filetypes!
-
+nmap <leader>w :call DeleteTrailingWS()
 
 func! EnableMoveHighlight()
   autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
@@ -346,14 +353,14 @@ endfunc
 """"""""" Plugin settings """""""""""
 """""""""""""""""""""""""""""""""""""
 
-""" set our default tech flavor
-let g:tex_flavor = 'tex'
-
 """" for tagbar
 nmap <F8> :TagbarToggle<CR>
 
 
-"""" python-mode configuration
+"""" python configuration
+map <buffer> <F4> :call Autopep8()<CR>
+
+" python-mode config (disabled)
 " disable python folding
 "let g:pymode_folding = 0
 " Disable pylint checking every save
@@ -364,17 +371,27 @@ nmap <F8> :TagbarToggle<CR>
 "let g:pymode_lint_checker = "flake8"
 
 
+""" set our default tech flavor
+let g:tex_flavor = 'tex'
+
+"""" latex unicoder
+let g:unicoder_no_map=0
+nnoremap <leader>l :call unicoder#start(0)<CR>
+
+
 """" for airline
 set laststatus=2
 
 """" for smartcolorcolumn
+" configure this in filetype specific after/ftplugin/ files
 " let g:smart_display_opts = { 'column' : 80 }
 
 """" settings for ctrlp
 let g:ctrlp_max_height = 30
 map <leader>t :CtrlP<cr>
+map <leader>b :CtrlPBuffer<cr>
+map <leader>r :CtrlPMixed<cr>
 let g:ctrlp_working_path_mode = 'a'
-
 
 """" for syntastic
 " configure py/C checkers, although they are handled by YCM on recent vims
@@ -385,28 +402,7 @@ let g:syntastic_c_checkers = ['gcc']
 let g:vim_markdown_math=1
 let g:vim_markdown_folding_disabled=1
 
-
-"""" for neocomplete
-" " Disable AutoComplPop.
-" let g:acp_enableAtStartup = 0
-" " Use neocomplete.
-" let g:neocomplete#enable_at_startup = 1
-" " Use smartcase.
-" let g:neocomplete#enable_smart_case = 1
-
-" inoremap <expr><C-g>     neocomplete#undo_completion()
-" inoremap <expr><C-l>     neocomplete#complete_common_string()
-" " <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" " <C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-
 """" for rust.vim
 " auto-format rust code on save
 let g:rustfmt_autosave = 1
 
-"set hidden
-"let g:racer_cmd = "~/src/racer/target/release/racer"
-"let $RUST_SRC_PATH="~/src/rus"
