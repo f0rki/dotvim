@@ -333,7 +333,8 @@ func! DeleteTrailingWS()
 endfunc
 
 " delete trailing whitespaces on write
-autocmd BufWrite * :call DeleteTrailingWS()
+"autocmd BufWrite * :call DeleteTrailingWS()
+"Explicitly enable for filetypes!
 
 
 func! EnableMoveHighlight()
@@ -347,6 +348,7 @@ endfunc
 
 """ set our default tech flavor
 let g:tex_flavor = 'tex'
+
 """" for tagbar
 nmap <F8> :TagbarToggle<CR>
 
