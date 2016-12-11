@@ -149,6 +149,7 @@ set tm=500
 
 set title
 set wildignore=*.swp,*.bak,*.pyc,*.class
+set wildignore+=*.aux,*toc,*blg,*.bcf,*bbl,*.tdo
 set wildignore+=*_build/*
 set wildignore+=*build/*
 set wildignore+=*/coverage/*
@@ -344,6 +345,8 @@ endfunc
 """"""""" Plugin settings """""""""""
 """""""""""""""""""""""""""""""""""""
 
+""" set our default tech flavor
+let g:tex_flavor = 'tex'
 """" for tagbar
 nmap <F8> :TagbarToggle<CR>
 
