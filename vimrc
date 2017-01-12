@@ -98,8 +98,17 @@ Plugin 'Raimondi/delimitMate'
 "
 "Plugin 'tpope/vim-surround'
 
+
+" snippets engine
+Plugin 'SirVer/ultisnips'
+" and some snippets
+Plugin 'honza/vim-snippets'
+
 """"" language support
-Plugin 'vim-latex/vim-latex'
+" TODO: checkout https://github.com/sheerun/vim-polyglot
+" meta package for language support, maybe use this?
+"Plugin 'vim-latex/vim-latex'
+Plugin 'lervag/vimtex'
 "Plugin 'voithos/vim-python-matchit'
 " python mode combines several useful python plugins
 " TODO: check whether to use python mode
@@ -148,6 +157,7 @@ set autoread
 " like <leader>w saves the current file
 " TODO: consider alternative leader
 let mapleader = ";"
+let maplocalleader = "'"
 let g:mapleader = ";"
 " Ignore case when searching
 set ignorecase
@@ -353,9 +363,11 @@ endfunc
 """"""""" Plugin settings """""""""""
 """""""""""""""""""""""""""""""""""""
 
+""" expand ultisnips
+let g:UltiSnipsExpandTrigger="<leader>s"
+
 """" for tagbar
 nmap <F8> :TagbarToggle<CR>
-
 
 """" python configuration
 map <buffer> <F4> :call Autopep8()<CR>
@@ -371,12 +383,16 @@ map <buffer> <F4> :call Autopep8()<CR>
 "let g:pymode_lint_checker = "flake8"
 
 
-""" set our default tech flavor
+""" latex configuration
+" set our default tech flavor
 let g:tex_flavor = 'tex'
+
+let g:vimtex_quickfix_mode = '2'
+
 
 """" latex unicoder
 let g:unicoder_no_map=0
-nnoremap <leader>l :call unicoder#start(0)<CR>
+nnoremap <F10> :call unicoder#start(0)<CR>
 
 
 """" for airline
