@@ -68,7 +68,7 @@ Plugin 'michalbachowski/vim-wombat256mod'
 Plugin 'godlygeek/tabular'
 
 " checker for writing style
-"Plugin 'reedes/vim-wordy'
+Plugin 'reedes/vim-wordy'
 
 " convert latex math stuff to unicode chars
 Plugin 'joom/latex-unicoder.vim'
@@ -103,6 +103,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'SirVer/ultisnips'
 " and some snippets
 Plugin 'honza/vim-snippets'
+Plugin 'rbonvall/snipmate-snippets-bib'
 
 """"" language support
 " TODO: checkout https://github.com/sheerun/vim-polyglot
@@ -123,8 +124,10 @@ Plugin 'plasticboy/vim-markdown'
 "Plugin 'godlygeek/tabular'
 Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
-" make vim a usable rust ide
+" make vim a usable rust editor
 Plugin 'rust-lang/rust.vim'
+Plugin 'cespare/vim-toml'
+
 
 
 """"" required, end of plugin loading
@@ -386,13 +389,19 @@ map <buffer> <F4> :call Autopep8()<CR>
 """ latex configuration
 " set our default tech flavor
 let g:tex_flavor = 'tex'
-
+if has('nvim')
+    " vimtex has not so good support for neovim
+    " https://github.com/lervag/vimtex/issues/262
+    " the fix is to use neovim-remote (pip install it)
+    let g:vimtex_latexmk_progname = 'nvr'
+endif
 let g:vimtex_quickfix_mode = '2'
 
 
 """" latex unicoder
 let g:unicoder_no_map=0
 nnoremap <F10> :call unicoder#start(0)<CR>
+"nnoremap <leader> :call unicoder#start(0)<CR>
 
 
 """" for airline
@@ -421,4 +430,6 @@ let g:vim_markdown_folding_disabled=1
 """" for rust.vim
 " auto-format rust code on save
 let g:rustfmt_autosave = 1
-
+" Naturally, this needs to be set to wherever your rust
+" source tree resides.
+let g:ycm_rust_src_path = '/usr/src/rust/src/'
