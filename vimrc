@@ -25,114 +25,107 @@
 " plugins
 """""""""""""""""""""""""""""""""""""""""
 
-" Install vundle
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-"" use vundle
 set nocompatible " be iMproved
 filetype off     " required!
 
-set runtimepath+=$HOME/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle
-" required!
-Plugin 'gmarik/Vundle.vim'
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+call plug#begin('~/.vim/plugged')
 
 """"""" Plugins
 
+Plug 'tpope/vim-sensible'
+
 """"""" Navigation & Look
 " file navigation based on name
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 " checkout out: https://github.com/Lokaltog/vim-easymotion
-" Plugin 'Lokaltog/vim-easymotion'
+" Plug 'Lokaltog/vim-easymotion'
 " status bar
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 " display git diff, as sign for added, changed, removed lines
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 " better highlighting for too long lines, instead of colorcolumn
-Plugin 'gagoar/SmartColumnColors'
+Plug 'gagoar/SmartColumnColors'
 " highligh targets for f, F, t, T
-Plugin 'unblevable/quick-scope'
+Plug 'unblevable/quick-scope'
 " TODO: check out movement advice at https://github.com/unblevable/quick-scope
-"Plugin 'tpope/vim-repeat'
+"Plug 'tpope/vim-repeat'
 
 """""" colorschemes
-Plugin 'Lokaltog/vim-distinguished'
-Plugin 'michalbachowski/vim-wombat256mod'
+Plug 'Lokaltog/vim-distinguished'
+Plug 'michalbachowski/vim-wombat256mod'
 
 
 """"""" general editing helps
 " tabular alignment of text
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 " checker for writing style
-Plugin 'reedes/vim-wordy'
+Plug 'reedes/vim-wordy'
 
 " convert latex math stuff to unicode chars
-Plugin 'joom/latex-unicoder.vim'
+Plug 'joom/latex-unicoder.vim'
 
 
 """"""" Programming related
 " syntax checkers
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 " auto completion
 if v:version > 703 || (v:version == 703 && has('patch584'))
-    Plugin 'Valloric/YouCompleteMe'
-    " Plugin 'Shougo/neocomplete.vim'
-    " Plugin 'davidhalter/jedi-vim'
+    Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --racer-completer --system-libclang --system-boost'}
+    " Plug 'Shougo/neocomplete.vim'
+    " Plug 'davidhalter/jedi-vim'
 else
     " otherwise fallback to supertab
-    Plugin 'ervandew/supertab'
+    Plug 'ervandew/supertab'
 endif
 " file navigation
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " show functions/methods/classes etc.
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 " commenting code
-Plugin 'scrooloose/nerdcommenter'
-" Plugin 'tpope/vim-commentary'
+Plug 'scrooloose/nerdcommenter'
+" Plug 'tpope/vim-commentary'
 " auto delimiter insertion
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 "
-"Plugin 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
 
 
 " snippets engine
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " and some snippets
-Plugin 'honza/vim-snippets'
-Plugin 'rbonvall/snipmate-snippets-bib'
+Plug 'honza/vim-snippets'
+Plug 'rbonvall/snipmate-snippets-bib'
 
 """"" language support
 " TODO: checkout https://github.com/sheerun/vim-polyglot
 " meta package for language support, maybe use this?
-"Plugin 'vim-latex/vim-latex'
-Plugin 'lervag/vimtex'
-"Plugin 'voithos/vim-python-matchit'
+"Plug 'vim-latex/vim-latex'
+Plug 'lervag/vimtex'
+"Plug 'voithos/vim-python-matchit'
 " python mode combines several useful python plugins
 " TODO: check whether to use python mode
-"Plugin 'klen/python-mode'
-Plugin 'tell-k/vim-autopep8'
-Plugin 'nvie/vim-flake8'
-Plugin 'dag/vim-fish'
-"Plugin 'derekwyatt/vim-scala'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'vim-scripts/yaml.vim'
-Plugin 'plasticboy/vim-markdown'
-"Plugin 'godlygeek/tabular'
-Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+"Plug 'klen/python-mode'
+Plug 'tell-k/vim-autopep8'
+Plug 'nvie/vim-flake8'
+Plug 'dag/vim-fish'
+"Plug 'derekwyatt/vim-scala'
+Plug 'kchmck/vim-coffee-script'
+"Plug 'vim-scripts/yaml.vim'
+Plug 'plasticboy/vim-markdown'
+"Plug 'godlygeek/tabular'
+Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 " make vim a usable rust editor
-Plugin 'rust-lang/rust.vim'
-Plugin 'cespare/vim-toml'
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
 
 
 
 """"" required, end of plugin loading
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 
 
 """"" external/system plugins """""""
