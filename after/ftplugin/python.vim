@@ -13,7 +13,7 @@ let g:autopep8_max_line_length=79
 let g:autopep8_disable_show_diff=1
 "autocmd BufWrite *.py :call Autopep8()
 "autocmd BufWritePost *.py call Flake8()
-map <buffer> <F4> :call Autopep8()<CR>
+"map <buffer> <F4> :call Autopep8()<CR>
 map <buffer> <F3> :call Flake8()<CR>
 
 let g:flake8_show_in_gutter=1  " show

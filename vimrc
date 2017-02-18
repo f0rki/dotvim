@@ -33,12 +33,13 @@ call plug#begin('~/.vim/plugged')
 
 """"""" Plugins
 
+" some sensible defaults
 Plug 'tpope/vim-sensible'
 
 """"""" Navigation & Look
 " file navigation based on name
 Plug 'kien/ctrlp.vim'
-" checkout out: https://github.com/Lokaltog/vim-easymotion
+" TODO: checkout out: https://github.com/Lokaltog/vim-easymotion
 " Plug 'Lokaltog/vim-easymotion'
 " status bar
 Plug 'bling/vim-airline'
@@ -72,18 +73,13 @@ Plug 'joom/latex-unicoder.vim'
 " syntax checkers
 Plug 'scrooloose/syntastic'
 " auto completion
-if v:version > 703 || (v:version == 703 && has('patch584'))
-    Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --racer-completer --system-libclang --system-boost'}
-    " Plug 'Shougo/neocomplete.vim'
-    " Plug 'davidhalter/jedi-vim'
-else
-    " otherwise fallback to supertab
-    Plug 'ervandew/supertab'
-endif
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --racer-completer --system-libclang --system-boost'}
 " file navigation
 Plug 'scrooloose/nerdtree'
 " show functions/methods/classes etc.
-Plug 'majutsushi/tagbar'
+if !has('nvim')
+    Plug 'majutsushi/tagbar'
+endif
 " commenting code
 Plug 'scrooloose/nerdcommenter'
 " Plug 'tpope/vim-commentary'
@@ -99,6 +95,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'rbonvall/snipmate-snippets-bib'
 
+" various autoformatter
+Plug 'Chiel92/vim-autoformat'
+
 """"" language support
 " TODO: checkout https://github.com/sheerun/vim-polyglot
 " meta package for language support, maybe use this?
@@ -108,7 +107,7 @@ Plug 'lervag/vimtex'
 " python mode combines several useful python plugins
 " TODO: check whether to use python mode
 "Plug 'klen/python-mode'
-Plug 'tell-k/vim-autopep8'
+"Plug 'tell-k/vim-autopep8'
 Plug 'nvie/vim-flake8'
 Plug 'dag/vim-fish'
 "Plug 'derekwyatt/vim-scala'
@@ -362,11 +361,18 @@ endfunc
 """ expand ultisnips
 let g:UltiSnipsExpandTrigger="<leader>s"
 
+noremap <F4> :Autoformat<CR>
+let g:formatter_yapf_style = 'pep8'
+let g:formatters_python = ['autopep8', 'yapf']
+
+let g:formatdef_biber_fmt = '"biber --tool --output-align --output-indent=2 --output-fieldcase=lower -O - "'
+let g:formatters_bib = ['biber_fmt']
+
 """" for tagbar
 nmap <F8> :TagbarToggle<CR>
 
 """" python configuration
-map <buffer> <F4> :call Autopep8()<CR>
+"map <buffer> <F4> :call Autopep8()<CR>
 
 " python-mode config (disabled)
 " disable python folding
