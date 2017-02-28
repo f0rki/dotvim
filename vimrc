@@ -363,7 +363,7 @@ let g:UltiSnipsExpandTrigger="<leader>s"
 
 noremap <F4> :Autoformat<CR>
 let g:formatter_yapf_style = 'pep8'
-let g:formatters_python = ['autopep8', 'yapf']
+let g:formatters_python = ['yapf']
 
 let g:formatdef_biber_fmt = '"biber --tool --output-align --output-indent=2 --output-fieldcase=lower -O - "'
 let g:formatters_bib = ['biber_fmt']
