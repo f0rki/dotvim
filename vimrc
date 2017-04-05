@@ -295,10 +295,14 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
 try
-  set switchbuf=useopen,usetab,newtab
+  set switchbuf=useopen
   set stal=2
 catch
 endtry
+
+if has('nvim')
+    set showtabline=0
+endif
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -329,6 +333,11 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
+" move lines around
+nmap <M-k> mz:m-2<cr>`z
+nmap <M-j> mz:m+<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 
 """""""""""""""""""""""""""""""""""""""""
