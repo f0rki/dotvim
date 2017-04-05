@@ -52,6 +52,8 @@ Plug 'gagoar/SmartColumnColors'
 Plug 'unblevable/quick-scope'
 " TODO: check out movement advice at https://github.com/unblevable/quick-scope
 "Plug 'tpope/vim-repeat'
+" grep away!
+Plug 'mileszs/ack.vim'"
 
 """""" colorschemes
 Plug 'Lokaltog/vim-distinguished'
@@ -357,6 +359,9 @@ endfunc
 """""""""""""""""""""""""""""""""""""
 """"""""" Plugin settings """""""""""
 """""""""""""""""""""""""""""""""""""
+
+" configure ack.vim to use ripgrep :)
+let g:ackprg = 'rg --vimgrep --no-heading'
 
 """ expand ultisnips
 let g:UltiSnipsExpandTrigger="<leader>s"
