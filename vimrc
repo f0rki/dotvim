@@ -4,22 +4,27 @@
 " Here is a quick overview of useful shortcuts
 
 """" buffer management
-" ;c close the buffer
-" ;t to open ctrl-p buffer managment
+" ;d close the buffer
+" ;t to open ctrl-p managment
+" ;b to open ctrl-p with only open buffer
 "
 
 """" movement
 " f<char> to jump to <char> on line (F for backward)
-" $ to line beginning
-" 0 to line end
+" 0 to line beginngin
+" $ to line end
 " jumplist navigation with C-i and C-o
 
 """" git
 " jump between hunks with: [c and ]c
-" stage, undo hunks with <leader>hs and <leader>hu
-" preview hunk diff <leader>hp
+" stage, unstate with ;hs and ;hu
+" preview hunk diff ;hp
 " view git diff with :Gdiff
 " git blaem with :Gblame
+
+""" vimtex
+" ;R start continous compilation
+" ;V view pdf
 
 """""""""""""""""""""""""""""""""""""""""
 " plugins
@@ -53,7 +58,8 @@ Plug 'unblevable/quick-scope'
 " TODO: check out movement advice at https://github.com/unblevable/quick-scope
 "Plug 'tpope/vim-repeat'
 " grep away!
-Plug 'mileszs/ack.vim'"
+Plug 'mileszs/ack.vim'
+"Plug 'wincent/ferret'
 
 """""" colorschemes
 Plug 'Lokaltog/vim-distinguished'
@@ -188,6 +194,9 @@ set wildignore+=*/coverage/*
 " let tab trigger auto completion
 set wildchar=<Tab> wildmenu wildmode=full
 
+if has('mouse')
+    set mouse=a
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
