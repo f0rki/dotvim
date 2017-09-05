@@ -123,7 +123,8 @@ Plug 'kchmck/vim-coffee-script'
 "Plug 'vim-scripts/yaml.vim'
 Plug 'plasticboy/vim-markdown'
 "Plug 'godlygeek/tabular'
-Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+" meh pulling the whole docker repo only for vim syntax is annoying
+"Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 " make vim a usable rust editor
 Plug 'rust-lang/rust.vim'
