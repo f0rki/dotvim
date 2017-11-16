@@ -6,3 +6,5 @@ au BufRead,BufNewFile *.coffee set filetype=coffee
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 au BufRead,BufNewFile *.ll set filetype=llvm
 au BufRead,BufNewFile *.td set filetype=tablegen
+autocmd BufNewFile,BufRead *.iec set filetype=iec
+autocmd BufNewFile,BufRead *.st set filetype=iec

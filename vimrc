@@ -43,7 +43,8 @@ Plug 'tpope/vim-sensible'
 
 """"""" Navigation & Look
 " file navigation based on name
-Plug 'kien/ctrlp.vim'
+"Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 " TODO: checkout out: https://github.com/Lokaltog/vim-easymotion
 " Plug 'Lokaltog/vim-easymotion'
 " status bar
@@ -81,7 +82,14 @@ Plug 'joom/latex-unicoder.vim'
 " syntax checkers
 Plug 'scrooloose/syntastic'
 " auto completion
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --racer-completer --system-libclang --system-boost'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --system-boost --system-libclang --clang-completer --racer-completer'}
+"if has('nvim')
+"    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"    Plug 'zchee/deoplete-jedi'
+"    Plug 'zchee/deoplete-clang'
+"    Plug 'sebastianmarkow/deoplete-rust'
+"else
+"endif
 " file navigation
 Plug 'scrooloose/nerdtree'
 " show functions/methods/classes etc.
@@ -130,6 +138,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 
+
+Plug 'neomake/neomake'
 
 
 """"" required, end of plugin loading
@@ -218,7 +228,7 @@ else
 endif
 
 if has("nvim") || has("gui_running")
-	" copypasta from X clipboard
+    " copypasta from X clipboard
     nmap <leader>P "+gP
     nmap <leader>Y "+y
     vmap <leader>Y "+y
@@ -305,8 +315,8 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
 try
-  set switchbuf=useopen
-  set stal=2
+    set switchbuf=useopen
+    set stal=2
 catch
 endtry
 
@@ -316,31 +326,31 @@ endif
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
 " Remember info about open buffers on close
 set viminfo^=%
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
+    let l:currentBufNum = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
 
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
 
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
 
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
+    if buflisted(l:currentBufNum)
+        execute("bdelete! ".l:currentBufNum)
+    endif
 endfunction
 
 " move lines around
@@ -360,9 +370,9 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Delete trailing white space on save
 func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
 endfunc
 
 " delete trailing whitespaces on write
@@ -371,7 +381,7 @@ endfunc
 nmap <leader>w :call DeleteTrailingWS()
 
 func! EnableMoveHighlight()
-  autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+    autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 endfunc
 
 
@@ -397,6 +407,7 @@ nmap <F8> :TagbarToggle<CR>
 
 """" python configuration
 "map <buffer> <F4> :call Autopep8()<CR>
+let g:ycm_python_binary_path = 'python'
 
 " python-mode config (disabled)
 " disable python folding
@@ -453,6 +464,18 @@ let g:vim_markdown_folding_disabled=1
 """" for rust.vim
 " auto-format rust code on save
 let g:rustfmt_autosave = 1
+
+let g:syntastic_rust_checkers = ['rustc']
 " Naturally, this needs to be set to wherever your rust
 " source tree resides.
-let g:ycm_rust_src_path = '/usr/src/rust/src/'
+if file_readable('/usr/src/rust/src/')
+    let g:ycm_rust_src_path = '/usr/src/rust/src/'
+else
+    let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
+
+    let g:deoplete#sources#rust#rust_source_path = '~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
+endif
+
+let g:deoplete#sources#rust#racer_binary='/home/f0rki/.cargo/bin/racer'
+
+let g:deoplete#sources#clang#libclang_path = '/usr/lib64/libclang.so'
