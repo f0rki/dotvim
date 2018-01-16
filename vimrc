@@ -138,6 +138,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 
+Plug 'ethereum/vim-solidity'
 
 Plug 'neomake/neomake'
 
