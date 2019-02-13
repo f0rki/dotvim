@@ -11,3 +11,11 @@ autocmd BufWrite *.h :call DeleteTrailingWS()
 autocmd BufWrite *.hpp :call DeleteTrailingWS()
 
 let g:smart_display_opts = { 'column' : 81 }
+
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif

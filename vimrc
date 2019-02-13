@@ -33,6 +33,8 @@
 set nocompatible " be iMproved
 filetype off     " required!
 
+
+let g:plug_shallow = 0 " disable shallow clones
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
 
@@ -65,7 +67,9 @@ Plug 'mileszs/ack.vim'
 """""" colorschemes
 Plug 'Lokaltog/vim-distinguished'
 Plug 'michalbachowski/vim-wombat256mod'
-
+"set rtp+=~/.vim/plugged/vim-wombat256mod
+"Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+"set rtp+=~/.vim/plugged/tomorrow-theme/vim/
 
 """"""" general editing helps
 " tabular alignment of text
@@ -80,68 +84,109 @@ Plug 'joom/latex-unicoder.vim'
 
 """"""" Programming related
 " syntax checkers
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+
 " auto completion
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --system-boost --system-libclang --clang-completer --racer-completer'}
-"if has('nvim')
-"    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"    Plug 'zchee/deoplete-jedi'
-"    Plug 'zchee/deoplete-clang'
-"    Plug 'sebastianmarkow/deoplete-rust'
-"else
-"endif
-" file navigation
-Plug 'scrooloose/nerdtree'
-" show functions/methods/classes etc.
-if !has('nvim')
-    Plug 'majutsushi/tagbar'
+
+" previously I used YouCompleteMe a lot
+"Plug 'Valloric/YouCompleteMe', {'do': './install.py --system-boost --system-libclang --clang-completer --racer-completer'}
+" apparently boost < 1.66 has a bug which breaks YCM
+" https://github.com/Valloric/YouCompleteMe/issues/2917#issuecomment-365902233
+" so we do not use --system-boost
+"Plug 'Valloric/YouCompleteMe', {'do': './install.py --system-libclang --clang-completer --rust-completer --go-completer'}
+
+" Support for language server protocol, which seems to become the standard
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
+let g:deoplete#enable_at_startup = 1
+
+Plug 'lighttiger2505/deoplete-vim-lsp'
+
+" ncm2 as completion engine
+"Plug 'ncm2/ncm2'
+" ncm completion sources
+"Plug 'ncm2/ncm2-vim-lsp'
+"Plug 'ncm2/ncm2-bufword'
+"Plug 'ncm2/ncm2-path'
+"Plug 'ncm2/ncm2-ultisnips'
+
+" we use ncm for completion
+let g:ale_completion_enabled = 0
+Plug 'w0rp/ale'
+
 " commenting code
 Plug 'scrooloose/nerdcommenter'
 " Plug 'tpope/vim-commentary'
 " auto delimiter insertion
 Plug 'Raimondi/delimitMate'
-"
 "Plug 'tpope/vim-surround'
 
 
 " snippets engine
-Plug 'SirVer/ultisnips'
-" and some snippets
+"Plug 'SirVer/ultisnips'
+"" and some snippets
 Plug 'honza/vim-snippets'
-Plug 'rbonvall/snipmate-snippets-bib'
+"Plug 'rbonvall/snipmate-snippets-bib'
+
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 " various autoformatter
-Plug 'Chiel92/vim-autoformat'
+"Plug 'Chiel92/vim-autoformat'
+
+" display docs in the editor
+Plug 'Shougo/echodoc.vim'
 
 """"" language support
-" TODO: checkout https://github.com/sheerun/vim-polyglot
-" meta package for language support, maybe use this?
+
+" latex
 "Plug 'vim-latex/vim-latex'
 Plug 'lervag/vimtex'
+
+" python stuff
 "Plug 'voithos/vim-python-matchit'
 " python mode combines several useful python plugins
 " TODO: check whether to use python mode
 "Plug 'klen/python-mode'
 "Plug 'tell-k/vim-autopep8'
-Plug 'nvie/vim-flake8'
+"Plug 'nvie/vim-flake8'
+"Plug 'ncm2/ncm2-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
+
+" C/C++ 
+"Plug 'ncm2/ncm2-pyclang'
+
+" rust
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+"Plug 'ncm2/ncm2-racer'
+Plug 'racer-rust/vim-racer'
+
+" go stuff
+"Plug 'ncm2/ncm2-go'
+
+" misc formats
 Plug 'dag/vim-fish'
-"Plug 'derekwyatt/vim-scala'
-Plug 'kchmck/vim-coffee-script'
-"Plug 'vim-scripts/yaml.vim'
 Plug 'plasticboy/vim-markdown'
+Plug 'ethereum/vim-solidity'
+"Plug 'derekwyatt/vim-scala'
+"Plug 'kchmck/vim-coffee-script'
+"Plug 'vim-scripts/yaml.vim'
 "Plug 'godlygeek/tabular'
 " meh pulling the whole docker repo only for vim syntax is annoying
 "Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-
-" make vim a usable rust editor
-Plug 'rust-lang/rust.vim'
-Plug 'cespare/vim-toml'
-
-Plug 'ethereum/vim-solidity'
-
-Plug 'neomake/neomake'
-
+"Plug 'ncm2/ncm2-markdown-subscope'
+"Plug 'ncm2/ncm2-rst-subscope'
+Plug 'deoplete-plugins/deoplete-docker'
+Plug 'fszymanski/deoplete-emoji'
 
 """"" required, end of plugin loading
 call plug#end()
@@ -237,6 +282,7 @@ endif
 
 if has("nvim")
     colorscheme wombat256mod
+    "colorscheme Tomorrow-Night
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -253,6 +299,9 @@ set ffs=unix,dos,mac
 set nobackup
 set nowb
 set noswapfile
+" However, we still want persistent undo
+set undodir=$HOME/vim_undo
+set undofile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -394,21 +443,25 @@ endfunc
 let g:ackprg = 'rg --vimgrep --no-heading'
 
 """ expand ultisnips
-let g:UltiSnipsExpandTrigger="<leader>s"
+"let g:UltiSnipsExpandTrigger="<leader>s"
 
-noremap <F4> :Autoformat<CR>
-let g:formatter_yapf_style = 'pep8'
-let g:formatters_python = ['yapf']
+"noremap <F4> :Autoformat<CR>
+"let g:formatter_yapf_style = 'pep8'
+"let g:formatters_python = ['yapf']
 
-let g:formatdef_biber_fmt = '"biber --tool --output-align --output-indent=2 --output-fieldcase=lower -O - "'
-let g:formatters_bib = ['biber_fmt']
+"let g:formatdef_biber_fmt = '"biber --tool --output-align --output-indent=2 --output-fieldcase=lower -O - "'
+"let g:formatters_bib = ['biber_fmt']
 
 """" for tagbar
-nmap <F8> :TagbarToggle<CR>
+"nmap <F8> :TagbarToggle<CR>
 
 """" python configuration
 "map <buffer> <F4> :call Autopep8()<CR>
-let g:ycm_python_binary_path = 'python'
+"
+
+"""" for YouCompleteMe
+"let g:ycm_server_python_interpreter = "/usr/bin/python3"
+"let g:ycm_python_binary_path = 'python3'
 
 " python-mode config (disabled)
 " disable python folding
@@ -421,22 +474,15 @@ let g:ycm_python_binary_path = 'python'
 "let g:pymode_lint_checker = "flake8"
 
 
-""" latex configuration
-" set our default tech flavor
-let g:tex_flavor = 'tex'
-if has('nvim')
-    " vimtex has not so good support for neovim
-    " https://github.com/lervag/vimtex/issues/262
-    " the fix is to use neovim-remote (pip install it)
-    let g:vimtex_latexmk_progname = 'nvr'
-endif
-let g:vimtex_quickfix_mode = '2'
-
-
 """" latex unicoder
 let g:unicoder_no_map=0
-nnoremap <F10> :call unicoder#start(0)<CR>
+"nnoremap <F10> :call unicoder#start(0)<CR>
 "nnoremap <leader> :call unicoder#start(0)<CR>
+map <leader><F9> :call unicoder#start(0)<CR>
+
+
+"""" tex flavor!
+let g:tex_flavor = 'latex'
 
 
 """" for airline
@@ -455,8 +501,8 @@ let g:ctrlp_working_path_mode = 'a'
 
 """" for syntastic
 " configure py/C checkers, although they are handled by YCM on recent vims
-let g:syntastic_python_checkers = ['flake8', 'python']
-let g:syntastic_c_checkers = ['gcc']
+"let g:syntastic_python_checkers = ['flake8', 'python']
+"let g:syntastic_c_checkers = ['gcc']
 
 """" for vim-markdown
 let g:vim_markdown_math=1
@@ -466,17 +512,55 @@ let g:vim_markdown_folding_disabled=1
 " auto-format rust code on save
 let g:rustfmt_autosave = 1
 
-let g:syntastic_rust_checkers = ['rustc']
+"let g:syntastic_rust_checkers = ['rustc']
 " Naturally, this needs to be set to wherever your rust
 " source tree resides.
-if file_readable('/usr/src/rust/src/')
-    let g:ycm_rust_src_path = '/usr/src/rust/src/'
-else
-    let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
+"if file_readable('/usr/src/rust/src/')
+"    let g:ycm_rust_src_path = '/usr/src/rust/src/'
+"else
+"    let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
+"endif
 
-    let g:deoplete#sources#rust#rust_source_path = '~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
-endif
+"""" for ncm2
+"autocmd BufEnter * call ncm2#enable_for_buffer()
+"" IMPORTANT: :help Ncm2PopupOpen for more information
+"set completeopt=noinsert,menuone,noselect
+"set shortmess+=c
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-let g:deoplete#sources#rust#racer_binary='/home/f0rki/.cargo/bin/racer'
 
-let g:deoplete#sources#clang#libclang_path = '/usr/lib64/libclang.so'
+"""" for deoplete
+inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
+
+"""" for neosnippets
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
+
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+"" For conceal markers.
+"if has('conceal')
+"  set conceallevel=2 concealcursor=niv
+"endif
+
+
+"""" for echodoc
+
+set cmdheight=2
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'signature'
+
+
+"""" for ALE
+
+noremap <F4> :ALEFix<CR>
