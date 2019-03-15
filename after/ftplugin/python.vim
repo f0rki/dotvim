@@ -37,3 +37,6 @@ let b:ale_fixers = ['trim_whitespace', 'isort', 'yapf']
 " we don't want it automatically, as yapf can f* up the source code if there is
 " a syntax error...
 let b:ale_fix_on_save = 0
+let g:ale_python_auto_pipenv = 1
+let g:ale_python_mypy_auto_pipenv = 1
+let g:ale_python_mypy_options = '--ignore-missing-imports'

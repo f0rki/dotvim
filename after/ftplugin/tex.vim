@@ -24,7 +24,7 @@ endif
 "    \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
 "    \ ]
 
-let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+"let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
 
 
 nmap <leader>T :VimtexTocToggle<CR>
@@ -32,13 +32,6 @@ nmap <leader>R :VimtexCompile<CR>
 nmap <leader>V :VimtexView<CR>
 
 au User VimtexEventQuit     VimtexClean
-
-if has('nvim')
-    " vimtex has not so good support for neovim
-    " https://github.com/lervag/vimtex/issues/262
-    " the fix is to use neovim-remote (pip install it)
-    let g:vimtex_compiler_progname = "nvr"
-endif
 
 "let g:vimtex_view_enable = 1
 let g:vimtex_quickfix_mode = '2'

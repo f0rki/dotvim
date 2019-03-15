@@ -33,6 +33,8 @@
 set nocompatible " be iMproved
 filetype off     " required!
 
+let g:python_host_prog = "/usr/bin/python"
+let g:python3_host_prog = "/usr/bin/python3"
 
 let g:plug_shallow = 0 " disable shallow clones
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
@@ -564,3 +566,13 @@ let g:echodoc#type = 'signature'
 """" for ALE
 
 noremap <F4> :ALEFix<CR>
+
+
+"""" for vimtex
+
+if has('nvim')
+    " vimtex has not so good support for neovim
+    " https://github.com/lervag/vimtex/issues/262
+    " the fix is to use neovim-remote (pip install it)
+    let g:vimtex_compiler_progname = "nvr"
+endif
