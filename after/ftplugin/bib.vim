@@ -1,4 +1,4 @@
-set textwidth=79
+set textwidth=0
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2

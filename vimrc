@@ -120,9 +120,10 @@ Plug 'lighttiger2505/deoplete-vim-lsp'
 "Plug 'ncm2/ncm2-path'
 "Plug 'ncm2/ncm2-ultisnips'
 
-" we use ncm for completion
+" we use deoplete for completion
 let g:ale_completion_enabled = 0
 Plug 'w0rp/ale'
+let g:ale_completion_enabled = 0
 
 " commenting code
 Plug 'scrooloose/nerdcommenter'
@@ -302,7 +303,7 @@ set nobackup
 set nowb
 set noswapfile
 " However, we still want persistent undo
-set undodir=$HOME/vim_undo
+set undodir=$HOME/.vim_undo/
 set undofile
 
 
@@ -343,6 +344,10 @@ noremap 0 g^
 " Just in case you need to go to the very beginning of a line
 noremap ^ g0
 noremap $ g$
+
+" smart moving around wrapped lines
+nnoremap <expr> j (v:count > 4 ? "m'" . v:count . 'j' : 'gj')
+nnoremap <expr> k (v:count > 4 ? "m'" . v:count . 'k' : 'gk')
 
 " jumplist navigation without pressing shift...
 map <C-i> <C-I>
@@ -435,6 +440,12 @@ nmap <leader>w :call DeleteTrailingWS()
 func! EnableMoveHighlight()
     autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 endfunc
+
+func! FormatOneSentencePerLine(start, end)
+    call DeleteTrailingWS()
+    silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
+    silent execute a:start.','.a:end.'s/\([^.!?]\)\s*\n/\1 /g'
+endfunction
 
 
 """""""""""""""""""""""""""""""""""""

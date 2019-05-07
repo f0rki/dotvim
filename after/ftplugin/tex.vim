@@ -1,8 +1,14 @@
-set textwidth=79
+set textwidth=0
 set shiftwidth=2
 set tabstop=2
 
-autocmd BufWrite *.tex :call DeleteTrailingWS()
+" we're going for the one-sentence per-line formatting
+set formatexpr=FormatOneSentencePerLine(v:lnum,v:lnum+v:count-1)
+
+"setlocal formatoptions=ant
+"setlocal wrapmargin=0
+
+"autocmd BufWrite *.tex :call DeleteTrailingWS()
 " enable spell checking for tex document
 syntax spell toplevel
 set spell
@@ -10,22 +16,14 @@ set spell
 " set conceallevel=1
 " hi clear Conceal
 
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-endif
-"let g:ycm_semantic_triggers.tex = [
-"    \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-"    \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-"    \ 're!\\hyperref\[[^]]*',
-"    \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-"    \ 're!\\(include(only)?|input){[^}]*',
-"    \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-"    \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-"    \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-"    \ ]
 
-"let g:ycm_semantic_triggers.tex = g:vimtex#re#youcompleteme
+" enable vimtex for deoplete
+call deoplete#custom#var('omni', 'input_patterns', {
+      \ 'tex': g:vimtex#re#deoplete
+      \})
 
+"is this needed? no, I guess?
+"let g:vimtex_complete_enabled = 1
 
 nmap <leader>T :VimtexTocToggle<CR>
 nmap <leader>R :VimtexCompile<CR>
@@ -36,12 +34,19 @@ au User VimtexEventQuit     VimtexClean
 "let g:vimtex_view_enable = 1
 let g:vimtex_quickfix_mode = '2'
 
+" zathura is awesome but doesn't work so nicely with synctex
 "let g:vimtex_view_method = "zathura"
 
+" okular seems to work fine though
 let g:vimtex_view_method = "general"
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
 
+
+" configure ALE fixers
+let b:ale_fixers = ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
+" and the ALE linters...
+let b:ale_linters = ['lacheck', 'chktex', 'vale']
 
 let g:smart_display_opts = { 'column' : 101 }

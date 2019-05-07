@@ -9,7 +9,7 @@ set tabstop=2
 " set colorcolumn=100
 
 "let b:ale_linters = ['cargo', 'rls', 'rustc']
-let b:ale_fixers = ['trim_whitespace', 'remove_trailing_lines']
+let b:ale_fixers = ['trim_whitespace', 'remove_trailing_lines', 'clang-format']
 let b:ale_fix_on_save = 1
 
 if executable('clangd')
