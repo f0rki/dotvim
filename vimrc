@@ -444,7 +444,7 @@ endfunc
 func! FormatOneSentencePerLine(start, end)
     call DeleteTrailingWS()
     silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
-    silent execute a:start.','.a:end.'s/\([^.!?]\)\s*\n/\1 /g'
+    silent execute a:start.','.a:end.'s/\([^.!?%}]\)\s*\n/\1 /g'
 endfunction
 
 
