@@ -65,6 +65,9 @@ Plug 'unblevable/quick-scope'
 " grep away!
 Plug 'mileszs/ack.vim'
 "Plug 'wincent/ferret'
+"
+Plug 'junegunn/fzf', { 'dir': '~/.local/fzf' }
+Plug 'junegunn/fzf.vim'
 
 """""" colorschemes
 Plug 'Lokaltog/vim-distinguished'
