@@ -49,4 +49,4 @@ let b:ale_fixers = ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
 " and the ALE linters...
 let b:ale_linters = ['lacheck', 'chktex', 'vale']
 
-let g:smart_display_opts = { 'column' : 101 }
+let g:smart_display_opts = { 'column' : 0 }
