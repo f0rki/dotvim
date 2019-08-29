@@ -124,9 +124,9 @@ Plug 'lighttiger2505/deoplete-vim-lsp'
 "Plug 'ncm2/ncm2-ultisnips'
 
 " we use deoplete for completion
-let g:ale_completion_enabled = 0
+"let g:ale_completion_enabled = 0
 Plug 'w0rp/ale'
-let g:ale_completion_enabled = 0
+"let g:ale_completion_enabled = 0
 
 " commenting code
 Plug 'scrooloose/nerdcommenter'
@@ -156,6 +156,8 @@ Plug 'Shougo/echodoc.vim'
 " latex
 "Plug 'vim-latex/vim-latex'
 Plug 'lervag/vimtex'
+" TODO: checkout the texlab lsp implementation:
+" https://github.com/latex-lsp/texlab
 
 " python stuff
 "Plug 'voithos/vim-python-matchit'
@@ -173,8 +175,6 @@ Plug 'deoplete-plugins/deoplete-jedi'
 " rust
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
-"Plug 'ncm2/ncm2-racer'
-Plug 'racer-rust/vim-racer'
 
 " go stuff
 "Plug 'ncm2/ncm2-go'
@@ -556,6 +556,8 @@ let g:rustfmt_autosave = 1
 """" for deoplete
 inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
+
+let g:deoplete#enable_at_startup = 1
 
 """" for neosnippets
 " Enable snipMate compatibility feature.
