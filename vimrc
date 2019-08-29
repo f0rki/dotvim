@@ -48,7 +48,7 @@ Plug 'tpope/vim-sensible'
 """"""" Navigation & Look
 " file navigation based on name
 "Plug 'kien/ctrlp.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 " TODO: checkout out: https://github.com/Lokaltog/vim-easymotion
 " Plug 'Lokaltog/vim-easymotion'
 " status bar
@@ -509,11 +509,18 @@ set laststatus=2
 " let g:smart_display_opts = { 'column' : 80 }
 
 """" settings for ctrlp
-let g:ctrlp_max_height = 30
-map <leader>t :CtrlP<cr>
-map <leader>b :CtrlPBuffer<cr>
-map <leader>r :CtrlPMixed<cr>
-let g:ctrlp_working_path_mode = 'a'
+"let g:ctrlp_max_height = 30
+"map <leader>t :CtrlP<cr>
+"map <leader>b :CtrlPBuffer<cr>
+"map <leader>r :CtrlPMixed<cr>
+"let g:ctrlp_working_path_mode = 'a'
+
+"""" alternatively we use fzf vim now
+map <leader>t :Files<cr>
+map <leader>b :Buffers<cr>
+map <leader>l :BLines<cr>
+"map <leader>r :CtrlPMixed<cr>
+
 
 """" for syntastic
 " configure py/C checkers, although they are handled by YCM on recent vims
