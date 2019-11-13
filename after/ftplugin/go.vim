@@ -8,7 +8,7 @@ autocmd BufWrite *.go :call DeleteTrailingWS()
 
 let g:smart_display_opts = { 'column' : 0 }
 
-"let b:ale_linters = ['flake8', 'mypy', 'pylint', 'vulture', 'bandit']
+"let b:ale_linters = []
 let b:ale_fixers = ['gofmt', 'goimports']
 let b:ale_fix_on_save = 1
 

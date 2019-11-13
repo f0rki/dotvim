@@ -5,13 +5,14 @@
 
 """" buffer management
 " ;d close the buffer
-" ;t to open ctrl-p managment
-" ;b to open ctrl-p with only open buffer
+" ;t to open fuzzy file list
+" ;b to open fuzzy list of open buffers
 "
 
 """" movement
 " f<char> to jump to <char> on line (F for backward)
-" 0 to line beginngin
+" 0 go to frist non-blank char in line
+" ^ go to actual line start
 " $ to line end
 " jumplist navigation with C-i and C-o
 
@@ -24,7 +25,7 @@
 
 """ vimtex
 " ;R start continous compilation
-" ;V view pdf
+" ;V view pdf / synctex forward search (if already open)
 
 """""""""""""""""""""""""""""""""""""""""
 " plugins
@@ -68,6 +69,12 @@ Plug 'mileszs/ack.vim'
 "
 Plug 'junegunn/fzf', { 'dir': '~/.local/fzf' }
 Plug 'junegunn/fzf.vim'
+
+" for word-level diffing in vim
+Plug 'rickhowe/diffchar.vim'
+
+" TODO: check-out vim-pencil for writing
+" https://github.com/reedes/vim-pencil
 
 """""" colorschemes
 Plug 'Lokaltog/vim-distinguished'
@@ -191,7 +198,7 @@ Plug 'ethereum/vim-solidity'
 "Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 "Plug 'ncm2/ncm2-markdown-subscope'
 "Plug 'ncm2/ncm2-rst-subscope'
-Plug 'deoplete-plugins/deoplete-docker'
+"Plug 'deoplete-plugins/deoplete-docker'
 Plug 'fszymanski/deoplete-emoji'
 
 """"" required, end of plugin loading
