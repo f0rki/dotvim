@@ -1,5 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""
-" my .vimrc
+" f0rki's .vimrc
 "
 " Here is a quick overview of useful shortcuts
 
@@ -21,7 +21,7 @@
 " stage, unstate with ;hs and ;hu
 " preview hunk diff ;hp
 " view git diff with :Gdiff
-" git blaem with :Gblame
+" git blame with :Gblame
 
 """ vimtex
 " ;R start continous compilation
@@ -47,15 +47,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 
 """"""" Navigation & Look
-" file navigation based on name
-"Plug 'kien/ctrlp.vim'
-"Plug 'ctrlpvim/ctrlp.vim'
+
 " TODO: checkout out: https://github.com/Lokaltog/vim-easymotion
 " Plug 'Lokaltog/vim-easymotion'
 " status bar
 Plug 'bling/vim-airline'
 " display git diff, as sign for added, changed, removed lines
 Plug 'airblade/vim-gitgutter'
+" integrated git support
 Plug 'tpope/vim-fugitive'
 " better highlighting for too long lines, instead of colorcolumn
 Plug 'gagoar/SmartColumnColors'
@@ -63,9 +62,6 @@ Plug 'gagoar/SmartColumnColors'
 Plug 'unblevable/quick-scope'
 " TODO: check out movement advice at https://github.com/unblevable/quick-scope
 "Plug 'tpope/vim-repeat'
-" grep away!
-Plug 'mileszs/ack.vim'
-"Plug 'wincent/ferret'
 "
 Plug 'junegunn/fzf', { 'dir': '~/.local/fzf' }
 Plug 'junegunn/fzf.vim'
@@ -95,22 +91,15 @@ Plug 'joom/latex-unicoder.vim'
 
 
 """"""" Programming related
-" syntax checkers
-"Plug 'scrooloose/syntastic'
-
 " auto completion
 
-" previously I used YouCompleteMe a lot
-"Plug 'Valloric/YouCompleteMe', {'do': './install.py --system-boost --system-libclang --clang-completer --racer-completer'}
-" apparently boost < 1.66 has a bug which breaks YCM
-" https://github.com/Valloric/YouCompleteMe/issues/2917#issuecomment-365902233
-" so we do not use --system-boost
-"Plug 'Valloric/YouCompleteMe', {'do': './install.py --system-libclang --clang-completer --rust-completer --go-completer'}
-
 " Support for language server protocol, which seems to become the standard
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-
+"Plug 'prabirshrestha/async.vim'
+"Plug 'prabirshrestha/vim-lsp'
+"
+"Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
+"
+" deoplete as completion engine
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -120,20 +109,9 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
-Plug 'lighttiger2505/deoplete-vim-lsp'
-
-" ncm2 as completion engine
-"Plug 'ncm2/ncm2'
-" ncm completion sources
-"Plug 'ncm2/ncm2-vim-lsp'
-"Plug 'ncm2/ncm2-bufword'
-"Plug 'ncm2/ncm2-path'
-"Plug 'ncm2/ncm2-ultisnips'
-
-" we use deoplete for completion
-"let g:ale_completion_enabled = 0
+" we use deoplete for completion, but get the completion sources from ALE
+let g:ale_completion_enabled = 0
 Plug 'w0rp/ale'
-"let g:ale_completion_enabled = 0
 
 " commenting code
 Plug 'scrooloose/nerdcommenter'
@@ -152,9 +130,6 @@ Plug 'honza/vim-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
-" various autoformatter
-"Plug 'Chiel92/vim-autoformat'
-
 " display docs in the editor
 Plug 'Shougo/echodoc.vim'
 
@@ -167,39 +142,26 @@ Plug 'lervag/vimtex'
 " https://github.com/latex-lsp/texlab
 
 " python stuff
-"Plug 'voithos/vim-python-matchit'
-" python mode combines several useful python plugins
-" TODO: check whether to use python mode
-"Plug 'klen/python-mode'
-"Plug 'tell-k/vim-autopep8'
-"Plug 'nvie/vim-flake8'
-"Plug 'ncm2/ncm2-jedi'
 Plug 'deoplete-plugins/deoplete-jedi'
-
-" C/C++ 
-"Plug 'ncm2/ncm2-pyclang'
 
 " rust
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 
-" go stuff
-"Plug 'ncm2/ncm2-go'
-
-" misc formats
+" other formats/languages
 Plug 'dag/vim-fish'
 Plug 'plasticboy/vim-markdown'
 Plug 'ethereum/vim-solidity'
 "Plug 'derekwyatt/vim-scala'
 "Plug 'kchmck/vim-coffee-script'
 "Plug 'vim-scripts/yaml.vim'
-"Plug 'godlygeek/tabular'
-" meh pulling the whole docker repo only for vim syntax is annoying
-"Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-"Plug 'ncm2/ncm2-markdown-subscope'
-"Plug 'ncm2/ncm2-rst-subscope'
-"Plug 'deoplete-plugins/deoplete-docker'
-Plug 'fszymanski/deoplete-emoji'
+
+" Deoplete completion sources:
+Plug 'Shougo/neco-syntax'
+
+" TODO: those two look nice, but don't seem to work properly...
+"Plug 'Inazuma110/deoplete-greek'
+"Plug 'fszymanski/deoplete-emoji'
 
 """"" required, end of plugin loading
 call plug#end()
@@ -442,15 +404,20 @@ func! DeleteTrailingWS()
     exe "normal `z"
 endfunc
 
-" delete trailing whitespaces on write
+" delete trailing whitespaces on write - not using for now, some files need
+" whitespace
 "autocmd BufWrite * :call DeleteTrailingWS()
 "Explicitly enable for filetypes!
-nmap <leader>w :call DeleteTrailingWS()
+
+" ;w - delete all training WS
+nmap <leader>w :call DeleteTrailingWS()<CR>
 
 func! EnableMoveHighlight()
     autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 endfunc
 
+" this is used for latex tech editing to move every sentence to its own line
+" with Q
 func! FormatOneSentencePerLine(start, end)
     call DeleteTrailingWS()
     silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
@@ -461,41 +428,6 @@ endfunction
 """""""""""""""""""""""""""""""""""""
 """"""""" Plugin settings """""""""""
 """""""""""""""""""""""""""""""""""""
-
-" configure ack.vim to use ripgrep :)
-let g:ackprg = 'rg --vimgrep --no-heading'
-
-""" expand ultisnips
-"let g:UltiSnipsExpandTrigger="<leader>s"
-
-"noremap <F4> :Autoformat<CR>
-"let g:formatter_yapf_style = 'pep8'
-"let g:formatters_python = ['yapf']
-
-"let g:formatdef_biber_fmt = '"biber --tool --output-align --output-indent=2 --output-fieldcase=lower -O - "'
-"let g:formatters_bib = ['biber_fmt']
-
-"""" for tagbar
-"nmap <F8> :TagbarToggle<CR>
-
-"""" python configuration
-"map <buffer> <F4> :call Autopep8()<CR>
-"
-
-"""" for YouCompleteMe
-"let g:ycm_server_python_interpreter = "/usr/bin/python3"
-"let g:ycm_python_binary_path = 'python3'
-
-" python-mode config (disabled)
-" disable python folding
-"let g:pymode_folding = 0
-" Disable pylint checking every save
-"let g:pymode_lint_write = 0
-" Load run code plugin
-"let g:pymode_run = 0
-" the checkers
-"let g:pymode_lint_checker = "flake8"
-
 
 """" latex unicoder
 let g:unicoder_no_map=0
@@ -515,56 +447,14 @@ set laststatus=2
 " configure this in filetype specific after/ftplugin/ files
 " let g:smart_display_opts = { 'column' : 80 }
 
-"""" settings for ctrlp
-"let g:ctrlp_max_height = 30
-"map <leader>t :CtrlP<cr>
-"map <leader>b :CtrlPBuffer<cr>
-"map <leader>r :CtrlPMixed<cr>
-"let g:ctrlp_working_path_mode = 'a'
-
 """" alternatively we use fzf vim now
 map <leader>t :Files<cr>
 map <leader>b :Buffers<cr>
 map <leader>l :BLines<cr>
-"map <leader>r :CtrlPMixed<cr>
-
-
-"""" for syntastic
-" configure py/C checkers, although they are handled by YCM on recent vims
-"let g:syntastic_python_checkers = ['flake8', 'python']
-"let g:syntastic_c_checkers = ['gcc']
 
 """" for vim-markdown
 let g:vim_markdown_math=1
 let g:vim_markdown_folding_disabled=1
-
-"""" for rust.vim
-" auto-format rust code on save
-let g:rustfmt_autosave = 1
-
-"let g:syntastic_rust_checkers = ['rustc']
-" Naturally, this needs to be set to wherever your rust
-" source tree resides.
-"if file_readable('/usr/src/rust/src/')
-"    let g:ycm_rust_src_path = '/usr/src/rust/src/'
-"else
-"    let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
-"endif
-
-"""" for ncm2
-"autocmd BufEnter * call ncm2#enable_for_buffer()
-"" IMPORTANT: :help Ncm2PopupOpen for more information
-"set completeopt=noinsert,menuone,noselect
-"set shortmess+=c
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-
-"""" for deoplete
-inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
-
-let g:deoplete#enable_at_startup = 1
 
 """" for neosnippets
 " Enable snipMate compatibility feature.
@@ -577,14 +467,30 @@ imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 "" For conceal markers.
-"if has('conceal')
-"  set conceallevel=2 concealcursor=niv
-"endif
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
+
+"""" for deoplete
+
+" cycle through completion with tab
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
+" cycle reverse with shift+tab
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" ctrl+e to cancel the popup
+inoremap <expr><C-e>  deoplete#cancel_popup()
+
+call deoplete#custom#option('camel_case', v:true)
+call deoplete#custom#option('smart_case', v:true)
+"call deoplete#custom#option('sources', {
+"      \ '_': ['tag', 'buffer', 'file', 'ale', 'syntax', 'greek', 'emoji'],
+"      \ 'python': ['tag', 'buffer', 'jedi', 'file', 'ale', 'syntax', 'greek', 'emoji'],
+"\})
 
 """" for echodoc
 
@@ -597,6 +503,8 @@ let g:echodoc#type = 'signature'
 
 noremap <F4> :ALEFix<CR>
 
+" airline/ALE integration
+let g:airline#extensions#ale#enabled = 1
 
 """" for vimtex
 
