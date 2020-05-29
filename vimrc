@@ -524,9 +524,3 @@ if has('nvim')
     " the fix is to use neovim-remote (pip install it)
     let g:vimtex_compiler_progname = "nvr"
 endif
-
-
-""" ALE/languagetool config
-
-"let languagetool_executable = ""
-"call ale#Set('languagetool_executable', 'flatpak run org.languagetool.cli')
