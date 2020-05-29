@@ -17,16 +17,22 @@
 " jumplist navigation with C-i and C-o
 
 """" git
+"
 " jump between hunks with: [c and ]c
 " stage, unstate with ;hs and ;hu
 " preview hunk diff ;hp
 "
-" Fugitive
-" :G to view git index and as git cli shortcUT
-"  Use '+' and '-' keys to add and remove files from index 
-"  (i.e., git add and git reset)
-" view git diff with :Gdiff
-" git blame with :Gblame
+" :G to view git index and as git cli shortcut
+"   Use '+' and '-' keys to add and remove files from index 
+"   (i.e., git add and git reset)
+"   Use '=' to show the diff (very nice)
+"
+" (hint the following can ommit the whitespace)
+" :G diff :Gdiffsplit
+" :G blame
+" :G commit 
+" :G push
+" etc.
 " 
 
 """ vimtex
