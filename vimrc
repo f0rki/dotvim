@@ -251,7 +251,7 @@ endif
 if has("nvim") || has("gui_running")
     " copypasta from X clipboard
     nmap <leader>P "+gP
-    nmap <leader>Y "+y
+    nmap <leader>Y "+yy
     vmap <leader>Y "+y
 endif
 
