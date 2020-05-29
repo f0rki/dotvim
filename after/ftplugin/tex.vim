@@ -46,6 +46,6 @@ let g:vimtex_view_method = "zathura"
 " configure ALE fixers
 let b:ale_fixers = ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
 " and the ALE linters...
-let b:ale_linters = ['lacheck', 'chktex', 'vale']
+let b:ale_linters = ['lacheck', 'chktex', 'vale', 'languagetool']
 
 let g:smart_display_opts = { 'column' : 0 }
