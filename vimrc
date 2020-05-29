@@ -20,8 +20,14 @@
 " jump between hunks with: [c and ]c
 " stage, unstate with ;hs and ;hu
 " preview hunk diff ;hp
+"
+" Fugitive
+" :G to view git index and as git cli shortcUT
+"  Use '+' and '-' keys to add and remove files from index 
+"  (i.e., git add and git reset)
 " view git diff with :Gdiff
 " git blame with :Gblame
+" 
 
 """ vimtex
 " ;R start continous compilation
@@ -155,6 +161,8 @@ Plug 'ethereum/vim-solidity'
 "Plug 'derekwyatt/vim-scala'
 "Plug 'kchmck/vim-coffee-script'
 "Plug 'vim-scripts/yaml.vim'
+Plug 'freitass/todo.txt-vim'
+Plug 'LnL7/vim-nix'
 
 " Deoplete completion sources:
 Plug 'Shougo/neco-syntax'
@@ -162,6 +170,8 @@ Plug 'Shougo/neco-syntax'
 " TODO: those two look nice, but don't seem to work properly...
 "Plug 'Inazuma110/deoplete-greek'
 "Plug 'fszymanski/deoplete-emoji'
+
+
 
 """"" required, end of plugin loading
 call plug#end()
@@ -470,9 +480,9 @@ xmap <C-k> <Plug>(neosnippet_expand_target)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 "" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+"if has('conceal')
+"  set conceallevel=2 concealcursor=niv
+"endif
 
 
 """" for deoplete
@@ -514,3 +524,9 @@ if has('nvim')
     " the fix is to use neovim-remote (pip install it)
     let g:vimtex_compiler_progname = "nvr"
 endif
+
+
+""" ALE/languagetool config
+
+"let languagetool_executable = ""
+"call ale#Set('languagetool_executable', 'flatpak run org.languagetool.cli')
