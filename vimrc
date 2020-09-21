@@ -35,6 +35,14 @@
 " etc.
 " 
 
+""" todo.txt editing
+" 's - sort by prio
+" 'sdd - sort by due date
+" 's+ - sort by project
+" 'j/k - inc/decrease prio
+" '(a|b|c) - set prio
+" 'x - mark as done
+
 """ vimtex
 " ;R start continous compilation
 " ;V view pdf / synctex forward search (if already open)
