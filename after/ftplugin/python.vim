@@ -15,8 +15,8 @@ au FileType python syn keyword pythonDecorator True None False self
 "let b:ale_linters = ['flake8', 'mypy', 'pylint', 'vulture', 'bandit']
 "let b:ale_linters = ['pylint', 'mypy']
 "let b:ale_linters = ['prospector', 'pylint', 'mypy', 'bandit']
-let b:ale_linters = ['mypy', 'bandit', 'prospector']
-let b:ale_fixers = ['trim_whitespace', 'isort', 'yapf']
+let b:ale_linters = ['mypy', 'bandit', 'prospector', 'flake8', "pyls"]
+let b:ale_fixers = ['trim_whitespace', 'isort', 'add_blank_lines_for_python_control_statements', 'yapf']
 " we don't want it automatically, as yapf can f* up the source code if there is
 " a syntax error...
 let b:ale_fix_on_save = 0
