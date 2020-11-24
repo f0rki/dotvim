@@ -34,13 +34,13 @@ au User VimtexEventQuit     VimtexClean
 let g:vimtex_quickfix_mode = '2'
 
 " zathura is awesome but doesn't work so nicely with synctex
-let g:vimtex_view_method = "zathura"
+"let g:vimtex_view_method = "zathura"
 
 " okular seems to work fine though
-"let g:vimtex_view_method = "general"
-"let g:vimtex_view_general_viewer = 'okular'
-"let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-"let g:vimtex_view_general_options_latexmk = '--unique'
+let g:vimtex_view_method = "general"
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_options_latexmk = '--unique'
 
 
 " configure ALE fixers
