@@ -43,7 +43,7 @@
 " '(a|b|c) - set prio
 " 'x - mark as done
 
-""" vimtex
+""" vimtex / latex editing
 " ;R start continous compilation
 " ;V view pdf / synctex forward search (if already open)
 
@@ -54,8 +54,8 @@
 set nocompatible " be iMproved
 filetype off     " required!
 
-let g:python_host_prog = "/usr/bin/python"
-let g:python3_host_prog = "/usr/bin/python3"
+"let g:python_host_prog = "/usr/bin/python"
+"let g:python3_host_prog = "/usr/bin/python3"
 
 let g:plug_shallow = 0 " disable shallow clones
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
@@ -86,11 +86,20 @@ Plug 'unblevable/quick-scope'
 Plug 'junegunn/fzf', { 'dir': '~/.local/fzf' }
 Plug 'junegunn/fzf.vim'
 
+" 
+Plug 'fiatjaf/neuron.vim'
+
 " for word-level diffing in vim
 Plug 'rickhowe/diffchar.vim'
 
+" highlight yank
+Plug 'machakann/vim-highlightedyank'
+
 " TODO: check-out vim-pencil for writing
 " https://github.com/reedes/vim-pencil
+
+" TODO: check out show a nice minimap
+"Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 
 """""" colorschemes
 Plug 'Lokaltog/vim-distinguished'
@@ -183,7 +192,7 @@ Plug 'Shougo/neco-syntax'
 
 " TODO: those two look nice, but don't seem to work properly...
 "Plug 'Inazuma110/deoplete-greek'
-"Plug 'fszymanski/deoplete-emoji'
+Plug 'fszymanski/deoplete-emoji'
 
 
 
@@ -509,12 +518,17 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
 " ctrl+e to cancel the popup
 inoremap <expr><C-e>  deoplete#cancel_popup()
 
+"inoremap <expr><C-h> deoplete#toggle()
+
 call deoplete#custom#option('camel_case', v:true)
 call deoplete#custom#option('smart_case', v:true)
-"call deoplete#custom#option('sources', {
-"      \ '_': ['tag', 'buffer', 'file', 'ale', 'syntax', 'greek', 'emoji'],
-"      \ 'python': ['tag', 'buffer', 'jedi', 'file', 'ale', 'syntax', 'greek', 'emoji'],
-"\})
+call deoplete#custom#option('sources', {
+      \ '_': ['tag', 'buffer', 'file', 'ale', 'syntax', 'greek', 'emoji'],
+      \ 'python': ['tag', 'buffer', 'jedi', 'file', 'ale', 'syntax', 'greek', 'emoji'],
+\})
+
+call deoplete#custom#source('emoji', 'converters', ['converter_emoji'])
+
 
 """" for echodoc
 
