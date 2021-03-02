@@ -28,6 +28,40 @@ nmap <leader>T :VimtexTocToggle<CR>
 nmap <leader>R :VimtexCompile<CR>
 nmap <leader>V :VimtexView<CR>
 
+function! s:bibtex_cite_sink_insert(lines)
+    let r=system("bibtex-cite -separator=', ' -prefix='' -postfix='' ", a:lines)
+    execute ':normal! i' . r
+    call feedkeys('a', 'n')
+endfunction
+
+function! s:bibtex_cite_sink(lines)
+    let r=system("bibtex-cite -mode=latex ", a:lines)
+    execute ':normal! i' . r
+endfunction
+
+inoremap <silent> @@ <c-g>u<c-o>:call fzf#run({
+                        \ 'source': Bibtex_ls(),
+                        \ 'sink*': function('<sid>bibtex_cite_sink_insert'),
+                        \ 'up': '40%',
+                        \ 'options': '--ansi --layout=reverse-list --multi --prompt "Cite> "'})<CR>
+
+nnoremap <silent> <leader>C :call fzf#run({
+                        \ 'source': Bibtex_ls(),
+                        \ 'sink*': function('<sid>bibtex_cite_sink'),
+                        \ 'up': '40%',
+                        \ 'options': '--ansi --layout=reverse-list --multi --prompt "Cite> "'})<CR>
+
+function! s:bibtex_markdown_sink(lines)
+    let r=system("bibtex-markdown ", a:lines)
+    execute ':normal! i' . r
+endfunction
+
+nnoremap <silent> <leader>M :call fzf#run({
+                        \ 'source': Bibtex_ls(),
+                        \ 'sink*': function('<sid>bibtex_markdown_sink'),
+                        \ 'up': '40%',
+                        \ 'options': '--ansi --layout=reverse-list --multi --prompt "Markdown> "'})<CR>
+
 au User VimtexEventQuit     VimtexClean
 
 "let g:vimtex_view_enable = 1

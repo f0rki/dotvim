@@ -23,17 +23,17 @@
 " preview hunk diff ;hp
 "
 " :G to view git index and as git cli shortcut
-"   Use '+' and '-' keys to add and remove files from index 
+"   Use '+' and '-' keys to add and remove files from index
 "   (i.e., git add and git reset)
 "   Use '=' to show the diff (very nice)
 "
 " (hint the following can ommit the whitespace)
 " :G diff :Gdiffsplit
 " :G blame
-" :G commit 
+" :G commit
 " :G push
 " etc.
-" 
+"
 
 """ todo.txt editing
 " 's - sort by prio
@@ -73,7 +73,12 @@ Plug 'tpope/vim-sensible'
 " status bar
 Plug 'bling/vim-airline'
 " display git diff, as sign for added, changed, removed lines
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
 " integrated git support
 Plug 'tpope/vim-fugitive'
 " better highlighting for too long lines, instead of colorcolumn
@@ -86,8 +91,11 @@ Plug 'unblevable/quick-scope'
 Plug 'junegunn/fzf', { 'dir': '~/.local/fzf' }
 Plug 'junegunn/fzf.vim'
 
-" 
-Plug 'fiatjaf/neuron.vim'
+"
+"Plug 'fiatjaf/neuron.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'michal-h21/vim-zettel'
+
 
 " for word-level diffing in vim
 Plug 'rickhowe/diffchar.vim'
@@ -146,8 +154,10 @@ Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 " Plug 'tpope/vim-commentary'
 " auto delimiter insertion
-Plug 'Raimondi/delimitMate'
-"Plug 'tpope/vim-surround'
+"Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-surround'
+
+Plug 'liuchengxu/vista.vim'
 
 
 " snippets engine
@@ -552,3 +562,26 @@ if has('nvim')
     " the fix is to use neovim-remote (pip install it)
     let g:vimtex_compiler_progname = "nvr"
 endif
+
+
+"""" for vimwiki
+
+let g:vimwiki_list = [{'path': '~/todo/notes/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:nv_search_paths = ['~/todo/notes']
+let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading --color=always "
+nnoremap <leader>zn :ZettelNew<space>
+
+
+""""" form bibtex-fzf
+
+let $FZF_BIBTEX_CACHEDIR = '~/.cache/fzf-bibtex'
+function! Bibtex_ls()
+  let bibfiles = (
+      \ globpath('.', '*.bib', v:true, v:true) +
+      \ globpath('..', '*.bib', v:true, v:true) +
+      \ globpath('*/', '*.bib', v:true, v:true)
+      \ )
+  let bibfiles = join(bibfiles, ' ')
+  let source_cmd = 'bibtex-ls '.bibfiles
+  return source_cmd
+endfunction
