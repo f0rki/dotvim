@@ -490,8 +490,26 @@ set laststatus=2
 " configure this in filetype specific after/ftplugin/ files
 " let g:smart_display_opts = { 'column' : 80 }
 
-"""" alternatively we use fzf vim now
+"""" fzf in vim
+function! FzfGitCwdFiles(fullscreen)
+  let root_ = split(system('git rev-parse --show-toplevel'), '\n')[0]
+  let root = v:shell_error ? '' : root_
+  if empty(root)
+      return fzf#vim#files(getcwd(), fzf#vim#with_preview(), a:fullscreen)
+  else
+      return fzf#run(fzf#vim#with_preview(fzf#wrap('gcwdfiles', {
+        \ 'source':  'git ls-files --exclude-standard --others --cached '.(has('win32') || has('win64') ? '' : ' | uniq'),
+        \ 'dir': getcwd(),
+        \ 'options': '-m --preview="bat {}" --prompt "GitFiles(PWD)> "'
+        \}, a:fullscreen)))
+  endif
+endfunction
+command! -bang FilesOrGitFiles call FzfGitCwdFiles(<bang>0)
+
 map <leader>t :Files<cr>
+map <leader>T :GFiles --cached --others --exclude-standard<cr>
+map <leader>f :FilesOrGitFiles<cr>
+map <leader>F :FilesOrGitFiles!<cr>
 map <leader>b :Buffers<cr>
 map <leader>l :BLines<cr>
 
