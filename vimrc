@@ -382,6 +382,10 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" easy buffer switching
+map <leader>j :bn<cr>
+map <leader>k :bp<cr>
+
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
