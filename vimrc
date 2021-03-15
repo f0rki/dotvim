@@ -5,7 +5,8 @@
 
 """" buffer management
 " ;d close the buffer
-" ;t to open fuzzy file list
+" ;f to open fuzzy finder for file list (honoring gitignore if within a repo)
+" ;t to open fuzzy file list (without gitignore)
 " ;b to open fuzzy list of open buffers
 "
 
