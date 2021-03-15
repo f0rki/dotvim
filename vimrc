@@ -273,6 +273,11 @@ if has('mouse')
     set mouse=a
 endif
 
+" workaround for neovim in alacritty: https://github.com/neovim/neovim/issues/11330
+if has('nvim')
+    autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
