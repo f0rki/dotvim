@@ -482,7 +482,7 @@ func! FormatOneSentencePerLine(start, end)
 endfunction
 
 " the most important emoji :S 
-command! Shrug a¯\_(ツ)_/¯
+command Shrug execute "normal! a¯\\_(ツ)_/¯\<Esc>"
 
 """""""""""""""""""""""""""""""""""""
 """"""""" Plugin settings """""""""""
