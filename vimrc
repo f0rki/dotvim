@@ -47,6 +47,8 @@
 """ vimtex / latex editing
 " ;R start continous compilation
 " ;V view pdf / synctex forward search (if already open)
+" ;C search and insert for bibtex citation
+" @@ inline bibtex citation key insert
 
 """""""""""""""""""""""""""""""""""""""""
 " plugins
@@ -203,8 +205,8 @@ Plug 'Shougo/neco-syntax'
 
 " TODO: those two look nice, but don't seem to work properly...
 "Plug 'Inazuma110/deoplete-greek'
-Plug 'fszymanski/deoplete-emoji'
-
+Plug 'f0rki/deoplete-emoji'
+"Plug '~/code/deoplete-emoji'
 
 
 """"" required, end of plugin loading
@@ -229,7 +231,7 @@ set nocompatible
 " we want line numbers
 set number
 " Sets how many lines of history VIM has to remember
-set history=700
+set history=4096
 " Set to auto read when a file is changed from the outside
 set autoread
 " With a map leader it's possible to do extra key combinations
@@ -238,6 +240,7 @@ set autoread
 let mapleader = ";"
 let maplocalleader = "'"
 let g:mapleader = ";"
+let g:localleader = "'"
 " Ignore case when searching
 set ignorecase
 " When searching try to be smart about cases
@@ -263,6 +266,7 @@ set tm=500
 set title
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*.aux,*toc,*blg,*.bcf,*bbl,*.tdo
+set wildignore+=*.bin,*.so,*.rlib
 set wildignore+=*_build/*
 set wildignore+=*build/*
 set wildignore+=*/coverage/*
@@ -477,6 +481,8 @@ func! FormatOneSentencePerLine(start, end)
     silent execute a:start.','.a:end.'s/\([^.!?%}]\)\s*\n/\1 /g'
 endfunction
 
+" the most important emoji :S 
+command! Shrug a¯\_(ツ)_/¯
 
 """""""""""""""""""""""""""""""""""""
 """"""""" Plugin settings """""""""""
@@ -558,14 +564,15 @@ inoremap <expr><C-e>  deoplete#cancel_popup()
 
 "inoremap <expr><C-h> deoplete#toggle()
 
+call deoplete#custom#source('emoji', {'converters': ['converter_emoji'],'filetypes': []})
+
+
 call deoplete#custom#option('camel_case', v:true)
 call deoplete#custom#option('smart_case', v:true)
 call deoplete#custom#option('sources', {
       \ '_': ['tag', 'buffer', 'file', 'ale', 'syntax', 'greek', 'emoji'],
       \ 'python': ['tag', 'buffer', 'jedi', 'file', 'ale', 'syntax', 'greek', 'emoji'],
 \})
-
-call deoplete#custom#source('emoji', 'converters', ['converter_emoji'])
 
 
 """" for echodoc
@@ -578,6 +585,9 @@ let g:echodoc#type = 'signature'
 """" for ALE
 
 noremap <F4> :ALEFix<CR>
+noremap <localleader>d :ALEGoToDefinition<cr>
+noremap <localleader>t :ALEGoToTypeDefinition<cr>
+noremap <localleader>x :ALEFindReferences<cr>
 
 " airline/ALE integration
 let g:airline#extensions#ale#enabled = 1
@@ -602,7 +612,7 @@ nnoremap <leader>zn :ZettelNew<space>
 
 """"" form bibtex-fzf
 
-let $FZF_BIBTEX_CACHEDIR = '~/.cache/fzf-bibtex'
+let FZF_BIBTEX_CACHEDIR = '~/.cache/fzf-bibtex'
 function! Bibtex_ls()
   let bibfiles = (
       \ globpath('.', '*.bib', v:true, v:true) +
