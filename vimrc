@@ -74,7 +74,12 @@ Plug 'tpope/vim-sensible'
 " TODO: checkout out: https://github.com/Lokaltog/vim-easymotion
 " Plug 'Lokaltog/vim-easymotion'
 " status bar
-Plug 'bling/vim-airline'
+if has('nvim')
+    Plug 'hoob3rt/lualine.nvim'
+    " If you want to have icons in your statusline choose one of these
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'ryanoasis/vim-devicons'
+endif
 " display git diff, as sign for added, changed, removed lines
 "Plug 'airblade/vim-gitgutter'
 if has('nvim') || has('patch-8.0.902')
@@ -85,7 +90,9 @@ endif
 " integrated git support
 Plug 'tpope/vim-fugitive'
 " better highlighting for too long lines, instead of colorcolumn
-Plug 'gagoar/SmartColumnColors'
+" doesn't work well with neovim and 
+"Plug 'gagoar/SmartColumnColors'
+
 " highligh targets for f, F, t, T
 Plug 'unblevable/quick-scope'
 if has('nvim')
@@ -116,11 +123,9 @@ Plug 'machakann/vim-highlightedyank'
 "Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 
 """""" colorschemes
-Plug 'Lokaltog/vim-distinguished'
-Plug 'michalbachowski/vim-wombat256mod'
-"set rtp+=~/.vim/plugged/vim-wombat256mod
-"Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-"set rtp+=~/.vim/plugged/tomorrow-theme/vim/
+"Plug 'Lokaltog/vim-distinguished'
+"Plug 'michalbachowski/vim-wombat256mod'
+Plug 'navarasu/onedark.nvim'
 
 """"""" general editing helps
 " tabular alignment of text
@@ -293,15 +298,10 @@ endif
 " Enable syntax highlighting
 syntax enable
 
-" Set extra options when running in GUI mode
-if has("gui_running")
-    "colorscheme github
-    colorscheme wombat256mod
-    set guioptions-=T
-    set guioptions-=e
-    " highlight ColorColumn guibg=lightgrey
-else
-    colorscheme darkdot
+if has("nvim")
+    set termguicolors
+    let g:onedark_style = 'warmer'
+    colorscheme onedark
 endif
 
 if has("nvim") || has("gui_running")
@@ -309,11 +309,6 @@ if has("nvim") || has("gui_running")
     nmap <leader>P "+gP
     nmap <leader>Y "+yy
     vmap <leader>Y "+y
-endif
-
-if has("nvim")
-    colorscheme wombat256mod
-    "colorscheme Tomorrow-Night
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -633,3 +628,11 @@ endfunction
 "if has('nvim')
 " currently nothing
 "endif
+
+
+
+""" load lua config
+
+if has('nvim')
+    lua require'init'
+endif
