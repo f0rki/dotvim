@@ -88,6 +88,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'gagoar/SmartColumnColors'
 " highligh targets for f, F, t, T
 Plug 'unblevable/quick-scope'
+if has('nvim')
+    Plug 'ggandor/lightspeed.nvim'
+endif
 " TODO: check out movement advice at https://github.com/unblevable/quick-scope
 "Plug 'tpope/vim-repeat'
 "
@@ -623,3 +626,10 @@ function! Bibtex_ls()
   let source_cmd = 'bibtex-ls '.bibfiles
   return source_cmd
 endfunction
+
+
+""" for lightspeed
+
+"if has('nvim')
+" currently nothing
+"endif
