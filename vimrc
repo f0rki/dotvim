@@ -90,19 +90,25 @@ endif
 " integrated git support
 Plug 'tpope/vim-fugitive'
 " better highlighting for too long lines, instead of colorcolumn
-" doesn't work well with neovim and 
+" doesn't work well with neovim and
 "Plug 'gagoar/SmartColumnColors'
 
 " highligh targets for f, F, t, T
 Plug 'unblevable/quick-scope'
+" TODO: check out movement advice at https://github.com/unblevable/quick-scope
 if has('nvim')
     Plug 'ggandor/lightspeed.nvim'
 endif
-" TODO: check out movement advice at https://github.com/unblevable/quick-scope
+
 "Plug 'tpope/vim-repeat'
-"
 Plug 'junegunn/fzf', { 'dir': '~/.local/fzf' }
 Plug 'junegunn/fzf.vim'
+
+" TODO: check out telescope.nvim as an alternative to the fzf plugin
+"Plug 'nvim-telescope/telescope.nvim'
+"Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+"Plug 'AckslD/nvim-neoclip.lua'
+"Plug 'ElPiloto/telescope-vimwiki.nvim'
 
 if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -143,6 +149,9 @@ Plug 'godlygeek/tabular'
 " checker for writing style
 Plug 'reedes/vim-wordy'
 
+" languagetool integration
+" Plug 'brymer-meneses/grammar-guard.nvim'
+
 " convert latex math stuff to unicode chars
 Plug 'joom/latex-unicoder.vim'
 
@@ -168,7 +177,7 @@ let g:deoplete#enable_at_startup = 1
 
 " we use deoplete for completion, but get the completion sources from ALE
 let g:ale_completion_enabled = 0
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " commenting code
 Plug 'scrooloose/nerdcommenter'
@@ -490,7 +499,7 @@ func! FormatOneSentencePerLine(start, end)
     silent execute a:start.','.a:end.'s/\([^.!?%}]\)\s*\n/\1 /g'
 endfunction
 
-" the most important emoji :S 
+" the most important emoji ¯\_(ツ)_/¯
 command Shrug execute "normal! a¯\\_(ツ)_/¯\<Esc>"
 
 """""""""""""""""""""""""""""""""""""
