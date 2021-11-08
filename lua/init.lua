@@ -1,6 +1,8 @@
 require("lualine").setup({
 	options = {
-		theme = "onedark",
+		--theme = "material-nvim",
+        --theme = "github",
+        theme = "onedark",
 	},
 	sections = {
 		lualine_a = { "mode" },

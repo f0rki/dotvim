@@ -104,7 +104,11 @@ endif
 Plug 'junegunn/fzf', { 'dir': '~/.local/fzf' }
 Plug 'junegunn/fzf.vim'
 
-"
+if has('nvim')
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+endif
+
+
 "Plug 'fiatjaf/neuron.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'michal-h21/vim-zettel'
@@ -125,7 +129,12 @@ Plug 'machakann/vim-highlightedyank'
 """""" colorschemes
 "Plug 'Lokaltog/vim-distinguished'
 "Plug 'michalbachowski/vim-wombat256mod'
-Plug 'navarasu/onedark.nvim'
+if has('nvim')
+    Plug 'navarasu/onedark.nvim'
+    "Plug 'rafamadriz/neon'
+    Plug 'marko-cerovac/material.nvim'
+    Plug 'projekt0n/github-nvim-theme'
+endif
 
 """"""" general editing helps
 " tabular alignment of text
@@ -300,7 +309,9 @@ syntax enable
 
 if has("nvim")
     set termguicolors
-    let g:onedark_style = 'warmer'
+    let g:material_style = 'darker'
+    "colorscheme material
+    "colorscheme github_dark_default
     colorscheme onedark
 endif
 
