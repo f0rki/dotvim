@@ -596,10 +596,26 @@ let g:echodoc#type = 'signature'
 noremap <F4> :ALEFix<CR>
 noremap <localleader>d :ALEGoToDefinition<cr>
 noremap <localleader>t :ALEGoToTypeDefinition<cr>
-noremap <localleader>x :ALEFindReferences<cr>
+noremap <localleader>x :ALEFindReferences -relative<cr>
 
 " airline/ALE integration
 let g:airline#extensions#ale#enabled = 1
+
+"""" for vista
+
+"let g:vista_default_executive = 'ale'
+"let g:vista_fzf_preview = ['right:50%']
+let g:vista#renderer#enable_icon = 1
+
+let g:vista_executive_for = {
+  \ 'c': 'ale',
+  \ 'cpp': 'ale',
+  \ 'rust': 'ale',
+  \ 'python': 'ale',
+  \ }
+
+noremap <silent> <leader>S :Vista finder<cr>
+"noremap <silent> <leader>V :Vista!!<Return>
 
 """" for vimtex
 
