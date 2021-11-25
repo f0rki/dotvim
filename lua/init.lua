@@ -14,3 +14,5 @@ require("lualine").setup({
 	},
 	extensions = { "fzf", "fugitive" },
 })
+
+require("Comment").setup()

@@ -177,7 +177,11 @@ let g:ale_completion_enabled = 0
 Plug 'dense-analysis/ale'
 
 " commenting code
-Plug 'scrooloose/nerdcommenter'
+if has('nvim')
+    Plug 'numToStr/Comment.nvim'
+else
+    Plug 'scrooloose/nerdcommenter'
+endif
 " Plug 'tpope/vim-commentary'
 " auto delimiter insertion
 "Plug 'Raimondi/delimitMate'
