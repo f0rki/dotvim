@@ -57,9 +57,6 @@
 set nocompatible " be iMproved
 filetype off     " required!
 
-"let g:python_host_prog = "/usr/bin/python"
-"let g:python3_host_prog = "/usr/bin/python3"
-
 let g:plug_shallow = 0 " disable shallow clones
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
@@ -251,7 +248,7 @@ endif
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " we need this when using fish, or otherwise some plugins are fubar
-set shell=/bin/bash
+set shell=/bin/sh
 " disable vi compat
 set nocompatible
 " we want line numbers
