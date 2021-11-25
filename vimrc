@@ -548,6 +548,12 @@ map <leader>F :FilesOrGitFiles!<cr>
 map <leader>b :Buffers<cr>
 map <leader>l :BLines<cr>
 
+function! RgWord()
+    let wordUnderCursor = expand("<cword>")
+    execute ':Rg ' . wordUnderCursor
+endfunction
+map <leader>q :call RgWord()<cr>
+
 """" for vim-markdown
 let g:vim_markdown_math=1
 let g:vim_markdown_folding_disabled=1
