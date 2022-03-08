@@ -110,6 +110,7 @@ Plug 'junegunn/fzf.vim'
 if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter', {'branch' : '0.5-compat', 'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-textobjects', {'branch' : '0.5-compat'}
+    Plug 'IndianBoy42/tree-sitter-just'
 endif
 
 
@@ -674,6 +675,12 @@ endfunction
 "endif
 
 
+
+au VimEnter,BufWinEnter,BufRead,BufNewFile *.just setlocal filetype=make
+au VimEnter,BufWinEnter,BufRead,BufNewFile justfile setlocal filetype=make
+au VimEnter,BufWinEnter,BufRead,BufNewFile Justfile setlocal filetype=make
+au VimEnter,BufWinEnter,BufRead,BufNewFile .justfile setlocal filetype=make
+au VimEnter,BufWinEnter,BufRead,BufNewFile .Justfile setlocal filetype=make
 
 """ load lua config
 
