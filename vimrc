@@ -321,9 +321,9 @@ syntax enable
 if has("nvim")
     set termguicolors
     let g:material_style = 'darker'
-    "colorscheme material
+    colorscheme material
     "colorscheme github_dark_default
-    colorscheme onedark
+    "colorscheme onedark
 endif
 
 if has("nvim") || has("gui_running")
