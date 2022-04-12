@@ -52,3 +52,7 @@ require("lspconfig").grammar_guard.setup({
 require("lspconfig").rust_analyzer.setup({})
 
 require("lspconfig").clangd.setup({})
+
+require("lspconfig").pylsp.setup({})
+
+require("lspconfig").gopls.setup({})

@@ -8,6 +8,6 @@ set noexpandtab
 
 let g:smart_display_opts = { 'column' : 0 }
 
-let b:ale_linters = ['gopls', 'gobuild', 'golint']
+let b:ale_linters = ['gobuild', 'golint']
 let b:ale_fixers = ['gofmt', 'goimports']
 let b:ale_fix_on_save = 1
