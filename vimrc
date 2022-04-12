@@ -66,6 +66,11 @@ call plug#begin('~/.vim/plugged')
 " some sensible defaults
 Plug 'tpope/vim-sensible'
 
+" support libs
+if has('nvim')
+    Plug 'nvim-lua/plenary.nvim'
+endif
+
 """"""" Navigation & Look
 
 " TODO: checkout out: https://github.com/Lokaltog/vim-easymotion
@@ -177,6 +182,15 @@ let g:deoplete#enable_at_startup = 1
 " we use deoplete for completion, but get the completion sources from ALE
 let g:ale_completion_enabled = 0
 Plug 'dense-analysis/ale'
+" Plug 'f0rki/ale', { 'dir': '~/src/ale' }
+" Plug '~/src/ale'
+
+
+if has('nvim')
+    Plug 'neovim/nvim-lspconfig'
+    " Plug 'williamboman/nvim-lsp-installer'
+    Plug 'brymer-meneses/grammar-guard.nvim'
+endif
 
 " commenting code
 if has('nvim')
@@ -214,6 +228,9 @@ Plug 'lervag/vimtex'
 
 " python stuff
 Plug 'deoplete-plugins/deoplete-jedi'
+if has('nvim')
+    Plug 'deoplete-plugins/deoplete-lsp'
+endif
 
 " rust
 Plug 'rust-lang/rust.vim'
@@ -597,8 +614,8 @@ call deoplete#custom#source('emoji', {'converters': ['converter_emoji'],'filetyp
 call deoplete#custom#option('camel_case', v:true)
 call deoplete#custom#option('smart_case', v:true)
 call deoplete#custom#option('sources', {
-      \ '_': ['tag', 'buffer', 'file', 'ale', 'syntax', 'greek', 'emoji'],
-      \ 'python': ['tag', 'buffer', 'jedi', 'file', 'ale', 'syntax', 'greek', 'emoji'],
+      \ '_': ['lsp', 'tag', 'buffer', 'file', 'ale', 'syntax', 'greek', 'emoji'],
+      \ 'python': ['lsp', 'tag', 'buffer', 'jedi', 'file', 'ale', 'syntax', 'greek', 'emoji'],
 \})
 
 
@@ -612,25 +629,37 @@ let g:echodoc#type = 'signature'
 """" for ALE
 
 noremap <F4> :ALEFix<CR>
-noremap <localleader>d :ALEGoToDefinition<cr>
-noremap <localleader>t :ALEGoToTypeDefinition<cr>
-noremap <localleader>x :ALEFindReferences -relative<cr>
+
+" noremap <localleader>d :ALEGoToDefinition<cr>
+" noremap <localleader>t :ALEGoToTypeDefinition<cr>
+" noremap <localleader>x :ALEFindReferences -relative<cr>
 
 " airline/ALE integration
 let g:airline#extensions#ale#enabled = 1
 
+
+"""" for neovim-lsp client
+
+noremap <localleader>d <cmd>lua vim.lsp.buf.definition()<CR>
+noremap <localleader>t <cmd>lua vim.lsp.buf.declaration()<cr>
+noremap <localleader>x <cmd>lua vim.lsp.buf.references()<CR>
+" nnoremap <silent>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <silent><c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent>K     <cmd>lua vim.lsp.buf.hover()<CR>
+
+
 """" for vista
 
-"let g:vista_default_executive = 'ale'
+let g:vista_default_executive = 'nvim-lspconfig'
 "let g:vista_fzf_preview = ['right:50%']
 let g:vista#renderer#enable_icon = 1
 
-let g:vista_executive_for = {
-  \ 'c': 'ale',
-  \ 'cpp': 'ale',
-  \ 'rust': 'ale',
-  \ 'python': 'ale',
-  \ }
+" let g:vista_executive_for = {
+"   \ 'c': 'nvim-lspconfig',
+"   \ 'cpp': 'ale',
+"   \ 'rust': 'ale',
+"   \ 'python': 'ale',
+"   \ }
 
 noremap <silent> <leader>S :Vista finder<cr>
 "noremap <silent> <leader>V :Vista!!<Return>

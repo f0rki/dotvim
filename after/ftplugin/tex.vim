@@ -74,12 +74,15 @@ let g:vimtex_quickfix_mode = '2'
 let g:vimtex_view_method = "general"
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-let g:vimtex_view_general_options_latexmk = '--unique'
+" let g:vimtex_view_general_options_latexmk = '--unique'
 
 
 " configure ALE fixers
 let b:ale_fixers = ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
 " and the ALE linters...
-let b:ale_linters = ['lacheck', 'vale', 'textidote', 'texlab']
+let b:ale_linters = ['lacheck', 'vale', 'textidote']
 
 let g:smart_display_opts = { 'column' : 0 }
+
+" let g:ale_tex_ltex_options = "--log-file=./ltex.log"
+" let g:ale_tex_ltex_config = {'checkFrequency': 'edit', 'additionalRules': {'enablePickyRules': 1, 'motherTongue': 'de-DE'}, 'enabled': ['tex', 'latex', 'bibtex'], "additionalRules.word2VecModel": "~/.lt_data/word2vec/", "additionalRules.languageModel": "~/.lt_data/ngram/", "ltex-ls" :{ "logLevel": "finest"}, "trace": {"server": "verbose"}, "language": "en-US"}
