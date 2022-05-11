@@ -153,9 +153,6 @@ Plug 'godlygeek/tabular'
 " checker for writing style
 Plug 'reedes/vim-wordy'
 
-" languagetool integration
-" Plug 'brymer-meneses/grammar-guard.nvim'
-
 " convert latex math stuff to unicode chars
 Plug 'joom/latex-unicoder.vim'
 
@@ -188,16 +185,25 @@ Plug 'dense-analysis/ale'
 
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
+
+    " meh I install LSPs on my own; don't need another package manger...
     " Plug 'williamboman/nvim-lsp-installer'
+    
+    " languagetool integration
     Plug 'brymer-meneses/grammar-guard.nvim'
+
+    Plug 'folke/trouble.nvim'
 endif
 
 " commenting code
 if has('nvim')
+    " Plug 'numToStr/Comment.nvim'
+    " Plug 'numToStr/Comment.nvim', { 'tag': 'v0.6' }
     Plug 'numToStr/Comment.nvim'
 else
     Plug 'scrooloose/nerdcommenter'
 endif
+
 " Plug 'tpope/vim-commentary'
 " auto delimiter insertion
 "Plug 'Raimondi/delimitMate'
@@ -235,6 +241,9 @@ endif
 " rust
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
+if has('nvim')
+    Plug 'simrat39/rust-tools.nvim'
+endif
 
 " other formats/languages
 Plug 'dag/vim-fish'
@@ -646,6 +655,14 @@ noremap <localleader>x <cmd>lua vim.lsp.buf.references()<CR>
 " nnoremap <silent>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 " nnoremap <silent><c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 " nnoremap <silent>K     <cmd>lua vim.lsp.buf.hover()<CR>
+
+"""" for trouble
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 
 
 """" for vista
