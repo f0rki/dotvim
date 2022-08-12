@@ -39,6 +39,7 @@ function! s:bibtex_cite_sink(lines)
     execute ':normal! i' . r
 endfunction
 
+
 inoremap <silent> @@ <c-g>u<c-o>:call fzf#run({
                         \ 'source': Bibtex_ls(),
                         \ 'sink*': function('<sid>bibtex_cite_sink_insert'),
@@ -51,16 +52,33 @@ nnoremap <silent> <leader>C :call fzf#run({
                         \ 'up': '40%',
                         \ 'options': '--ansi --layout=reverse-list --multi --prompt "Cite> "'})<CR>
 
+
 function! s:bibtex_markdown_sink(lines)
     let r=system("bibtex-markdown ", a:lines)
     execute ':normal! i' . r
 endfunction
 
-nnoremap <silent> <leader>M :call fzf#run({
-                        \ 'source': Bibtex_ls(),
-                        \ 'sink*': function('<sid>bibtex_markdown_sink'),
+" nnoremap <silent> <leader>M :call fzf#run({
+"                         \ 'source': Bibtex_ls(),
+"                         \ 'sink*': function('<sid>bibtex_markdown_sink'),
+"                         \ 'up': '40%',
+"                         \ 'options': '--ansi --layout=reverse-list --multi --prompt "Markdown> "'})<CR>
+
+
+function Latex_label_join(line)
+    let parts = split(a:line, ':')
+    call remove(parts, 0, 1)
+    execute ':normal! i' . join(parts, ':')
+endfunction
+
+inoremap <silent> @c <c-g>u<c-o>:call fzf#run({
+                        \ 'source': "rg --color always -n 'label\\{(.+)\\}' -o -r '$1'",
+                        \ 'sink': function('Latex_label_join'),
                         \ 'up': '40%',
-                        \ 'options': '--ansi --layout=reverse-list --multi --prompt "Markdown> "'})<CR>
+                        \ 'options': '--ansi --layout=reverse-list --multi --prompt "Label> "'})<CR>
+
+
+
 
 au User VimtexEventQuit     VimtexClean
 
