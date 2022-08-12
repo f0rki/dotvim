@@ -24,6 +24,8 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
+require("hlargs").setup()
+
 -- setup LSP config
 require("grammar-guard").init()
 
