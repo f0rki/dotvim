@@ -60,7 +60,7 @@ require("lspconfig").grammar_guard.setup({
 	cmd = { "ltex-ls" },
 	settings = {
 		ltex = {
-			enabled = { "latex", "tex", "bib", "markdown", "bibtex" },
+			enabled = { "latex", "tex", "bib", "markdown", "bibtex", "rst", "reStructuredText" },
 			language = "en-US",
 			diagnosticSeverity = "information",
 			sentenceCacheSize = 2000,
