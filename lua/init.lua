@@ -21,6 +21,8 @@ require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
+		-- vimtex recommends disabling tree-sitter for latex
+		disable = { "latex" },
 	},
 })
 
