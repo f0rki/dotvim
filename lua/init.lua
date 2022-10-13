@@ -28,9 +28,6 @@ require("nvim-treesitter.configs").setup({
 
 require("hlargs").setup()
 
--- setup LSP config
-require("grammar-guard").init()
-
 -------
 -- http://lua-users.org/wiki/FileInputOutput
 -- see if the file exists
@@ -55,7 +52,9 @@ function lines_from(file)
 	return lines
 end
 -------
+--[[
 
+require("grammar-guard").init()
 require("lspconfig").grammar_guard.setup({
 	cmd = { "ltex-ls" },
 	settings = {
@@ -73,8 +72,8 @@ require("lspconfig").grammar_guard.setup({
 			trace = { server = "verbose" },
 			dictionary = {
 				["en-US"] = {
-					table.unpack(lines_from("./.dict.txt")),
-					table.unpack(lines_from("~/.config/ltex/dict-en.txt")),
+					--table.unpack(lines_from("./.dict.txt")),
+					--table.unpack(lines_from("~/.config/ltex/dict-en.txt")),
 				},
 				-- ["de-DE"] = lines_from("./.dict.txt") + lines_from("~/.config/ltex/dict-de.txt"),
 			},
@@ -83,6 +82,7 @@ require("lspconfig").grammar_guard.setup({
 		},
 	},
 })
+--]]
 
 require("lspconfig").rust_analyzer.setup({})
 

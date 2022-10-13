@@ -191,7 +191,7 @@ if has('nvim')
     " Plug 'williamboman/nvim-lsp-installer'
     
     " languagetool integration
-    Plug 'brymer-meneses/grammar-guard.nvim'
+    " Plug 'brymer-meneses/grammar-guard.nvim'
 
     Plug 'folke/trouble.nvim'
 endif
