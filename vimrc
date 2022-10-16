@@ -113,7 +113,7 @@ Plug 'junegunn/fzf.vim'
 "Plug 'ElPiloto/telescope-vimwiki.nvim'
 
 if has('nvim')
-    Plug 'nvim-treesitter/nvim-treesitter', {'branch' : '0.5-compat', 'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-textobjects', {'branch' : '0.5-compat'}
     Plug 'IndianBoy42/tree-sitter-just'
     Plug 'm-demare/hlargs.nvim'
