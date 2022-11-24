@@ -117,18 +117,13 @@ require("lspconfig").grammar_guard.setup({
 })
 --]]
 
+-- initialize the lsps
 require("lspconfig").rust_analyzer.setup({})
-
 require("lspconfig").clangd.setup({})
-
 require("lspconfig").pylsp.setup({})
-
 require("lspconfig").gopls.setup({})
-
-require("trouble").setup({
-	-- your configuration comes here
-	-- or leave it empty to use the default settings
-	-- refer to the configuration section below
-})
-
+-- we want a bunch of nice rusty features :)
 require("rust-tools").setup({})
+
+-- pretty list of LSP reported issues
+require("trouble").setup({})
