@@ -77,10 +77,10 @@ endif
 " Plug 'Lokaltog/vim-easymotion'
 " status bar
 if has('nvim')
-    Plug 'hoob3rt/lualine.nvim'
     " If you want to have icons in your statusline choose one of these
     Plug 'kyazdani42/nvim-web-devicons'
-    Plug 'ryanoasis/vim-devicons'
+    " thne lualine
+    Plug 'hoob3rt/lualine.nvim'
 endif
 " display git diff, as sign for added, changed, removed lines
 "Plug 'airblade/vim-gitgutter'
