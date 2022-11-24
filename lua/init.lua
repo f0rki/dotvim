@@ -17,15 +17,48 @@ require("lualine").setup({
 
 require("Comment").setup()
 
+-- treesitter stuff
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
 		-- vimtex recommends disabling tree-sitter for latex
 		disable = { "latex" },
+        -- make sure a bunch of useful ones are installed all the time
+        ensure_installed = {
+            'lua',
+            'rust',
+            'c',
+            'cpp',
+            'bash',
+            'markdown',
+            'make',
+            'python'
+        }
 	},
 })
 
+-- auto-install TS parsers on first open of unknown
+local ask_install = {}
+function _G.ensure_treesitter_language_installed()
+  local parsers = require "nvim-treesitter.parsers"
+  local lang = parsers.get_buf_lang()
+  if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) and ask_install[lang] ~= false then
+    vim.schedule_wrap(function()
+      vim.ui.select({"yes", "no"}, { prompt = "Install tree-sitter parsers for " .. lang .. "?" }, function(item)
+        if item == "yes" or item == "y" then
+          vim.cmd("TSInstall " .. lang)
+        elseif item == "no" then
+          ask_install[lang] = false
+        end
+      end)
+    end)()
+  end
+end
+vim.cmd [[autocmd FileType * :lua ensure_treesitter_language_installed()]]
+----------
+
+-- highlight function args using treesitter
 require("hlargs").setup()
 
 -------
