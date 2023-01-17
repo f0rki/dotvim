@@ -77,10 +77,8 @@ endif
 " Plug 'Lokaltog/vim-easymotion'
 " status bar
 if has('nvim')
-    " If you want to have icons in your statusline choose one of these
-    Plug 'kyazdani42/nvim-web-devicons'
-    " thne lualine
-    Plug 'hoob3rt/lualine.nvim'
+    Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'nvim-lualine/lualine.nvim'
 endif
 " display git diff, as sign for added, changed, removed lines
 "Plug 'airblade/vim-gitgutter'
@@ -103,7 +101,7 @@ if has('nvim')
 endif
 
 "Plug 'tpope/vim-repeat'
-Plug 'junegunn/fzf', { 'dir': '~/.local/fzf' }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 " TODO: check out telescope.nvim as an alternative to the fzf plugin
@@ -336,7 +334,7 @@ endif
 
 " workaround for neovim in alacritty: https://github.com/neovim/neovim/issues/11330
 if has('nvim')
-    autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+    "autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -547,9 +545,6 @@ map <leader><F9> :call unicoder#start(0)<CR>
 let g:tex_flavor = 'latex'
 
 
-"""" for airline
-set laststatus=2
-
 """" for smartcolorcolumn
 " configure this in filetype specific after/ftplugin/ files
 " let g:smart_display_opts = { 'column' : 80 }
@@ -643,9 +638,6 @@ noremap <F4> :ALEFix<CR>
 " noremap <localleader>d :ALEGoToDefinition<cr>
 " noremap <localleader>t :ALEGoToTypeDefinition<cr>
 " noremap <localleader>x :ALEFindReferences -relative<cr>
-
-" airline/ALE integration
-let g:airline#extensions#ale#enabled = 1
 
 
 """" for neovim-lsp client
