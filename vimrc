@@ -642,9 +642,11 @@ noremap <F4> :ALEFix<CR>
 
 """" for neovim-lsp client
 
-noremap <localleader>d <cmd>lua vim.lsp.buf.definition()<CR>
-noremap <localleader>t <cmd>lua vim.lsp.buf.declaration()<cr>
-noremap <localleader>x <cmd>lua vim.lsp.buf.references()<CR>
+" -> now configured in init.lua
+" noremap <localleader>d <cmd>lua vim.lsp.buf.definition()<CR>
+" noremap <localleader>D <cmd>lua vim.lsp.buf.declaration()<CR>
+" noremap <localleader>x <cmd>lua vim.lsp.buf.references()<CR>
+" noremap <localleader>r <cmd>lua vim.lsp.buf.references()<CR>
 " nnoremap <silent>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 " nnoremap <silent><c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 " nnoremap <silent>K     <cmd>lua vim.lsp.buf.hover()<CR>
