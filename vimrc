@@ -107,13 +107,15 @@ Plug 'junegunn/fzf.vim'
 " TODO: check out telescope.nvim as an alternative to the fzf plugin
 "Plug 'nvim-telescope/telescope.nvim'
 "Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+"
 "Plug 'AckslD/nvim-neoclip.lua'
 "Plug 'ElPiloto/telescope-vimwiki.nvim'
 
+
 if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'nvim-treesitter/nvim-treesitter-textobjects', {'branch' : '0.5-compat'}
-    Plug 'IndianBoy42/tree-sitter-just'
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    " Plug 'IndianBoy42/tree-sitter-just'
     Plug 'm-demare/hlargs.nvim'
 endif
 
@@ -157,25 +159,8 @@ Plug 'joom/latex-unicoder.vim'
 
 
 """"""" Programming related
-" auto completion
 
-" Support for language server protocol, which seems to become the standard
-"Plug 'prabirshrestha/async.vim'
-"Plug 'prabirshrestha/vim-lsp'
-"
-"Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'make release'}
-"
-" deoplete as completion engine
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-
-" we use deoplete for completion, but get the completion sources from ALE
+" something else for completion, and also as a LSP client
 let g:ale_completion_enabled = 0
 Plug 'dense-analysis/ale'
 " Plug 'f0rki/ale', { 'dir': '~/src/ale' }
@@ -183,15 +168,33 @@ Plug 'dense-analysis/ale'
 
 
 if has('nvim')
+    " LSP Support
     Plug 'neovim/nvim-lspconfig'
+    " Plug 'williamboman/mason.nvim', {'do': ':MasonUpdate'}
+    " Plug 'williamboman/mason-lspconfig.nvim'
+
+    " Autocompletion
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-cmdline'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+
+    " snippets
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'rafamadriz/friendly-snippets'
+
+    " glue code
+    Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
+
+    Plug 'folke/trouble.nvim'
 
     " meh I install LSPs on my own; don't need another package manger...
     " Plug 'williamboman/nvim-lsp-installer'
-    
+
     " languagetool integration
     " Plug 'brymer-meneses/grammar-guard.nvim'
 
-    Plug 'folke/trouble.nvim'
 endif
 
 " commenting code
@@ -199,29 +202,26 @@ if has('nvim')
     " Plug 'numToStr/Comment.nvim'
     " Plug 'numToStr/Comment.nvim', { 'tag': 'v0.6' }
     Plug 'numToStr/Comment.nvim'
-else
-    Plug 'scrooloose/nerdcommenter'
 endif
 
 " Plug 'tpope/vim-commentary'
 " auto delimiter insertion
 "Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
-
 Plug 'liuchengxu/vista.vim'
 
 
 " snippets engine
 "Plug 'SirVer/ultisnips'
 "" and some snippets
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 "Plug 'rbonvall/snipmate-snippets-bib'
 
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-
-" display docs in the editor
-Plug 'Shougo/echodoc.vim'
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'Shougo/neosnippet-snippets'
+"
+" " display docs in the editor
+" Plug 'Shougo/echodoc.vim'
 
 """"" language support
 
@@ -231,11 +231,6 @@ Plug 'lervag/vimtex'
 " TODO: checkout the texlab lsp implementation:
 " https://github.com/latex-lsp/texlab
 
-" python stuff
-Plug 'deoplete-plugins/deoplete-jedi'
-if has('nvim')
-    Plug 'deoplete-plugins/deoplete-lsp'
-endif
 
 " rust
 Plug 'rust-lang/rust.vim'
@@ -253,14 +248,6 @@ Plug 'ethereum/vim-solidity'
 "Plug 'vim-scripts/yaml.vim'
 Plug 'freitass/todo.txt-vim'
 Plug 'LnL7/vim-nix'
-
-" Deoplete completion sources:
-Plug 'Shougo/neco-syntax'
-
-" TODO: those two look nice, but don't seem to work properly...
-"Plug 'Inazuma110/deoplete-greek'
-Plug 'f0rki/deoplete-emoji'
-"Plug '~/code/deoplete-emoji'
 
 
 """"" required, end of plugin loading
@@ -604,31 +591,31 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expan
 """" for deoplete
 
 " cycle through completion with tab
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
-" cycle reverse with shift+tab
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" ctrl+e to cancel the popup
-inoremap <expr><C-e>  deoplete#cancel_popup()
-
-"inoremap <expr><C-h> deoplete#toggle()
-
-call deoplete#custom#source('emoji', {'converters': ['converter_emoji'],'filetypes': []})
-
-
-call deoplete#custom#option('camel_case', v:true)
-call deoplete#custom#option('smart_case', v:true)
-call deoplete#custom#option('sources', {
-      \ '_': ['lsp', 'tag', 'buffer', 'file', 'ale', 'syntax', 'greek', 'emoji'],
-      \ 'python': ['lsp', 'tag', 'buffer', 'jedi', 'file', 'ale', 'syntax', 'greek', 'emoji'],
-\})
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
+" " cycle reverse with shift+tab
+" inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+" " ctrl+e to cancel the popup
+" inoremap <expr><C-e>  deoplete#cancel_popup()
+"
+" "inoremap <expr><C-h> deoplete#toggle()
+"
+" call deoplete#custom#source('emoji', {'converters': ['converter_emoji'],'filetypes': []})
+"
+"
+" call deoplete#custom#option('camel_case', v:true)
+" call deoplete#custom#option('smart_case', v:true)
+" call deoplete#custom#option('sources', {
+"       \ '_': ['lsp', 'tag', 'buffer', 'file', 'ale', 'syntax', 'greek', 'emoji'],
+"       \ 'python': ['lsp', 'tag', 'buffer', 'jedi', 'file', 'ale', 'syntax', 'greek', 'emoji'],
+" \})
 
 
 """" for echodoc
 
-set cmdheight=2
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'signature'
+" set cmdheight=2
+" let g:echodoc#enable_at_startup = 1
+" let g:echodoc#type = 'signature'
 
 
 """" for ALE

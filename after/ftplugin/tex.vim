@@ -17,9 +17,9 @@ set spell
 " hi clear Conceal
 
 " enable vimtex for deoplete
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'tex': g:vimtex#re#deoplete
-      \})
+" call deoplete#custom#var('omni', 'input_patterns', {
+"       \ 'tex': g:vimtex#re#deoplete
+"       \})
 
 "is this needed? no, I guess?
 "let g:vimtex_complete_enabled = 1
