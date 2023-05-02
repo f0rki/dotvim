@@ -141,10 +141,11 @@ Plug 'machakann/vim-highlightedyank'
 "Plug 'Lokaltog/vim-distinguished'
 "Plug 'michalbachowski/vim-wombat256mod'
 if has('nvim')
-    Plug 'navarasu/onedark.nvim'
+    " Plug 'navarasu/onedark.nvim'
     "Plug 'rafamadriz/neon'
     Plug 'marko-cerovac/material.nvim'
-    Plug 'projekt0n/github-nvim-theme'
+    " Plug 'projekt0n/github-nvim-theme'
+    Plug 'rebelot/kanagawa.nvim'
 endif
 
 """"""" general editing helps
@@ -334,9 +335,10 @@ syntax enable
 if has("nvim")
     set termguicolors
     let g:material_style = 'darker'
-    colorscheme material
+    " colorscheme material
     "colorscheme github_dark_default
     "colorscheme onedark
+    colorscheme kanagawa-wave
 endif
 
 if has("nvim") || has("gui_running")
