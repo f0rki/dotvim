@@ -175,14 +175,20 @@ if has('nvim')
     " Plug 'williamboman/mason-lspconfig.nvim'
 
     " Autocompletion
-    Plug 'hrsh7th/nvim-cmp'
+    " check out sources: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
     Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-path'
+    " Plug 'hrsh7th/cmp-path'
+    Plug 'FelipeLema/cmp-async-path'
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'lukas-reineke/cmp-rg'
+    "Plug 'tzachar/cmp-ai'
+     
+    Plug 'hrsh7th/nvim-cmp'
 
     " snippets
     Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'rafamadriz/friendly-snippets'
 
     " glue code
