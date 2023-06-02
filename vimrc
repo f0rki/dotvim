@@ -162,8 +162,8 @@ Plug 'joom/latex-unicoder.vim'
 """"""" Programming related
 
 " something else for completion, and also as a LSP client
-let g:ale_completion_enabled = 0
-Plug 'dense-analysis/ale'
+" let g:ale_completion_enabled = 0
+" Plug 'dense-analysis/ale'
 " Plug 'f0rki/ale', { 'dir': '~/src/ale' }
 " Plug '~/src/ale'
 
@@ -182,6 +182,9 @@ if has('nvim')
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'lukas-reineke/cmp-rg'
+    Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+    Plug 'hrsh7th/cmp-nvim-lua'
+    
     "Plug 'tzachar/cmp-ai'
      
     Plug 'hrsh7th/nvim-cmp'
@@ -193,6 +196,8 @@ if has('nvim')
 
     " glue code
     Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
+    " hook into lsp sources
+    Plug 'jose-elias-alvarez/null-ls.nvim'
 
     Plug 'folke/trouble.nvim'
 
@@ -201,6 +206,7 @@ if has('nvim')
 
     " languagetool integration
     " Plug 'brymer-meneses/grammar-guard.nvim'
+    
 
 endif
 
@@ -244,6 +250,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 if has('nvim')
     Plug 'simrat39/rust-tools.nvim'
+    Plug 'saecki/crates.nvim'
 endif
 
 " other formats/languages
@@ -628,7 +635,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expan
 
 """" for ALE
 
-noremap <F4> :ALEFix<CR>
+" noremap <F4> :ALEFix<CR>
 
 " noremap <localleader>d :ALEGoToDefinition<cr>
 " noremap <localleader>t :ALEGoToTypeDefinition<cr>

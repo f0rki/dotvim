@@ -7,7 +7,7 @@ set tabstop=4
 "let b:ale_linters = ['rls', 'cargo', 'rustc']
 let b:ale_linters = []
 let b:ale_fixers = ['trim_whitespace', 'remove_trailing_lines', 'rustfmt']
-let b:ale_fix_on_save = 1
+let b:ale_fix_on_save = 0
 
 let g:smart_display_opts = { 'column' : 101 }
 
