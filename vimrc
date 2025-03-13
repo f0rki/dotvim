@@ -197,7 +197,8 @@ if has('nvim')
     " glue code
     Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
     " hook into lsp sources
-    Plug 'jose-elias-alvarez/null-ls.nvim'
+    " Plug 'jose-elias-alvarez/null-ls.nvim'
+    Plug 'nvimtools/none-ls.nvim'
 
     Plug 'folke/trouble.nvim'
 
