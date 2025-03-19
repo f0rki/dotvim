@@ -18,6 +18,7 @@ require("lualine").setup({
 require("Comment").setup()
 
 -- treesitter stuff
+-- require('nvim-treesitter.install'.compilers = { 'gcc' }
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
@@ -129,6 +130,8 @@ require("lspconfig").grammar_guard.setup({
 ------ lsp keybindings
 -- https://github.com/neovim/nvim-lspconfig#Suggested-configuration
 
+local lspconfig = require("lspconfig")
+
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
@@ -136,12 +139,13 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
-local lspzero = require("lsp-zero").preset(lsp_std_config)
+-- lsp-zero is deprecated... move to plain lsp-config
+-- local lspzero = require("lsp-zero").preset()
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-	lspzero.default_keymaps({ buffer = bufnr })
+	-- lspzero.default_keymaps({ buffer = bufnr })
 
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -177,30 +181,23 @@ local on_attach = function(client, bufnr)
 	end, bufopts)
 end
 
-local lsp_flags = {
-	-- This is the default in Nvim 0.7+
-	debounce_text_changes = 150,
-}
-
 local lsp_cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local lsp_std_config = {
-	on_attach = on_attach,
-	flags = lsp_flags,
-	capabilities = lsp_cmp_capabilities,
-}
-
 -- initialize the lsps
-local LSPs = { "rust_analyzer", "clangd", "pylsp", "gopls" }
-lspzero.on_attach(on_attach)
-lspzero.setup_servers(LSPs)
-lspzero.setup()
+local lsps = { "rust_analyzer", "clangd", "pyright", "gopls" }
+for _, lsp in pairs(lsps) do
+	local setup = {
+		on_attach = on_attach,
+		capabilities = lsp_cmp_capabilities,
+	}
+	lspconfig[lsp].setup(setup)
+end
 
 -- see also https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/guides/integrate-with-null-ls.md
 local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
-		null_ls.builtins.code_actions.shellcheck,
+		-- null_ls.builtins.code_actions.shellcheck,
 		null_ls.builtins.code_actions.statix,
 		null_ls.builtins.diagnostics.fish,
 		null_ls.builtins.formatting.stylua,
@@ -208,12 +205,12 @@ null_ls.setup({
 		-- null_ls.builtins.formatting.nixpkgs_fmt,
 		null_ls.builtins.formatting.alejandra,
 		null_ls.builtins.formatting.bibclean,
-		null_ls.builtins.formatting.dprint,
+		-- null_ls.builtins.formatting.dprint,
 
 		null_ls.builtins.diagnostics.todo_comments,
 
 		-- python
-		null_ls.builtins.diagnostics.ruff,
+		-- null_ls.builtins.diagnostics.ruff,
 		null_ls.builtins.diagnostics.pylint,
 		null_ls.builtins.formatting.isort,
 		null_ls.builtins.formatting.black,
@@ -241,7 +238,7 @@ end
 
 -- Set up nvim-cmp.
 local cmp = require("cmp")
-local cmp_action = lspzero.cmp_action()
+-- local cmp_action = lspzero.cmp_action()
 
 cmp.setup({
 	snippet = {

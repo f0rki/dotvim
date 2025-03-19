@@ -195,11 +195,14 @@ if has('nvim')
     Plug 'rafamadriz/friendly-snippets'
 
     " glue code
-    Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
+    " Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
     " hook into lsp sources
     " Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'nvimtools/none-ls.nvim'
+    " better formatting? alternative to none-ls
+    " Plug 'stevearc/conform.nvim'
 
+    " view diagnostics
     Plug 'folke/trouble.nvim'
 
     " meh I install LSPs on my own; don't need another package manger...
