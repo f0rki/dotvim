@@ -101,12 +101,15 @@ if has('nvim')
 endif
 
 "Plug 'tpope/vim-repeat'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf.vim'
 
-" TODO: check out telescope.nvim as an alternative to the fzf plugin
-"Plug 'nvim-telescope/telescope.nvim'
-"Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+if has('nvim')
+    " TODO: check out telescope.nvim as an alternative to the fzf plugin
+    Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+    "Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+    Plug 'nvim-telescope/telescope-ui-select.nvim'
+endif
 "
 "Plug 'AckslD/nvim-neoclip.lua'
 "Plug 'ElPiloto/telescope-vimwiki.nvim'
@@ -199,6 +202,7 @@ if has('nvim')
     " hook into lsp sources
     " Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'nvimtools/none-ls.nvim'
+
     " better formatting? alternative to none-ls
     " Plug 'stevearc/conform.nvim'
 
@@ -556,33 +560,35 @@ let g:tex_flavor = 'latex'
 " let g:smart_display_opts = { 'column' : 80 }
 
 """" fzf in vim
-function! FzfGitCwdFiles(fullscreen)
-  let root_ = split(system('git rev-parse --show-toplevel'), '\n')[0]
-  let root = v:shell_error ? '' : root_
-  if empty(root)
-      return fzf#vim#files(getcwd(), fzf#vim#with_preview(), a:fullscreen)
-  else
-      return fzf#run(fzf#vim#with_preview(fzf#wrap('gcwdfiles', {
-        \ 'source':  'git ls-files --exclude-standard --others --cached '.(has('win32') || has('win64') ? '' : ' | uniq'),
-        \ 'dir': getcwd(),
-        \ 'options': '-m --preview="bat {}" --prompt "GitFiles(PWD)> "'
-        \}, a:fullscreen)))
-  endif
-endfunction
-command! -bang FilesOrGitFiles call FzfGitCwdFiles(<bang>0)
+" function! FzfGitCwdFiles(fullscreen)
+"   let root_ = split(system('git rev-parse --show-toplevel'), '\n')[0]
+"   let root = v:shell_error ? '' : root_
+"   if empty(root)
+"       return fzf#vim#files(getcwd(), fzf#vim#with_preview(), a:fullscreen)
+"   else
+"       return fzf#run(fzf#vim#with_preview(fzf#wrap('gcwdfiles', {
+"         \ 'source':  'git ls-files --exclude-standard --others --cached '.(has('win32') || has('win64') ? '' : ' | uniq'),
+"         \ 'dir': getcwd(),
+"         \ 'options': '-m --preview="bat {}" --prompt "GitFiles(PWD)> "'
+"         \}, a:fullscreen)))
+"   endif
+" endfunction
+" command! -bang FilesOrGitFiles call FzfGitCwdFiles(<bang>0)
 
-map <leader>t :Files<cr>
-map <leader>T :GFiles --cached --others --exclude-standard<cr>
-map <leader>f :FilesOrGitFiles<cr>
-map <leader>F :FilesOrGitFiles!<cr>
-map <leader>b :Buffers<cr>
-map <leader>l :BLines<cr>
+" map <leader>t :Files<cr>
+" map <leader>T :GFiles --cached --others --exclude-standard<cr>
+" map <leader>f :FilesOrGitFiles<cr>
+" map <leader>F :FilesOrGitFiles!<cr>
+" map <leader>b :Buffers<cr>
+" map <leader>l :BLines<cr>
 
-function! RgWord()
-    let wordUnderCursor = expand("<cword>")
-    execute ':Rg ' . wordUnderCursor
-endfunction
-map <leader>q :call RgWord()<cr>
+
+
+" function! RgWord()
+"     let wordUnderCursor = expand("<cword>")
+"     execute ':Rg ' . wordUnderCursor
+" endfunction
+" map <leader>q :call RgWord()<cr>
 
 """" for vim-markdown
 let g:vim_markdown_math=1

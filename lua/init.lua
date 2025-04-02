@@ -17,6 +17,23 @@ require("lualine").setup({
 
 require("Comment").setup()
 
+require("telescope").setup({
+	extensions = {
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown({}),
+		},
+	},
+})
+require("telescope").load_extension("ui-select")
+
+local telescope_builtin = require("telescope.builtin")
+-- respects .gitignore
+vim.keymap.set("n", "<leader>f", telescope_builtin.find_files, { desc = "Telescope find files (respects .gitignore)" })
+vim.keymap.set("n", "<leader>g", telescope_builtin.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set("n", "<leader>b", telescope_builtin.buffers, { desc = "Telescope buffers" })
+vim.keymap.set("n", "<leader>q", telescope_builtin.grep_string, { desc = "Telescope grep string" })
+-- vim.keymap.set('n', '<leader>h', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
+
 -- treesitter stuff
 -- require('nvim-treesitter.install'.compilers = { 'gcc' }
 require("nvim-treesitter.configs").setup({
@@ -61,6 +78,7 @@ function _G.ensure_treesitter_language_installed()
 		end)()
 	end
 end
+
 vim.cmd([[autocmd FileType * :lua ensure_treesitter_language_installed()]])
 ----------
 
@@ -94,6 +112,7 @@ function lines_from(file)
 	end
 	return lines
 end
+
 -------
 --[[
 
@@ -172,6 +191,9 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<localleader>f", function()
 		vim.lsp.buf.format({ async = true })
 	end, bufopts)
+	vim.keymap.set("n", "<F3>", function()
+		vim.lsp.buf.format({ async = true })
+	end, bufopts)
 
 	-- TODO: wut are these?
 	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
@@ -184,7 +206,7 @@ end
 local lsp_cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- initialize the lsps
-local lsps = { "rust_analyzer", "clangd", "pyright", "gopls" }
+local lsps = { "rust_analyzer", "clangd", "pyright", "gopls", "ruff", "dprint", "lua_ls" }
 for _, lsp in pairs(lsps) do
 	local setup = {
 		on_attach = on_attach,
