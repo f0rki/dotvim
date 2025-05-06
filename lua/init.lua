@@ -41,7 +41,7 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 		additional_vim_regex_highlighting = false,
 		-- vimtex recommends disabling tree-sitter for latex
-		disable = { "latex" },
+		-- disable = { "latex" },
 		disable = { "latex", "Makefile" },
 		-- make sure a bunch of useful ones are installed all the time
 		ensure_installed = {

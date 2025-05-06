@@ -50,239 +50,6 @@
 " ;C search and insert for bibtex citation
 " @@ inline bibtex citation key insert
 
-"""""""""""""""""""""""""""""""""""""""""
-" plugins
-"""""""""""""""""""""""""""""""""""""""""
-
-set nocompatible " be iMproved
-filetype off     " required!
-
-let g:plug_shallow = 0 " disable shallow clones
-" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
-call plug#begin('~/.vim/plugged')
-
-""""""" Plugins
-
-" some sensible defaults
-Plug 'tpope/vim-sensible'
-
-" support libs
-if has('nvim')
-    Plug 'nvim-lua/plenary.nvim'
-endif
-
-""""""" Navigation & Look
-
-" TODO: checkout out: https://github.com/Lokaltog/vim-easymotion
-" Plug 'Lokaltog/vim-easymotion'
-" status bar
-if has('nvim')
-    Plug 'nvim-tree/nvim-web-devicons'
-    Plug 'nvim-lualine/lualine.nvim'
-endif
-" display git diff, as sign for added, changed, removed lines
-"Plug 'airblade/vim-gitgutter'
-if has('nvim') || has('patch-8.0.902')
-  Plug 'mhinz/vim-signify'
-else
-  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-endif
-" integrated git support
-Plug 'tpope/vim-fugitive'
-" better highlighting for too long lines, instead of colorcolumn
-" doesn't work well with neovim and
-"Plug 'gagoar/SmartColumnColors'
-
-" highligh targets for f, F, t, T
-Plug 'unblevable/quick-scope'
-" TODO: check out movement advice at https://github.com/unblevable/quick-scope
-if has('nvim')
-    Plug 'ggandor/lightspeed.nvim'
-endif
-
-"Plug 'tpope/vim-repeat'
-" Plug 'junegunn/fzf'
-" Plug 'junegunn/fzf.vim'
-
-if has('nvim')
-    " TODO: check out telescope.nvim as an alternative to the fzf plugin
-    Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
-    "Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-    Plug 'nvim-telescope/telescope-ui-select.nvim'
-endif
-"
-"Plug 'AckslD/nvim-neoclip.lua'
-"Plug 'ElPiloto/telescope-vimwiki.nvim'
-
-
-if has('nvim')
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-    " Plug 'IndianBoy42/tree-sitter-just'
-    Plug 'm-demare/hlargs.nvim'
-endif
-
-
-"Plug 'fiatjaf/neuron.vim'
-Plug 'vimwiki/vimwiki'
-Plug 'michal-h21/vim-zettel'
-
-
-" for word-level diffing in vim
-Plug 'rickhowe/diffchar.vim'
-
-" highlight yank
-Plug 'machakann/vim-highlightedyank'
-
-" TODO: check-out vim-pencil for writing
-" https://github.com/reedes/vim-pencil
-
-" TODO: check out show a nice minimap
-"Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
-
-"""""" colorschemes
-"Plug 'Lokaltog/vim-distinguished'
-"Plug 'michalbachowski/vim-wombat256mod'
-if has('nvim')
-    " Plug 'navarasu/onedark.nvim'
-    "Plug 'rafamadriz/neon'
-    Plug 'marko-cerovac/material.nvim'
-    " Plug 'projekt0n/github-nvim-theme'
-    Plug 'rebelot/kanagawa.nvim'
-endif
-
-""""""" general editing helps
-" tabular alignment of text
-Plug 'godlygeek/tabular'
-
-" checker for writing style
-Plug 'reedes/vim-wordy'
-
-" convert latex math stuff to unicode chars
-Plug 'joom/latex-unicoder.vim'
-
-
-""""""" Programming related
-
-" something else for completion, and also as a LSP client
-" let g:ale_completion_enabled = 0
-" Plug 'dense-analysis/ale'
-" Plug 'f0rki/ale', { 'dir': '~/src/ale' }
-" Plug '~/src/ale'
-
-
-if has('nvim')
-    " LSP Support
-    Plug 'neovim/nvim-lspconfig'
-    " Plug 'williamboman/mason.nvim', {'do': ':MasonUpdate'}
-    " Plug 'williamboman/mason-lspconfig.nvim'
-
-    " Autocompletion
-    " check out sources: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
-    Plug 'hrsh7th/cmp-buffer'
-    " Plug 'hrsh7th/cmp-path'
-    Plug 'FelipeLema/cmp-async-path'
-    Plug 'hrsh7th/cmp-cmdline'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'lukas-reineke/cmp-rg'
-    Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-    Plug 'hrsh7th/cmp-nvim-lua'
-    
-    "Plug 'tzachar/cmp-ai'
-     
-    Plug 'hrsh7th/nvim-cmp'
-
-    " snippets
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
-    Plug 'rafamadriz/friendly-snippets'
-
-    " glue code
-    " Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
-    " hook into lsp sources
-    " Plug 'jose-elias-alvarez/null-ls.nvim'
-    Plug 'nvimtools/none-ls.nvim'
-
-    " better formatting? alternative to none-ls
-    " Plug 'stevearc/conform.nvim'
-
-    " view diagnostics
-    Plug 'folke/trouble.nvim'
-
-    " meh I install LSPs on my own; don't need another package manger...
-    " Plug 'williamboman/nvim-lsp-installer'
-
-    " languagetool integration
-    " Plug 'brymer-meneses/grammar-guard.nvim'
-    
-
-endif
-
-" commenting code
-if has('nvim')
-    " Plug 'numToStr/Comment.nvim'
-    " Plug 'numToStr/Comment.nvim', { 'tag': 'v0.6' }
-    Plug 'numToStr/Comment.nvim'
-endif
-
-" Plug 'tpope/vim-commentary'
-" auto delimiter insertion
-"Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-surround'
-Plug 'liuchengxu/vista.vim'
-
-
-" snippets engine
-"Plug 'SirVer/ultisnips'
-"" and some snippets
-" Plug 'honza/vim-snippets'
-"Plug 'rbonvall/snipmate-snippets-bib'
-
-" Plug 'Shougo/neosnippet.vim'
-" Plug 'Shougo/neosnippet-snippets'
-"
-" " display docs in the editor
-" Plug 'Shougo/echodoc.vim'
-
-""""" language support
-
-" latex
-"Plug 'vim-latex/vim-latex'
-Plug 'lervag/vimtex'
-" TODO: checkout the texlab lsp implementation:
-" https://github.com/latex-lsp/texlab
-
-
-" rust
-Plug 'rust-lang/rust.vim'
-Plug 'cespare/vim-toml'
-if has('nvim')
-    Plug 'simrat39/rust-tools.nvim'
-    Plug 'saecki/crates.nvim'
-endif
-
-" other formats/languages
-Plug 'dag/vim-fish'
-Plug 'plasticboy/vim-markdown'
-Plug 'ethereum/vim-solidity'
-"Plug 'derekwyatt/vim-scala'
-"Plug 'kchmck/vim-coffee-script'
-"Plug 'vim-scripts/yaml.vim'
-Plug 'freitass/todo.txt-vim'
-Plug 'LnL7/vim-nix'
-
-
-""""" required, end of plugin loading
-call plug#end()
-
-
-""""" external/system plugins """""""
-
-if file_readable(expand("$GOROOT/misc/vim/"))
-    set rtp+=$GOROOT/misc/vim
-elseif file_readable(expand("/usr/share/go/misc/vim/"))
-    set rtp+=/usr/share/go/misc/vim/
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -345,6 +112,26 @@ endif
 if has('nvim')
     "autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 endif
+
+
+
+"""""""""""""""""""""""""""""""""""""""""
+" plugins
+"""""""""""""""""""""""""""""""""""""""""
+
+if has('nvim')
+    " use lazy to load plugins
+    lua require('config.lazy')
+
+    " golang vim plugin loaded from system
+    " TODO: is this still needed?
+    if file_readable(expand("$GOROOT/misc/vim/"))
+        set rtp+=$GOROOT/misc/vim
+    elseif file_readable(expand("/usr/share/go/misc/vim/"))
+        set rtp+=/usr/share/go/misc/vim/
+    endif
+end
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -706,7 +493,7 @@ let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading
 nnoremap <leader>zn :ZettelNew<space>
 
 
-""""" form bibtex-fzf
+""""" for bibtex-fzf
 
 let FZF_BIBTEX_CACHEDIR = '~/.cache/fzf-bibtex'
 function! Bibtex_ls()
@@ -735,8 +522,8 @@ au VimEnter,BufWinEnter,BufRead,BufNewFile Justfile setlocal filetype=make
 au VimEnter,BufWinEnter,BufRead,BufNewFile .justfile setlocal filetype=make
 au VimEnter,BufWinEnter,BufRead,BufNewFile .Justfile setlocal filetype=make
 
-""" load lua config
 
+""" load lua config
 if has('nvim')
-    lua require'init'
+    lua require('init')
 endif
