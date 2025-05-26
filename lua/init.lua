@@ -18,6 +18,18 @@ require("lualine").setup({
 require("Comment").setup()
 
 require("telescope").setup({
+	defaults = {
+		layout_strategy = "vertical",
+		layout_config = {
+			vertical = {
+				width = 0.97,
+				height = 0.95,
+				preview_height = 0.7,
+			},
+		},
+		-- borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+	},
+
 	extensions = {
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown({}),
