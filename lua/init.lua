@@ -257,6 +257,8 @@ null_ls.setup({
 		null_ls.builtins.formatting.isort,
 		null_ls.builtins.formatting.black,
 	},
+
+	on_attach = on_attach,
 })
 
 -- pretty list of LSP reported issues
