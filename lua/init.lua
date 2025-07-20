@@ -46,11 +46,11 @@ vim.keymap.set("n", "<leader>b", telescope_builtin.buffers, { desc = "Telescope 
 vim.keymap.set("n", "<leader>q", telescope_builtin.grep_string, { desc = "Telescope grep string" })
 -- vim.keymap.set('n', '<leader>h', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
 
-vim.api.nvim_create_user_command('Rg', function(opts)
-  -- Get the argument passed to the command
-  local search_term = opts.args
-  -- Call telescope's grep_string with the provided search term
-  require('telescope.builtin').grep_string({ search = search_term })
+vim.api.nvim_create_user_command("Rg", function(opts)
+	-- Get the argument passed to the command
+	local search_term = opts.args
+	-- Call telescope's grep_string with the provided search term
+	require("telescope.builtin").grep_string({ search = search_term })
 end, { nargs = 1 })
 
 -- treesitter stuff
@@ -222,6 +222,10 @@ local on_attach = function(client, bufnr)
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, bufopts)
 end
+
+-- vim.keymap.set("n", "<localleader>d", function()
+--   require("codecompanion").prompt("docs")
+-- end, { noremap = true, silent = true })
 
 local lsp_cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
