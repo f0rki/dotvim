@@ -41,6 +41,7 @@ require("telescope").load_extension("ui-select")
 local telescope_builtin = require("telescope.builtin")
 -- respects .gitignore
 vim.keymap.set("n", "<leader>f", telescope_builtin.find_files, { desc = "Telescope find files (respects .gitignore)" })
+vim.keymap.set("n", "<leader>ff", telescope_builtin.git_files, { desc = "Telescope find files in git repository" })
 vim.keymap.set("n", "<leader>g", telescope_builtin.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>b", telescope_builtin.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>q", telescope_builtin.grep_string, { desc = "Telescope grep string" })
