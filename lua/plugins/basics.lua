@@ -98,4 +98,7 @@ return {
 	-- 	--     "saghen/blink.cmp"
 	-- 	-- },
 	-- },
+    --
+
+    { "sindrets/diffview.nvim" },
 }

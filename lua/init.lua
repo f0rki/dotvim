@@ -245,14 +245,12 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		-- null_ls.builtins.code_actions.shellcheck,
-		null_ls.builtins.code_actions.statix,
 		null_ls.builtins.diagnostics.fish,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.clang_format,
-		-- null_ls.builtins.formatting.nixpkgs_fmt,
+		-- null_ls.builtins.formatting.bibclean,
+        
 		null_ls.builtins.formatting.alejandra,
-		null_ls.builtins.formatting.bibclean,
-		-- null_ls.builtins.formatting.dprint,
 
 		null_ls.builtins.diagnostics.todo_comments,
 
