@@ -1,40 +1,40 @@
 require("lualine").setup({
-	options = {
-		-- theme = "material-nvim",
-		--theme = "github",
-		theme = "onedark",
-	},
-	sections = {
-		lualine_a = { "mode" },
-		lualine_b = { "branch" },
-		lualine_c = { "filename" },
-		lualine_x = { { "diagnostics", sources = { "nvim_lsp", "nvim_diagnostic", "ale" } } },
-		lualine_y = { "encoding", "fileformat", "filetype" },
-		lualine_z = { "location" },
-	},
-	extensions = { "fzf", "fugitive" },
+    options = {
+        -- theme = "material-nvim",
+        --theme = "github",
+        theme = "onedark",
+    },
+    sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch" },
+        lualine_c = { "filename" },
+        lualine_x = { { "diagnostics", sources = { "nvim_lsp", "nvim_diagnostic", "ale" } } },
+        lualine_y = { "encoding", "fileformat", "filetype" },
+        lualine_z = { "location" },
+    },
+    extensions = { "fzf", "fugitive" },
 })
 
 require("Comment").setup()
 
 require("telescope").setup({
-	defaults = {
-		layout_strategy = "vertical",
-		layout_config = {
-			vertical = {
-				width = 0.97,
-				height = 0.95,
-				preview_height = 0.7,
-			},
-		},
-		-- borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
-	},
+    defaults = {
+        layout_strategy = "vertical",
+        layout_config = {
+            vertical = {
+                width = 0.97,
+                height = 0.95,
+                preview_height = 0.7,
+            },
+        },
+        -- borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+    },
 
-	extensions = {
-		["ui-select"] = {
-			require("telescope.themes").get_dropdown({}),
-		},
-	},
+    extensions = {
+        ["ui-select"] = {
+            require("telescope.themes").get_dropdown({}),
+        },
+    },
 })
 require("telescope").load_extension("ui-select")
 
@@ -48,55 +48,55 @@ vim.keymap.set("n", "<leader>q", telescope_builtin.grep_string, { desc = "Telesc
 -- vim.keymap.set('n', '<leader>h', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
 
 vim.api.nvim_create_user_command("Rg", function(opts)
-	-- Get the argument passed to the command
-	local search_term = opts.args
-	-- Call telescope's grep_string with the provided search term
-	require("telescope.builtin").grep_string({ search = search_term })
+    -- Get the argument passed to the command
+    local search_term = opts.args
+    -- Call telescope's grep_string with the provided search term
+    require("telescope.builtin").grep_string({ search = search_term })
 end, { nargs = 1 })
 
 -- treesitter stuff
 -- require('nvim-treesitter.install'.compilers = { 'gcc' }
 require("nvim-treesitter.configs").setup({
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-		-- vimtex recommends disabling tree-sitter for latex
-		-- disable = { "latex" },
-		disable = { "latex", "Makefile" },
-		-- make sure a bunch of useful ones are installed all the time
-		ensure_installed = {
-			"lua",
-			"rust",
-			"c",
-			"cpp",
-			"bash",
-			"markdown",
-			"make",
-			"python",
-		},
-	},
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+        -- vimtex recommends disabling tree-sitter for latex
+        -- disable = { "latex" },
+        disable = { "latex", "Makefile" },
+        -- make sure a bunch of useful ones are installed all the time
+        ensure_installed = {
+            "lua",
+            "rust",
+            "c",
+            "cpp",
+            "bash",
+            "markdown",
+            "make",
+            "python",
+        },
+    },
 })
 
 -- auto-install TS parsers on first open of unknown
 local ask_install = {}
 function _G.ensure_treesitter_language_installed()
-	local parsers = require("nvim-treesitter.parsers")
-	local lang = parsers.get_buf_lang()
-	if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) and ask_install[lang] ~= false then
-		vim.schedule_wrap(function()
-			vim.ui.select(
-				{ "yes", "no" },
-				{ prompt = "Install tree-sitter parsers for " .. lang .. "?" },
-				function(item)
-					if item == "yes" or item == "y" then
-						vim.cmd("TSInstall " .. lang)
-					elseif item == "no" then
-						ask_install[lang] = false
-					end
-				end
-			)
-		end)()
-	end
+    local parsers = require("nvim-treesitter.parsers")
+    local lang = parsers.get_buf_lang()
+    if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) and ask_install[lang] ~= false then
+        vim.schedule_wrap(function()
+            vim.ui.select(
+                { "yes", "no" },
+                { prompt = "Install tree-sitter parsers for " .. lang .. "?" },
+                function(item)
+                    if item == "yes" or item == "y" then
+                        vim.cmd("TSInstall " .. lang)
+                    elseif item == "no" then
+                        ask_install[lang] = false
+                    end
+                end
+            )
+        end)()
+    end
 end
 
 vim.cmd([[autocmd FileType * :lua ensure_treesitter_language_installed()]])
@@ -113,24 +113,24 @@ local luasnip = require("luasnip")
 -- http://lua-users.org/wiki/FileInputOutput
 -- see if the file exists
 function file_exists(file)
-	local f = io.open(file, "rb")
-	if f then
-		f:close()
-	end
-	return f ~= nil
+    local f = io.open(file, "rb")
+    if f then
+        f:close()
+    end
+    return f ~= nil
 end
 
 -- get all lines from a file, returns an empty
 -- list/table if the file does not exist
 function lines_from(file)
-	if not file_exists(file) then
-		return {}
-	end
-	local lines = {}
-	for line in io.lines(file) do
-		lines[#lines + 1] = string.gsub(line, "%s+", "")
-	end
-	return lines
+    if not file_exists(file) then
+        return {}
+    end
+    local lines = {}
+    for line in io.lines(file) do
+        lines[#lines + 1] = string.gsub(line, "%s+", "")
+    end
+    return lines
 end
 
 -------
@@ -211,66 +211,62 @@ vim.keymap.set("n", "<space>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, bufopts)
 
+-- TODO: LLM assistant?
+-- [ ] aider
+-- [ ] codecompanion
+-- [ ] lsp-ai
+-- https://github.com/SilasMarvin/lsp-ai/blob/main/examples/nvim/init.lua
 -- vim.keymap.set("n", "<localleader>d", function()
 --   require("codecompanion").prompt("docs")
 -- end, { noremap = true, silent = true })
+--
+--
+
 
 local lsp_cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- initialize the lsps
-local lsps = { "rust_analyzer", "clangd", "pyright", "gopls", "ruff", "dprint", "lua_ls", "null-ls" }
+local enabled_lsps = { "rust_analyzer", "clangd", "pyright", "ruff", "dprint", "lua_ls" }
 
-
--- see also https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/guides/integrate-with-null-ls.md
+-- use null_ls to integrate calling common tools via the LSP interface
 local null_ls = require("null-ls")
 null_ls.setup({
-	sources = {
-		-- null_ls.builtins.code_actions.shellcheck,
-		null_ls.builtins.diagnostics.fish,
-		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.clang_format,
-		-- null_ls.builtins.formatting.bibclean,
-        
-		null_ls.builtins.formatting.alejandra,
+    sources = {
+        -- null_ls.builtins.code_actions.shellcheck,
+        null_ls.builtins.diagnostics.fish,
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.clang_format,
+        -- null_ls.builtins.formatting.bibclean,
 
-		null_ls.builtins.diagnostics.todo_comments,
+        null_ls.builtins.formatting.alejandra,
 
-		-- python
-		-- null_ls.builtins.diagnostics.ruff,
-		null_ls.builtins.diagnostics.pylint,
-		null_ls.builtins.formatting.isort,
-		null_ls.builtins.formatting.black,
-	},
+        null_ls.builtins.diagnostics.todo_comments,
 
-	on_attach = on_attach,
+        -- python
+        -- null_ls.builtins.diagnostics.ruff,
+        null_ls.builtins.diagnostics.pylint,
+        null_ls.builtins.formatting.isort,
+        null_ls.builtins.formatting.black,
+    },
 })
 
 -- configure capabilities for all lsps
 vim.lsp.config('*', {
-  capabilities = lsp_cmp_capabilities
+    capabilities = lsp_cmp_capabilities
 })
 
-for _, lsp in pairs(lsps) do
+for _, lsp in pairs(enabled_lsps) do
     vim.lsp.enable(lsp)
 end
 
 -- pretty list of LSP reported issues
 require("trouble").setup({})
 
--- we want a bunch of nice rusty features :)
-require("rust-tools").setup({})
-require("crates").setup({
-	null_ls = {
-		enabled = true,
-		name = "crates.nvim",
-	},
-})
-
 -- setup auto complete
 local has_words_before = function()
-	unpack = unpack or table.unpack
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    unpack = unpack or table.unpack
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 -- Set up nvim-cmp.
@@ -278,69 +274,69 @@ local cmp = require("cmp")
 -- local cmp_action = lspzero.cmp_action()
 
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-b>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-e>"] = cmp.mapping.abort(),
-		["<CR>"] = cmp.mapping.confirm({ select = false }),
-		["<C-Tab>"] = cmp.mapping.complete(),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_locally_jumpable()
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "nvim_lsp_signature_help" },
-		{ name = "nvim_lua" },
-		{ name = "luasnip" },
-		{ name = "crates" },
-	}, {
-		{ name = "buffer" },
-		{ name = "async_path" },
-		{ name = "rg", keyword_length = 4, option = { additional_arguments = "--smart-case" } },
-		-- { name = 'emoji' },
-	}),
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<C-Tab>"] = cmp.mapping.complete(),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_locally_jumpable()
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    }),
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
+        { name = "nvim_lua" },
+        { name = "luasnip" },
+        { name = "crates" },
+    }, {
+        { name = "buffer" },
+        { name = "async_path" },
+        { name = "rg",        keyword_length = 4, option = { additional_arguments = "--smart-case" } },
+        -- { name = 'emoji' },
+    }),
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ "/", "?" }, {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = "buffer" },
-	},
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = "buffer" },
+    },
 })
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = "path" },
-	}, {
-		{ name = "cmdline" },
-	}),
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = "path" },
+    }, {
+        { name = "cmdline" },
+    }),
 })

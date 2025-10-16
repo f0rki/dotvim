@@ -1,40 +1,97 @@
 return {
-	{
-		"olimorris/codecompanion.nvim",
-		opts = {
-			strategies = {
-				chat = { adapter = "ollama_chat" },
-				inline = { adapter = "ollama_inline" },
-			},
-
-			adapters = {
-				http = {
-					ollama_inline = function()
-						return require("codecompanion.adapters").extend("ollama", {
-							schema = {
-								model = {
-									default = "qwen2.5-coder:0.5b",
-								},
-							},
-						})
-					end,
-
-					ollama_chat = function()
-						return require("codecompanion.adapters").extend("ollama", {
-							schema = {
-								model = {
-									default = "qwen2.5-coder:3b",
-								},
-							},
-						})
-					end,
-				},
-			},
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-	},
-	-- { "azorng/goose.nvim" },
+    ----------------------
+    -- aider is an external coding assistant for the CLI; there are at least three plugins for
+    -- nvim/aider integration;
+    ----------------------
+    -- {
+    --   "joshuavial/aider.nvim",
+    --   opts = {
+    --     -- your configuration comes here
+    --     -- if you don't want to use the default settings
+    --     auto_manage_context = true, -- automatically manage buffer context
+    --     default_bindings = true,    -- use default <leader>A keybindings
+    --     debug = false,              -- enable debug logging
+    --   },
+    -- },
+    ----------------------
+    -- https://github.com/GeorgesAlkhouri/nvim-aider (seems a bit more full-featured?)
+    -- {
+    --     "GeorgesAlkhouri/nvim-aider",
+    --     cmd = "Aider",
+    --     -- Example key mappings for common actions:
+    --     keys = {
+    --       { "<leader>a/", "<cmd>Aider toggle<cr>", desc = "Toggle Aider" },
+    --       { "<leader>as", "<cmd>Aider send<cr>", desc = "Send to Aider", mode = { "n", "v" } },
+    --       { "<leader>ac", "<cmd>Aider command<cr>", desc = "Aider Commands" },
+    --       { "<leader>ab", "<cmd>Aider buffer<cr>", desc = "Send Buffer" },
+    --       { "<leader>a+", "<cmd>Aider add<cr>", desc = "Add File" },
+    --       { "<leader>a-", "<cmd>Aider drop<cr>", desc = "Drop File" },
+    --       { "<leader>ar", "<cmd>Aider add readonly<cr>", desc = "Add Read-Only" },
+    --       { "<leader>aR", "<cmd>Aider reset<cr>", desc = "Reset Session" },
+    --       -- Example nvim-tree.lua integration if needed
+    --       { "<leader>a+", "<cmd>AiderTreeAddFile<cr>", desc = "Add File from Tree to Aider", ft = "NvimTree" },
+    --       { "<leader>a-", "<cmd>AiderTreeDropFile<cr>", desc = "Drop File from Tree from Aider", ft = "NvimTree" },
+    --     },
+    --     dependencies = {
+    --       "folke/snacks.nvim",
+    --       --- The below dependencies are optional
+    --       "catppuccin/nvim",
+    --       "nvim-tree/nvim-tree.lua",
+    --       --- Neo-tree integration
+    --       {
+    --         "nvim-neo-tree/neo-tree.nvim",
+    --         opts = function(_, opts)
+    --           -- Example mapping configuration (already set by default)
+    --           -- opts.window = {
+    --           --   mappings = {
+    --           --     ["+"] = { "nvim_aider_add", desc = "add to aider" },
+    --           --     ["-"] = { "nvim_aider_drop", desc = "drop from aider" }
+    --           --     ["="] = { "nvim_aider_add_read_only", desc = "add read-only to aider" }
+    --           --   }
+    --           -- }
+    --           require("nvim_aider.neo_tree").setup(opts)
+    --         end,
+    --       },
+    --     },
+    --     config = true,
+    --   }
+    --
+    -- 
+    ----------------------
+    -- codecompanion allows chating with an LLM in neovim buffers.
+	-- {
+	-- 	"olimorris/codecompanion.nvim",
+	-- 	opts = {
+	-- 		strategies = {
+	-- 			chat = { adapter = "ollama_chat" },
+	-- 			inline = { adapter = "ollama_inline" },
+	-- 		},
+	--
+	-- 		adapters = {
+	-- 			ollama_inline = function()
+	-- 				return require("codecompanion.adapters").extend("ollama", {
+	-- 					schema = {
+	-- 						model = {
+	-- 							default = "qwen2.5-coder:0.5b",
+	-- 						},
+	-- 					},
+	-- 				})
+	-- 			end,
+	--
+	-- 			ollama_chat = function()
+	-- 				return require("codecompanion.adapters").extend("ollama", {
+	-- 					schema = {
+	-- 						model = {
+	-- 							default = "qwen2.5-coder:3b",
+	-- 						},
+	-- 					},
+	-- 				})
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 	},
+	-- },
 }
