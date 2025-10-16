@@ -8,25 +8,27 @@ return {
 			},
 
 			adapters = {
-				ollama_inline = function()
-					return require("codecompanion.adapters").extend("ollama", {
-						schema = {
-							model = {
-								default = "qwen2.5-coder:0.5b",
+				http = {
+					ollama_inline = function()
+						return require("codecompanion.adapters").extend("ollama", {
+							schema = {
+								model = {
+									default = "qwen2.5-coder:0.5b",
+								},
 							},
-						},
-					})
-				end,
+						})
+					end,
 
-				ollama_chat = function()
-					return require("codecompanion.adapters").extend("ollama", {
-						schema = {
-							model = {
-								default = "qwen2.5-coder:3b",
+					ollama_chat = function()
+						return require("codecompanion.adapters").extend("ollama", {
+							schema = {
+								model = {
+									default = "qwen2.5-coder:3b",
+								},
 							},
-						},
-					})
-				end,
+						})
+					end,
+				},
 			},
 		},
 		dependencies = {

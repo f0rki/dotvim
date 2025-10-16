@@ -29,7 +29,7 @@ return {
 	-- convert latex math stuff to unicode chars
 	{ "joom/latex-unicoder.vim" },
 
-	{ "neovim/nvim-lspconfig" },
+	{ "neovim/nvim-lspconfig", lazy = false },
 
 	-- Autocompletion
 	-- check out sources: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
