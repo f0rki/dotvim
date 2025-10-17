@@ -62,12 +62,6 @@ return {
     -- TODO: checkout the texlab lsp implementation; seems to require tectonic though
     -- https://github.com/latex-lsp/texlab
 
-    -- rust
-    { "rust-lang/rust.vim" },
-    { "cespare/vim-toml" },
-    { "simrat39/rust-tools.nvim" },
-    { "saecki/crates.nvim" },
-
     -- other formats/languages
     { "dag/vim-fish" },
     -- { "plasticboy/vim-markdown" },

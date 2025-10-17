@@ -169,7 +169,6 @@ require("lspconfig").grammar_guard.setup({
 ------ lsp keybindings
 -- https://github.com/neovim/nvim-lspconfig#Suggested-configuration
 
-
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
@@ -222,11 +221,11 @@ end, bufopts)
 --
 --
 
-
 local lsp_cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- initialize the lsps
-local enabled_lsps = { "rust_analyzer", "clangd", "pyright", "ruff", "dprint", "lua_ls" }
+local enabled_lsps = { "clangd", "pyright", "ruff", "dprint", "lua_ls" }
+-- do not explictely setup "rust_analyzer" lsp -> this is done with rustaceanvim
 
 -- use null_ls to integrate calling common tools via the LSP interface
 local null_ls = require("null-ls")
@@ -251,8 +250,8 @@ null_ls.setup({
 })
 
 -- configure capabilities for all lsps
-vim.lsp.config('*', {
-    capabilities = lsp_cmp_capabilities
+vim.lsp.config("*", {
+    capabilities = lsp_cmp_capabilities,
 })
 
 for _, lsp in pairs(enabled_lsps) do
