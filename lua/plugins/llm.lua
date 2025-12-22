@@ -94,4 +94,7 @@ return {
 	-- 		"nvim-treesitter/nvim-treesitter",
 	-- 	},
 	-- },
+    --
+    ---------------
+    --https://github.com/milanglacier/minuet-ai.nvim
 }
