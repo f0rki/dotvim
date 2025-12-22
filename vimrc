@@ -331,13 +331,6 @@ command Shrug execute "normal! a¯\\_(ツ)_/¯\<Esc>"
 """"""""" Plugin settings """""""""""
 """""""""""""""""""""""""""""""""""""
 
-"""" latex unicoder
-let g:unicoder_no_map=0
-"nnoremap <F10> :call unicoder#start(0)<CR>
-"nnoremap <leader> :call unicoder#start(0)<CR>
-map <leader><F9> :call unicoder#start(0)<CR>
-
-
 """" tex flavor!
 let g:tex_flavor = 'latex'
 
@@ -381,63 +374,11 @@ let g:tex_flavor = 'latex'
 let g:vim_markdown_math=1
 let g:vim_markdown_folding_disabled=1
 
-"""" for neosnippets
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
-
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 "" For conceal markers.
 "if has('conceal')
 "  set conceallevel=2 concealcursor=niv
 "endif
-
-
-"""" for deoplete
-
-" cycle through completion with tab
-" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
-" " cycle reverse with shift+tab
-" inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-" " ctrl+e to cancel the popup
-" inoremap <expr><C-e>  deoplete#cancel_popup()
-"
-" "inoremap <expr><C-h> deoplete#toggle()
-"
-" call deoplete#custom#source('emoji', {'converters': ['converter_emoji'],'filetypes': []})
-"
-"
-" call deoplete#custom#option('camel_case', v:true)
-" call deoplete#custom#option('smart_case', v:true)
-" call deoplete#custom#option('sources', {
-"       \ '_': ['lsp', 'tag', 'buffer', 'file', 'ale', 'syntax', 'greek', 'emoji'],
-"       \ 'python': ['lsp', 'tag', 'buffer', 'jedi', 'file', 'ale', 'syntax', 'greek', 'emoji'],
-" \})
-
-
-"""" for echodoc
-
-" set cmdheight=2
-" let g:echodoc#enable_at_startup = 1
-" let g:echodoc#type = 'signature'
-
-
-"""" for ALE
-
-" noremap <F4> :ALEFix<CR>
-
-" noremap <localleader>d :ALEGoToDefinition<cr>
-" noremap <localleader>t :ALEGoToTypeDefinition<cr>
-" noremap <localleader>x :ALEFindReferences -relative<cr>
-
 
 """" for neovim-lsp client
 
