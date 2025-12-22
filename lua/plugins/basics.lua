@@ -28,24 +28,7 @@ return {
 
     { "neovim/nvim-lspconfig",                      lazy = false },
 
-    -- Autocompletion
-    -- check out sources: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
-    { "hrsh7th/cmp-buffer" },
-    -- {'hrsh7th/cmp-path'},
-    { "FelipeLema/cmp-async-path" },
-    { "hrsh7th/cmp-cmdline" },
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "lukas-reineke/cmp-rg" },
-    { "hrsh7th/cmp-nvim-lsp-signature-help" },
-    { "hrsh7th/cmp-nvim-lua" },
-    -- {'tzachar/cmp-ai'},
 
-    { "hrsh7th/nvim-cmp" },
-
-    -- snippets
-    { "L3MON4D3/LuaSnip" },
-    { "saadparwaiz1/cmp_luasnip" },
-    { "rafamadriz/friendly-snippets" },
 
     -- formatting tools as lsp
     { "nvimtools/none-ls.nvim" },
